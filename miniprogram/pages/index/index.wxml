@@ -17,6 +17,7 @@ module.exports = { has: has }
           focus="{{focus}}"
           confirm-type="search"
           bindinput="onInput"
+          bindconfirm="onInput"
           bindblur="onBlur"
         />
         <icon wx:if="{{filters.keyword}}" type="clear" size="16" color="#C4CDD6" bindtap="onClearKeyword" />

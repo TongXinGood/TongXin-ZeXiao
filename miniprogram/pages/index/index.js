@@ -100,9 +100,8 @@ Page({
 
   // ---------- 搜索 ----------
   onInput(e) {
-    clearTimeout(this.inputTimer)
-    const keyword = e.detail.value
-    this.inputTimer = setTimeout(() => this.setFilters({ keyword }), 250)
+    console.log('[搜索] 输入：', e.detail.value)
+    this.setFilters({ keyword: e.detail.value })
   },
   onClearKeyword() {
     this.setFilters({ keyword: '' })
