@@ -1,18 +1,41 @@
+<wxs module="u">
+function has(arr, v) { return arr.indexOf(v) >= 0 }
+module.exports = { has: has }
+</wxs>
+
 <view class="page">
-  <!-- 顶部概览 -->
-  <view class="hero" wx:if="{{meta}}">
-    <view class="hero-title">计算机考研择校</view>
-    <view class="hero-sub">
-      收录 <text class="num hero-num">{{meta.schoolCount}}</text> 所院校 ·
-      <text class="num hero-num">{{meta.programCount}}</text> 个专业 · 更新于 {{meta.updatedAt}}
+  <!-- 顶部：搜索 + 筛选（吸顶） -->
+  <view class="top">
+    <view class="search-row">
+      <view class="search">
+        <icon type="search" size="14" color="#9AA8B6" />
+        <input
+          class="search-input"
+          placeholder="搜索院校 / 专业 / 代码 / 城市"
+          placeholder-class="search-ph"
+          value="{{filters.keyword}}"
+          focus="{{focus}}"
+          confirm-type="search"
+          bindinput="onInput"
+          bindblur="onBlur"
+        />
+        <icon wx:if="{{filters.keyword}}" type="clear" size="16" color="#C4CDD6" bindtap="onClearKeyword" />
+      </view>
+      <view class="filter-btn {{activeCount ? 'on' : ''}}" bindtap="openPanel">
+        筛选<text class="filter-badge" wx:if="{{activeCount}}">{{activeCount}}</text>
+      </view>
     </view>
+    <scroll-view scroll-x class="quick" enable-flex>
+      <view class="chip {{filters.only408 ? 'on' : ''}}" bindtap="onQuick" data-key="only408">考408</view>
+      <view class="chip {{filters.degree === 'academic' ? 'on' : ''}}" bindtap="onQuick" data-key="degree" data-value="academic">学硕</view>
+      <view class="chip {{filters.degree === 'professional' ? 'on' : ''}}" bindtap="onQuick" data-key="degree" data-value="professional">专硕</view>
+      <view class="chip {{filters.math === '数学一' ? 'on' : ''}}" bindtap="onQuick" data-key="math" data-value="数学一">数学一</view>
+      <view class="chip {{filters.math === '数学二' ? 'on' : ''}}" bindtap="onQuick" data-key="math" data-value="数学二">数学二</view>
+    </scroll-view>
   </view>
 
-  <view class="notice" wx:if="{{meta.sample}}">
-    当前为示例数据，分数和人数均为虚构，仅用于界面调试
-  </view>
+  <view class="notice" wx:if="{{meta.sample}}">当前为示例数据，分数和人数均为虚构，仅用于界面调试</view>
 
-  <!-- 列表 -->
   <view wx:if="{{loading}}" class="state">加载中…</view>
   <view wx:elif="{{error}}" class="state">
     <view>{{error}}</view>
@@ -20,8 +43,8 @@
   </view>
   <block wx:else>
     <view class="list-head">
-      <text>共 {{list.length}} 个专业</text>
-      <text class="list-head-tip">点卡片看详情</text>
+      <text>共 <text class="num list-count">{{list.length}}</text> 个专业</text>
+      <view class="sort" bindtap="onSort">{{sortLabel}} ▾</view>
     </view>
     <program-card
       wx:for="{{list}}"
@@ -31,14 +54,69 @@
       bind:open="onOpen"
       bind:compare="onCompare"
     />
-    <view wx:if="{{!list.length}}" class="state">暂无数据</view>
+    <view wx:if="{{!list.length}}" class="state">
+      <view>没有符合条件的专业</view>
+      <view class="state-btn" bindtap="onClearAll">清空搜索和筛选</view>
+    </view>
   </block>
 
   <view class="disclaimer">{{disclaimer}}</view>
 
-  <!-- 对比悬浮按钮 -->
   <view class="fab" wx:if="{{compareCount}}" bindtap="goCompare" hover-class="fab-hover">
     <text>对比</text>
     <text class="fab-badge num">{{compareCount}}</text>
+  </view>
+</view>
+
+<!-- 筛选面板 -->
+<view class="mask {{showPanel ? 'show' : ''}}" bindtap="closePanel" catchtouchmove="noop"></view>
+<view class="panel {{showPanel ? 'show' : ''}}">
+  <view class="panel-head" catchtouchmove="noop">
+    <text class="panel-title">筛选</text>
+    <icon type="cancel" size="22" color="#C4CDD6" bindtap="closePanel" />
+  </view>
+  <scroll-view scroll-y class="panel-body">
+    <view class="sec-title">地区<text class="sec-tip">可多选</text></view>
+    <view class="opts">
+      <view wx:for="{{regionOptions}}" wx:key="*this" class="opt {{u.has(draft.regions, item) ? 'on' : ''}}"
+        bindtap="onToggleMulti" data-key="regions" data-value="{{item}}">{{item}}</view>
+    </view>
+
+    <view class="sec-title">院校层次<text class="sec-tip">可多选，按学校最高层次归类</text></view>
+    <view class="opts">
+      <view wx:for="{{levelOptions}}" wx:key="*this" class="opt {{u.has(draft.levels, item) ? 'on' : ''}}"
+        bindtap="onToggleMulti" data-key="levels" data-value="{{item}}">{{item}}</view>
+    </view>
+
+    <view class="sec-title">学位类型</view>
+    <view class="opts">
+      <view class="opt {{draft.degree === 'academic' ? 'on' : ''}}" bindtap="onPickSingle" data-key="degree" data-value="academic">学硕</view>
+      <view class="opt {{draft.degree === 'professional' ? 'on' : ''}}" bindtap="onPickSingle" data-key="degree" data-value="professional">专硕</view>
+    </view>
+
+    <view class="sec-title">数学</view>
+    <view class="opts">
+      <view class="opt {{draft.math === '数学一' ? 'on' : ''}}" bindtap="onPickSingle" data-key="math" data-value="数学一">数学一</view>
+      <view class="opt {{draft.math === '数学二' ? 'on' : ''}}" bindtap="onPickSingle" data-key="math" data-value="数学二">数学二</view>
+    </view>
+
+    <view class="sec-title">专业课</view>
+    <view class="opts">
+      <view class="opt {{draft.only408 ? 'on' : ''}}" bindtap="onToggle408">只看考 408</view>
+    </view>
+
+    <view class="sec-title">复试线上限<text class="sec-tip">按最近一年复试线，只看 ≤ 该分数的专业</text></view>
+    <view class="opts">
+      <view wx:for="{{linePresets}}" wx:key="*this" class="opt {{!customLine && draft.maxLine == item ? 'on' : ''}}"
+        bindtap="onPickLine" data-value="{{item}}">≤{{item}}</view>
+      <view class="opt opt-input {{customLine ? 'on' : ''}}">
+        <text>自定义 ≤</text>
+        <input class="line-input num" type="number" maxlength="3" placeholder="分数" value="{{customLine}}" bindinput="onLineInput" />
+      </view>
+    </view>
+  </scroll-view>
+  <view class="panel-foot" catchtouchmove="noop">
+    <view class="btn-ghost" bindtap="onResetDraft">重置</view>
+    <view class="btn-primary" bindtap="onConfirmPanel">查看 {{draftCount}} 个结果</view>
   </view>
 </view>

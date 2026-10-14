@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/home/home",
     "pages/index/index",
     "pages/compare/compare",
     "pages/detail/detail"
@@ -18,8 +19,14 @@
     "borderStyle": "white",
     "list": [
       {
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "iconPath": "images/tab-home.png",
+        "selectedIconPath": "images/tab-home-active.png"
+      },
+      {
         "pagePath": "pages/index/index",
-        "text": "择校",
+        "text": "院校库",
         "iconPath": "images/tab-school.png",
         "selectedIconPath": "images/tab-school-active.png"
       },

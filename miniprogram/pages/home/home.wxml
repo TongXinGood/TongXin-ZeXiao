@@ -1,0 +1,45 @@
+<view class="page">
+  <view class="hero">
+    <view class="hero-title">计算机考研择校</view>
+    <view class="hero-sub" wx:if="{{meta}}">
+      收录 <text class="num hero-num">{{meta.schoolCount}}</text> 所院校 ·
+      <text class="num hero-num">{{meta.programCount}}</text> 个专业 · 2024–2026 数据
+    </view>
+    <view class="search" bindtap="onSearch" hover-class="search-hover">
+      <icon type="search" size="15" color="#9AA8B6" />
+      <text class="search-ph">搜索院校 / 专业 / 代码 / 城市</text>
+    </view>
+  </view>
+
+  <!-- 两个主入口 -->
+  <view class="entries">
+    <view class="entry entry-match" bindtap="onMatch" hover-class="entry-hover">
+      <view class="entry-icon">🎯</view>
+      <view class="entry-title">智能择校</view>
+      <view class="entry-desc">填 5 个问题，按冲 / 稳 / 保帮你匹配</view>
+    </view>
+    <view class="entry entry-lib card" bindtap="onLibrary" hover-class="entry-hover">
+      <view class="entry-icon entry-icon-lib">🏫</view>
+      <view class="entry-title">院校库</view>
+      <view class="entry-desc">按地区、层次、科目筛选全部专业</view>
+    </view>
+  </view>
+
+  <!-- 快捷筛选 -->
+  <view class="sec-title">快捷筛选</view>
+  <view class="quick">
+    <view wx:for="{{quick}}" wx:key="label" class="quick-item card" bindtap="onQuick" data-index="{{index}}" hover-class="entry-hover">
+      <view class="quick-label">{{item.label}}</view>
+      <view class="quick-count"><text class="num">{{item.count}}</text> 个专业</view>
+    </view>
+  </view>
+
+  <!-- 对比入口 -->
+  <view class="compare-bar card" wx:if="{{compareCount}}" bindtap="goCompare" hover-class="entry-hover">
+    <text>已加入对比 <text class="num compare-num">{{compareCount}}</text> 个专业</text>
+    <text class="compare-go">去对比 ›</text>
+  </view>
+
+  <view class="notice" wx:if="{{meta.sample}}">当前为示例数据，分数和人数均为虚构，仅用于界面调试</view>
+  <view class="disclaimer">{{disclaimer}}</view>
+</view>

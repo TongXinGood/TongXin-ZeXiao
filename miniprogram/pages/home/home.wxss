@@ -1,0 +1,126 @@
+.hero {
+  padding: 24rpx 32rpx 48rpx;
+  background: linear-gradient(180deg, #EAF6FF 0%, #F5F9FD 100%);
+}
+.hero-title {
+  font-size: 44rpx;
+  font-weight: 700;
+}
+.hero-sub {
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  color: var(--text-2);
+}
+.hero-num {
+  color: var(--primary);
+  font-size: 28rpx;
+}
+.search {
+  display: flex;
+  align-items: center;
+  margin-top: 32rpx;
+  height: 84rpx;
+  padding: 0 28rpx;
+  border-radius: 999rpx;
+  background: #fff;
+  box-shadow: var(--shadow);
+}
+.search-hover { opacity: 0.8; }
+.search-ph {
+  margin-left: 14rpx;
+  font-size: 28rpx;
+  color: var(--text-3);
+}
+
+/* 主入口 */
+.entries {
+  display: flex;
+  padding: 0 24rpx;
+}
+.entry {
+  flex: 1;
+  padding: 32rpx 28rpx;
+  border-radius: var(--radius);
+}
+.entry + .entry { margin-left: 20rpx; }
+.entry-hover { transform: scale(0.98); opacity: 0.9; }
+.entry-match {
+  background: linear-gradient(135deg, #5BB8FF 0%, #3BA7FF 55%, #1E8FEA 100%);
+  color: #fff;
+  box-shadow: 0 8rpx 24rpx rgba(59, 167, 255, 0.3);
+}
+.entry-icon {
+  width: 72rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+  text-align: center;
+  font-size: 40rpx;
+  border-radius: 20rpx;
+  background: rgba(255, 255, 255, 0.25);
+}
+.entry-icon-lib { background: var(--primary-light); }
+.entry-title {
+  margin-top: 20rpx;
+  font-size: 34rpx;
+  font-weight: 700;
+}
+.entry-desc {
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  line-height: 1.5;
+  opacity: 0.9;
+}
+.entry-lib .entry-desc { color: var(--text-2); }
+
+/* 快捷筛选 */
+.sec-title {
+  padding: 44rpx 32rpx 20rpx;
+  font-size: 30rpx;
+  font-weight: 700;
+}
+.quick {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 24rpx 0 4rpx;
+}
+.quick-item {
+  width: calc((100% - 60rpx) / 3);
+  margin: 0 0 20rpx 20rpx;
+  padding: 24rpx 20rpx;
+  box-sizing: border-box;
+}
+.quick-label {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: var(--text-1);
+}
+.quick-count {
+  margin-top: 6rpx;
+  font-size: 22rpx;
+  color: var(--text-3);
+}
+.quick-count .num {
+  color: var(--primary);
+  font-size: 26rpx;
+}
+
+/* 对比入口 */
+.compare-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 24rpx 24rpx 0;
+  padding: 28rpx;
+  font-size: 28rpx;
+}
+.compare-num { color: var(--primary); }
+.compare-go { color: var(--primary); font-weight: 600; }
+
+.notice {
+  margin: 24rpx 24rpx 0;
+  padding: 18rpx 24rpx;
+  border-radius: 16rpx;
+  background: #FFF7E6;
+  color: #B76E00;
+  font-size: 24rpx;
+}
