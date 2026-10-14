@@ -1,0 +1,48 @@
+<view class="card pc" hover-class="pc-hover" hover-stay-time="80" bindtap="onTap">
+  <!-- 第一行：学校 + 层次 + 对比按钮 -->
+  <view class="pc-head">
+    <view class="pc-school">
+      <text class="pc-school-name">{{item.schoolName}}</text>
+      <text class="tag lv {{item.levelClass}}">{{item.level}}</text>
+    </view>
+    <view class="pc-cmp {{inCompare ? 'on' : ''}}" catchtap="onCompare" hover-class="pc-cmp-hover">
+      {{inCompare ? '✓ 已加入' : '+ 对比'}}
+    </view>
+  </view>
+
+  <!-- 第二行：专业代码 + 专业名 -->
+  <view class="pc-major">
+    <text class="pc-code num">{{item.majorCode}}</text>
+    <text class="pc-major-name">{{item.majorName}}</text>
+  </view>
+  <view class="pc-sub">{{item.college}} · {{item.city || item.province}}</view>
+
+  <!-- 第三行：关键标签 -->
+  <view class="pc-tags">
+    <text class="tag {{item.degreeClass}}">{{item.degreeLabel}}</text>
+    <text class="tag" wx:if="{{item.math}}">{{item.math}}</text>
+    <text class="tag" wx:else>不考数学</text>
+    <text class="tag {{item.is408 ? 'tag-orange' : ''}}">{{item.proLabel}}</text>
+  </view>
+
+  <!-- 第四行：核心数据 -->
+  <view class="pc-stats">
+    <view class="pc-stat pc-stat-main">
+      <view class="pc-val">
+        <text class="num pc-line">{{item.lineText}}</text>
+        <text class="pc-delta {{item.deltaClass}}" wx:if="{{item.deltaText}}">{{item.deltaText}}</text>
+      </view>
+      <view class="pc-label">{{item.lineYear || ''}} 复试线</view>
+    </view>
+    <view class="pc-divider"></view>
+    <view class="pc-stat">
+      <view class="pc-val"><text class="num">{{item.planText}}</text></view>
+      <view class="pc-label">{{item.planYear}} 统招计划</view>
+    </view>
+    <view class="pc-divider"></view>
+    <view class="pc-stat">
+      <view class="pc-val"><text class="num">{{item.exemptText}}</text></view>
+      <view class="pc-label">{{item.planYear}} 推免</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,151 @@
+{
+  "schoolId": "10336",
+  "programs": [
+    {
+      "id": "10336-081200-xs",
+      "college": "计算机学院",
+      "majorCode": "081200",
+      "majorName": "计算机科学与技术",
+      "degreeType": "academic",
+      "exam": {
+        "politics": "思想政治理论",
+        "foreign": "英语一",
+        "math": "数学一",
+        "pro": [
+          {
+            "code": "408",
+            "name": "计算机学科专业基础"
+          }
+        ]
+      },
+      "years": [
+        {
+          "year": 2024,
+          "retestLine": {
+            "total": 300,
+            "politics": 50,
+            "foreign": 50,
+            "math": 80,
+            "pro": 80
+          },
+          "planCount": 40,
+          "exemptCount": 5,
+          "admittedCount": null,
+          "retestCount": null,
+          "note": ""
+        },
+        {
+          "year": 2025,
+          "retestLine": {
+            "total": 310,
+            "politics": 50,
+            "foreign": 50,
+            "math": 80,
+            "pro": 80
+          },
+          "planCount": 45,
+          "exemptCount": 5,
+          "admittedCount": null,
+          "retestCount": null,
+          "note": ""
+        },
+        {
+          "year": 2026,
+          "retestLine": {
+            "total": 315,
+            "politics": 50,
+            "foreign": 50,
+            "math": 80,
+            "pro": 80
+          },
+          "planCount": 45,
+          "exemptCount": 6,
+          "admittedCount": null,
+          "retestCount": null,
+          "note": ""
+        }
+      ],
+      "remark": "",
+      "sources": [
+        {
+          "title": "示例数据（待替换）",
+          "url": "",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "id": "10336-085404-zs",
+      "college": "计算机学院",
+      "majorCode": "085404",
+      "majorName": "计算机技术",
+      "degreeType": "professional",
+      "exam": {
+        "politics": "思想政治理论",
+        "foreign": "英语二",
+        "math": "数学二",
+        "pro": [
+          {
+            "code": "408",
+            "name": "计算机学科专业基础"
+          }
+        ]
+      },
+      "years": [
+        {
+          "year": 2024,
+          "retestLine": {
+            "total": 290,
+            "politics": 50,
+            "foreign": 50,
+            "math": 80,
+            "pro": 80
+          },
+          "planCount": 150,
+          "exemptCount": 3,
+          "admittedCount": null,
+          "retestCount": null,
+          "note": ""
+        },
+        {
+          "year": 2025,
+          "retestLine": {
+            "total": 300,
+            "politics": 50,
+            "foreign": 50,
+            "math": 80,
+            "pro": 80
+          },
+          "planCount": 160,
+          "exemptCount": 3,
+          "admittedCount": null,
+          "retestCount": null,
+          "note": ""
+        },
+        {
+          "year": 2026,
+          "retestLine": {
+            "total": 298,
+            "politics": 50,
+            "foreign": 50,
+            "math": 80,
+            "pro": 80
+          },
+          "planCount": 170,
+          "exemptCount": 5,
+          "admittedCount": null,
+          "retestCount": null,
+          "note": ""
+        }
+      ],
+      "remark": "",
+      "sources": [
+        {
+          "title": "示例数据（待替换）",
+          "url": "",
+          "date": ""
+        }
+      ]
+    }
+  ]
+}

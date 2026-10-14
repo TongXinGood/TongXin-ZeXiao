@@ -1,0 +1,38 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/compare/compare",
+    "pages/detail/detail"
+  ],
+  "window": {
+    "navigationBarTitleText": "考研择校",
+    "navigationBarTextStyle": "black",
+    "navigationBarBackgroundColor": "#ffffff",
+    "backgroundColor": "#F5F9FD",
+    "backgroundTextStyle": "dark"
+  },
+  "tabBar": {
+    "color": "#9AA8B6",
+    "selectedColor": "#3BA7FF",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "择校",
+        "iconPath": "images/tab-school.png",
+        "selectedIconPath": "images/tab-school-active.png"
+      },
+      {
+        "pagePath": "pages/compare/compare",
+        "text": "对比",
+        "iconPath": "images/tab-compare.png",
+        "selectedIconPath": "images/tab-compare-active.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "componentFramework": "glass-easel",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

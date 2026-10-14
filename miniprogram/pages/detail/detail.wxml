@@ -1,0 +1,2 @@
+<view class="state">详情页将在第 3 步实现</view>
+<view class="state">{{id}}</view>

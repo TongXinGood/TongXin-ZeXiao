@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "考研择校 · 计算机",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "program-card": "/components/program-card/program-card"
+  }
+}

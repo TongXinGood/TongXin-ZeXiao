@@ -1,0 +1,87 @@
+/* ========== 设计变量 ========== */
+page {
+  --primary: #3BA7FF;
+  --primary-dark: #1E8FEA;
+  --primary-light: #EAF6FF;
+  --bg: #F5F9FD;
+  --card: #FFFFFF;
+  --text-1: #1F2D3D;
+  --text-2: #5B6B7B;
+  --text-3: #9AA8B6;
+  --line: #EEF2F6;
+  --green: #14A37F;
+  --green-light: #E6F8F3;
+  --orange: #FF8A1F;
+  --orange-light: #FFF3E6;
+  --red: #F5574A;
+  --radius: 24rpx;
+  --shadow: 0 4rpx 20rpx rgba(59, 167, 255, 0.08);
+
+  background: var(--bg);
+  color: var(--text-1);
+  font-size: 28rpx;
+  line-height: 1.5;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", "Microsoft YaHei", sans-serif;
+}
+
+/* 数字统一：等宽，方便上下对齐比较 */
+.num {
+  font-family: "DIN Alternate", "Helvetica Neue", Arial, sans-serif;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+/* ========== 标签 ========== */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  height: 40rpx;
+  padding: 0 14rpx;
+  border-radius: 8rpx;
+  font-size: 22rpx;
+  line-height: 1;
+  white-space: nowrap;
+  background: #F2F5F8;
+  color: var(--text-2);
+}
+.tag-blue { background: var(--primary-light); color: var(--primary-dark); }
+.tag-green { background: var(--green-light); color: var(--green); }
+.tag-orange { background: var(--orange-light); color: var(--orange); font-weight: 600; }
+
+/* 院校层次 */
+.lv { height: 34rpx; padding: 0 10rpx; font-size: 20rpx; font-weight: 600; border-radius: 6rpx; }
+.lv-c9 { background: linear-gradient(135deg, #3BA7FF, #1E8FEA); color: #fff; }
+.lv-985 { background: var(--primary-light); color: var(--primary-dark); }
+.lv-211 { background: var(--primary-light); color: var(--primary); }
+.lv-syl { background: #F0F4FF; color: #5B7CFA; }
+.lv-sf { background: #F2F5F8; color: var(--text-3); }
+
+/* ========== 通用 ========== */
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.disclaimer {
+  padding: 32rpx 32rpx 48rpx;
+  text-align: center;
+  font-size: 22rpx;
+  color: var(--text-3);
+}
+
+.state {
+  padding: 160rpx 0;
+  text-align: center;
+  color: var(--text-3);
+  font-size: 26rpx;
+}
+.state-btn {
+  display: inline-block;
+  margin-top: 24rpx;
+  padding: 12rpx 40rpx;
+  border-radius: 999rpx;
+  background: var(--primary);
+  color: #fff;
+  font-size: 26rpx;
+}

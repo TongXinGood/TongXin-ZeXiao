@@ -35,5 +35,7 @@
     "tabSize": 2
   },
   "appid": "wx5377e5c0c5c24dcd",
-  "simulatorPluginLibVersion": {}
+  "simulatorPluginLibVersion": {},
+  "miniprogramRoot": "miniprogram/",
+  "description": "考研择校（计算机）"
 }

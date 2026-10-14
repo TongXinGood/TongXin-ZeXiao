@@ -1,0 +1,44 @@
+<view class="page">
+  <!-- 顶部概览 -->
+  <view class="hero" wx:if="{{meta}}">
+    <view class="hero-title">计算机考研择校</view>
+    <view class="hero-sub">
+      收录 <text class="num hero-num">{{meta.schoolCount}}</text> 所院校 ·
+      <text class="num hero-num">{{meta.programCount}}</text> 个专业 · 更新于 {{meta.updatedAt}}
+    </view>
+  </view>
+
+  <view class="notice" wx:if="{{meta.sample}}">
+    当前为示例数据，分数和人数均为虚构，仅用于界面调试
+  </view>
+
+  <!-- 列表 -->
+  <view wx:if="{{loading}}" class="state">加载中…</view>
+  <view wx:elif="{{error}}" class="state">
+    <view>{{error}}</view>
+    <view class="state-btn" bindtap="retry">重新加载</view>
+  </view>
+  <block wx:else>
+    <view class="list-head">
+      <text>共 {{list.length}} 个专业</text>
+      <text class="list-head-tip">点卡片看详情</text>
+    </view>
+    <program-card
+      wx:for="{{list}}"
+      wx:key="id"
+      item="{{item}}"
+      in-compare="{{compareMap[item.id]}}"
+      bind:open="onOpen"
+      bind:compare="onCompare"
+    />
+    <view wx:if="{{!list.length}}" class="state">暂无数据</view>
+  </block>
+
+  <view class="disclaimer">{{disclaimer}}</view>
+
+  <!-- 对比悬浮按钮 -->
+  <view class="fab" wx:if="{{compareCount}}" bindtap="goCompare" hover-class="fab-hover">
+    <text>对比</text>
+    <text class="fab-badge num">{{compareCount}}</text>
+  </view>
+</view>
