@@ -101,3 +101,84 @@ function buildDetail(p) {
 }
 
 module.exports.buildDetail = buildDetail
+
+/**
+ * 对比页：生成表格行
+ * items: [{ p: 索引里的专业, full: 详情里的完整专业 }]
+ * 行类型：{ type: 'sec', label } 分组标题；{ type: 'row', label, cells: [{ text, best, cls }] }
+ */
+function buildCompareRows(items, years) {
+  const yearData = (full, year) => (full.years || []).filter((y) => y.year === year)[0] || {}
+  const num = (v) => (typeof v === 'number' ? v : null)
+
+  // better: 'min' 越小越好 / 'max' 越大越好 / null 不比较
+  function row(label, values, better, fmt) {
+    const nums = values.map(num).filter((v) => v !== null)
+    let best = null
+    if (better && nums.length >= 2 && Math.min.apply(null, nums) !== Math.max.apply(null, nums)) {
+      best = better === 'min' ? Math.min.apply(null, nums) : Math.max.apply(null, nums)
+    }
+    return {
+      type: 'row',
+      label,
+      cells: values.map((v, i) => ({
+        k: i,
+        text: v === null || v === undefined || v === '' ? '—' : fmt ? fmt(v) : v,
+        best: best !== null && v === best
+      }))
+    }
+  }
+
+  const rows = []
+  rows.push({ type: 'sec', label: '基本信息' })
+  rows.push(row('地区', items.map((x) => x.p.province + ' · ' + x.p.region)))
+  rows.push(row('层次', items.map((x) => x.p.level)))
+  rows.push(row('类型', items.map((x) => (x.p.degreeType === 'academic' ? '学硕' : '专硕'))))
+  rows.push(row('数学', items.map((x) => x.p.math || '不考')))
+  rows.push(row('外语', items.map((x) => x.p.foreign)))
+  rows.push(row('专业课', items.map((x) => (x.p.is408 ? '408' : '自命题 ' + x.p.proCodes.join('/')))))
+
+  rows.push({ type: 'sec', label: '复试线（总分）' })
+  const desc = years.slice().sort((a, b) => b - a)
+  desc.forEach((y) => {
+    rows.push(row(y + ' 年', items.map((x) => num((yearData(x.full, y).retestLine || {}).total)), 'min'))
+  })
+  rows.push(
+    row(
+      '三年平均',
+      items.map((x) => {
+        const v = desc.map((y) => num((yearData(x.full, y).retestLine || {}).total)).filter((n) => n !== null)
+        return v.length ? Math.round(v.reduce((a, b) => a + b, 0) / v.length) : null
+      }),
+      'min'
+    )
+  )
+  const delta = row('最近变化', items.map((x) => num(x.p.lineDelta)), null, (d) => (d > 0 ? '↑' + d : d < 0 ? '↓' + -d : '持平'))
+  delta.cells.forEach((c, i) => {
+    const d = items[i].p.lineDelta
+    c.cls = typeof d === 'number' ? (d > 0 ? 'up' : d < 0 ? 'down' : '') : ''
+  })
+  rows.push(delta)
+
+  const last = desc[0]
+  rows.push({ type: 'sec', label: '招生（' + last + ' 年）' })
+  rows.push(row('统招计划', items.map((x) => num(yearData(x.full, last).planCount)), 'max'))
+  rows.push(row('推免', items.map((x) => num(yearData(x.full, last).exemptCount))))
+  rows.push(
+    row(
+      '推免占比',
+      items.map((x) => {
+        const d = yearData(x.full, last)
+        const plan = num(d.planCount)
+        const ex = num(d.exemptCount)
+        return plan !== null && ex !== null && plan + ex > 0 ? Math.round((ex * 100) / (plan + ex)) : null
+      }),
+      'min',
+      (v) => v + '%'
+    )
+  )
+  rows.push(row('录取', items.map((x) => num(yearData(x.full, last).admittedCount))))
+  return rows
+}
+
+module.exports.buildCompareRows = buildCompareRows

@@ -1,1 +1,69 @@
-<view class="state">对比页将在第 4 步实现</view>
+<view wx:if="{{loading}}" class="state">加载中…</view>
+<view wx:elif="{{error}}" class="state">
+  <view>{{error}}</view>
+  <view class="state-btn" bindtap="retry">重新加载</view>
+</view>
+
+<!-- 空状态 -->
+<view wx:elif="{{!cols.length}}" class="empty">
+  <view class="empty-icon">📊</view>
+  <view class="empty-title">还没有加入对比的专业</view>
+  <view class="empty-desc">在院校库或详情页点「+ 对比」，最多可同时对比 {{max}} 个</view>
+  <view class="state-btn" bindtap="goLibrary">去院校库挑选</view>
+</view>
+
+<view wx:else class="page">
+  <view class="bar">
+    <text>已选 <text class="num bar-num">{{cols.length}}</text> / {{max}}</text>
+    <text class="bar-tip" wx:if="{{cols.length < 2}}">再加 1 个才能对比</text>
+    <text class="bar-tip" wx:else><text class="best-dot"></text>最优值高亮</text>
+    <text class="bar-clear" bindtap="onClear">清空</text>
+  </view>
+
+  <view class="card table">
+    <!-- 左侧固定标题列 -->
+    <view class="left" style="width: {{labelWidth}}rpx">
+      <view class="h-cell head-left">专业</view>
+      <block wx:for="{{rows}}" wx:key="label">
+        <view wx:if="{{item.type === 'sec'}}" class="h-sec">{{item.label}}</view>
+        <view wx:else class="h-cell">{{item.label}}</view>
+      </block>
+    </view>
+
+    <!-- 右侧可横向滑动 -->
+    <scroll-view scroll-x class="right" enable-flex>
+      <view class="right-inner">
+        <!-- 表头 -->
+        <view class="r-row head-row">
+          <view wx:for="{{cols}}" wx:key="id" class="head" style="width: {{colWidth}}rpx">
+            <view class="head-remove" catchtap="onRemove" data-id="{{item.id}}">×</view>
+            <view class="head-main" bindtap="onOpen" data-id="{{item.id}}" data-school="{{item.schoolId}}">
+              <view class="head-school">{{item.schoolName}}</view>
+              <text class="tag lv {{item.levelClass}}">{{item.level}}</text>
+              <view class="head-major"><text class="num head-code">{{item.majorCode}}</text></view>
+              <view class="head-major-name">{{item.majorName}}</view>
+              <view class="head-link">详情 ›</view>
+            </view>
+          </view>
+        </view>
+        <!-- 数据行 -->
+        <block wx:for="{{rows}}" wx:key="label" wx:for-item="row">
+          <view wx:if="{{row.type === 'sec'}}" class="r-sec"></view>
+          <view wx:else class="r-row">
+            <view wx:for="{{row.cells}}" wx:key="k" wx:for-item="cell"
+              class="cell {{cell.best ? 'best' : ''}} {{cell.cls}}" style="width: {{colWidth}}rpx">
+              <text class="cell-text">{{cell.text}}</text>
+            </view>
+          </view>
+        </block>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="tips">
+    <view>· 复试线、推免占比：越低越好；统招计划：越多越好</view>
+    <view>· 「最近变化」为最近两年有数据的复试线之差</view>
+    <view wx:if="{{cols.length > 2}}">· 专业较多时，表格可左右滑动</view>
+  </view>
+  <view class="disclaimer">{{disclaimer}}</view>
+</view>

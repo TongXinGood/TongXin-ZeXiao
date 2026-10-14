@@ -1,1 +1,199 @@
+.page {
+  padding-bottom: 40rpx;
+}
 
+/* ---------- 顶部信息条 ---------- */
+.bar {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 32rpx;
+  font-size: 26rpx;
+  color: var(--text-2);
+}
+.bar-num { color: var(--primary); font-size: 30rpx; }
+.bar-tip {
+  flex: 1;
+  margin-left: 20rpx;
+  font-size: 22rpx;
+  color: var(--text-3);
+  display: flex;
+  align-items: center;
+}
+.best-dot {
+  display: inline-block;
+  width: 20rpx;
+  height: 20rpx;
+  margin-right: 8rpx;
+  border-radius: 4rpx;
+  background: var(--primary-light);
+  border: 2rpx solid var(--primary);
+}
+.bar-clear {
+  padding: 4rpx 0 4rpx 20rpx;
+  color: var(--text-3);
+}
+
+/* ---------- 表格 ---------- */
+/* 所有行高写死，保证左右两部分对齐 */
+.table {
+  display: flex;
+  margin: 0 24rpx;
+  overflow: hidden;
+}
+.left {
+  flex-shrink: 0;
+  background: #FAFCFE;
+  border-right: 2rpx solid var(--line);
+  z-index: 1;
+}
+.right {
+  flex: 1;
+  width: 0;
+}
+.right-inner {
+  display: inline-block;
+  min-width: 100%;
+}
+
+.h-cell, .cell {
+  height: 84rpx;
+  display: flex;
+  align-items: center;
+  border-bottom: 2rpx solid var(--line);
+  box-sizing: border-box;
+  font-size: 24rpx;
+}
+.h-cell {
+  padding-left: 24rpx;
+  color: var(--text-3);
+  font-size: 24rpx;
+}
+.h-sec, .r-sec {
+  height: 64rpx;
+  box-sizing: border-box;
+  background: var(--bg);
+  border-bottom: 2rpx solid var(--line);
+}
+.h-sec {
+  display: flex;
+  align-items: center;
+  padding-left: 24rpx;
+  font-size: 24rpx;
+  font-weight: 700;
+  color: var(--text-1);
+  white-space: nowrap;
+}
+
+.r-row {
+  display: flex;
+}
+
+/* 表头 */
+.head-left, .head-row, .head {
+  height: 318rpx;
+}
+.head-left {
+  align-items: flex-start;
+  padding-top: 24rpx;
+}
+.head {
+  position: relative;
+  flex-shrink: 0;
+  padding: 20rpx 8rpx 0;
+  box-sizing: border-box;
+  border-bottom: 2rpx solid var(--line);
+  border-right: 2rpx solid var(--line);
+  text-align: center;
+}
+.head:last-child { border-right: none; }
+.head-remove {
+  position: absolute;
+  top: 6rpx;
+  right: 6rpx;
+  width: 36rpx;
+  height: 36rpx;
+  line-height: 32rpx;
+  text-align: center;
+  border-radius: 50%;
+  background: #F2F5F8;
+  color: var(--text-3);
+  font-size: 28rpx;
+}
+.head-school {
+  height: 72rpx;
+  padding: 0 28rpx;
+  font-size: 26rpx;
+  line-height: 36rpx;
+  font-weight: 700;
+  color: var(--text-1);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  margin-bottom: 8rpx;
+}
+.head-major { margin-top: 10rpx; }
+.head-code { font-size: 24rpx; color: var(--primary); }
+.head-major-name {
+  height: 64rpx;
+  font-size: 22rpx;
+  line-height: 32rpx;
+  font-weight: 600;
+  color: var(--text-1);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.head-link {
+  margin-top: 8rpx;
+  font-size: 22rpx;
+  color: var(--primary);
+}
+
+/* 数据格 */
+.cell {
+  flex-shrink: 0;
+  justify-content: center;
+  padding: 0 8rpx;
+  border-right: 2rpx solid var(--line);
+  color: var(--text-1);
+  font-weight: 600;
+}
+.r-row .cell:last-child { border-right: none; }
+.cell-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.cell.best {
+  background: var(--primary-light);
+  color: var(--primary-dark);
+  font-weight: 700;
+}
+.cell.up { color: var(--red); }
+.cell.down { color: var(--green); }
+
+/* ---------- 说明 / 空状态 ---------- */
+.tips {
+  margin: 24rpx 32rpx 0;
+  font-size: 22rpx;
+  line-height: 1.8;
+  color: var(--text-3);
+}
+
+.empty {
+  padding: 200rpx 64rpx 0;
+  text-align: center;
+}
+.empty-icon { font-size: 96rpx; }
+.empty-title {
+  margin-top: 24rpx;
+  font-size: 32rpx;
+  font-weight: 700;
+}
+.empty-desc {
+  margin-top: 12rpx;
+  font-size: 26rpx;
+  color: var(--text-3);
+}
