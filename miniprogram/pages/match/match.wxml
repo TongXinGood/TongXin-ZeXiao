@@ -1,0 +1,67 @@
+<wxs module="u">
+function has(arr, v) { return arr.indexOf(v) >= 0 }
+module.exports = { has: has }
+</wxs>
+
+<view class="page">
+  <view class="hero">
+    <view class="hero-title">智能择校</view>
+    <view class="hero-sub">回答 5 个问题，按最近一年复试线帮你分成 冲 / 稳 / 保</view>
+  </view>
+
+  <!-- 1 预估分 -->
+  <view class="card q">
+    <view class="q-title"><text class="q-no">1</text>你的预估总分<text class="q-req">必填</text></view>
+    <view class="score">
+      <input class="score-input num" type="number" maxlength="3" placeholder="如 350" placeholder-class="score-ph"
+        value="{{answers.score}}" bindinput="onScore" />
+      <text class="score-unit">分</text>
+    </view>
+    <view class="q-tip">建议按模考成绩保守估计，满分 500</view>
+  </view>
+
+  <!-- 2 地区 -->
+  <view class="card q">
+    <view class="q-title"><text class="q-no">2</text>意向地区<text class="q-tip-inline">可多选</text></view>
+    <view class="opts">
+      <view class="opt {{!answers.regions.length ? 'on' : ''}}" bindtap="onRegion" data-value="">不限</view>
+      <view wx:for="{{regionOptions}}" wx:key="*this" class="opt {{u.has(answers.regions, item) ? 'on' : ''}}"
+        bindtap="onRegion" data-value="{{item}}">{{item}}</view>
+    </view>
+  </view>
+
+  <!-- 3 学位类型 -->
+  <view class="card q">
+    <view class="q-title"><text class="q-no">3</text>学硕还是专硕</view>
+    <view class="opts">
+      <view class="opt {{answers.degree === '' ? 'on' : ''}}" bindtap="onPick" data-key="degree" data-value="">都可以</view>
+      <view class="opt {{answers.degree === 'academic' ? 'on' : ''}}" bindtap="onPick" data-key="degree" data-value="academic">学硕</view>
+      <view class="opt {{answers.degree === 'professional' ? 'on' : ''}}" bindtap="onPick" data-key="degree" data-value="professional">专硕</view>
+    </view>
+  </view>
+
+  <!-- 4 数学 -->
+  <view class="card q">
+    <view class="q-title"><text class="q-no">4</text>考哪种数学</view>
+    <view class="opts">
+      <view class="opt {{answers.math === '' ? 'on' : ''}}" bindtap="onPick" data-key="math" data-value="">都可以</view>
+      <view class="opt {{answers.math === '数学一' ? 'on' : ''}}" bindtap="onPick" data-key="math" data-value="数学一">数学一</view>
+      <view class="opt {{answers.math === '数学二' ? 'on' : ''}}" bindtap="onPick" data-key="math" data-value="数学二">数学二</view>
+    </view>
+  </view>
+
+  <!-- 5 专业课 -->
+  <view class="card q">
+    <view class="q-title"><text class="q-no">5</text>专业课</view>
+    <view class="opts">
+      <view class="opt {{!answers.only408 ? 'on' : ''}}" bindtap="onPick" data-key="only408" data-value="no">都可以</view>
+      <view class="opt {{answers.only408 ? 'on' : ''}}" bindtap="onPick" data-key="only408" data-value="yes">只看考 408</view>
+    </view>
+  </view>
+
+  <view class="disclaimer">匹配结果仅基于历年复试线估算，仅供参考</view>
+</view>
+
+<view class="footer">
+  <view class="submit {{valid ? '' : 'disabled'}}" bindtap="onSubmit">开始匹配</view>
+</view>

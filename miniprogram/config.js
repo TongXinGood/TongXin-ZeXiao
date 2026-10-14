@@ -11,5 +11,10 @@ module.exports = {
   USE_MOCK: true,
   BASE_URL: 'http://YOUR_SERVER_IP/kaoyan/api/v1',
   MAX_COMPARE: 4,
+  // 智能择校分档：差值 = 预估分 − 最近一年复试线
+  MATCH: {
+    REACH_MIN: -20, // 冲：差值在 [-20, 0) 之间；低于 -20 分太难，不推荐
+    SAFE_GAP: 15    // 稳：[0, 15]；保：> 15
+  },
   DISCLAIMER: '数据仅供参考，以研招网和院校官网为准'
 }

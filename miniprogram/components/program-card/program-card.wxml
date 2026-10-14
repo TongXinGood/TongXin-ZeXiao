@@ -1,4 +1,6 @@
 <view class="card pc" hover-class="pc-hover" hover-stay-time="80" bindtap="onTap">
+  <view wx:if="{{note}}" class="pc-note {{noteClass}}">{{note}}</view>
+
   <!-- 第一行：学校 + 层次 + 对比按钮 -->
   <view class="pc-head">
     <view class="pc-school">

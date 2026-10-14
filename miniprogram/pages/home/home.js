@@ -54,7 +54,7 @@ Page({
   },
 
   onMatch() {
-    wx.showToast({ title: '智能择校将在第 5 步上线', icon: 'none' })
+    wx.navigateTo({ url: '/pages/match/match' })
   },
 
   goCompare() {

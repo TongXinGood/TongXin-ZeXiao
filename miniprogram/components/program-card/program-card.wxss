@@ -114,3 +114,16 @@
   font-size: 22rpx;
   color: var(--text-3);
 }
+
+/* 智能择校分档说明 */
+.pc-note {
+  display: inline-block;
+  margin-bottom: 14rpx;
+  padding: 6rpx 16rpx;
+  border-radius: 8rpx;
+  font-size: 22rpx;
+  font-weight: 600;
+}
+.pc-note.reach { background: var(--orange-light); color: var(--orange); }
+.pc-note.steady { background: var(--primary-light); color: var(--primary-dark); }
+.pc-note.safe { background: var(--green-light); color: var(--green); }

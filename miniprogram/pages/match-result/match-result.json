@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "匹配结果",
+  "usingComponents": {
+    "program-card": "/components/program-card/program-card"
+  }
+}

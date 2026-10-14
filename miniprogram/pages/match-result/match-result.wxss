@@ -1,0 +1,62 @@
+.page { padding-bottom: 40rpx; }
+
+.summary {
+  padding: 28rpx 32rpx 32rpx;
+  background: linear-gradient(180deg, #EAF6FF 0%, #F5F9FD 100%);
+}
+.summary-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.summary-label { font-size: 26rpx; color: var(--text-2); margin-right: 12rpx; }
+.summary-score { font-size: 56rpx; color: var(--primary); }
+.summary-edit {
+  padding: 10rpx 28rpx;
+  border-radius: 999rpx;
+  border: 2rpx solid var(--primary);
+  color: var(--primary);
+  font-size: 24rpx;
+}
+.summary-cond { margin-top: 4rpx; font-size: 24rpx; color: var(--text-2); }
+
+/* 分档切换 */
+.tiers {
+  display: flex;
+  padding: 0 24rpx;
+}
+.tier {
+  flex: 1;
+  padding: 20rpx 0;
+  text-align: center;
+  border-radius: 20rpx;
+  background: #fff;
+  border: 3rpx solid transparent;
+  box-shadow: var(--shadow);
+}
+.tier + .tier { margin-left: 16rpx; }
+.tier-label { font-size: 36rpx; font-weight: 700; }
+.tier-count { font-size: 22rpx; color: var(--text-3); }
+.tier-count .num { font-size: 28rpx; }
+
+.tier-reach .tier-label, .tier-reach .num { color: var(--orange); }
+.tier-steady .tier-label, .tier-steady .num { color: var(--primary); }
+.tier-safe .tier-label, .tier-safe .num { color: var(--green); }
+.tier-reach.on { background: var(--orange-light); border-color: var(--orange); }
+.tier-steady.on { background: var(--primary-light); border-color: var(--primary); }
+.tier-safe.on { background: var(--green-light); border-color: var(--green); }
+
+.tier-desc {
+  padding: 20rpx 32rpx 16rpx;
+  font-size: 24rpx;
+  color: var(--text-2);
+}
+
+.empty-tip { margin-top: 8rpx; font-size: 22rpx; }
+
+.extra {
+  margin: 8rpx 32rpx 0;
+  font-size: 22rpx;
+  line-height: 1.8;
+  color: var(--text-3);
+}

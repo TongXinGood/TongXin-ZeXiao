@@ -3,7 +3,9 @@
     "pages/home/home",
     "pages/index/index",
     "pages/compare/compare",
-    "pages/detail/detail"
+    "pages/detail/detail",
+    "pages/match/match",
+    "pages/match-result/match-result"
   ],
   "window": {
     "navigationBarTitleText": "考研择校",
