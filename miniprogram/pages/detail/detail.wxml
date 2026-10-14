@@ -1,2 +1,132 @@
-<view class="state">详情页将在第 3 步实现</view>
-<view class="state">{{id}}</view>
+<view wx:if="{{loading}}" class="state">加载中…</view>
+<view wx:elif="{{error}}" class="state">
+  <view>{{error}}</view>
+  <view class="state-btn" bindtap="retry">重新加载</view>
+</view>
+
+<view wx:else class="page">
+  <!-- 学校 -->
+  <view class="school">
+    <view class="school-row">
+      <text class="school-name">{{school.name}}</text>
+      <text class="tag lv {{school.levelClass}}">{{school.level}}</text>
+      <text class="tag school-tag" wx:for="{{school.otherTags}}" wx:key="*this">{{item}}</text>
+    </view>
+    <view class="school-sub">{{school.province}}{{school.city && school.city !== school.province ? ' · ' + school.city : ''}} · {{school.region}}</view>
+    <view class="school-link" wx:if="{{school.website}}" bindtap="copyLink" data-url="{{school.website}}">研招网站：{{school.website}}（点击复制）</view>
+  </view>
+
+  <!-- 专业切换 -->
+  <scroll-view scroll-x class="tabs" enable-flex wx:if="{{tabs.length > 1}}">
+    <view wx:for="{{tabs}}" wx:key="id" class="tab {{current.id === item.id ? 'on' : ''}}" bindtap="onTab" data-id="{{item.id}}">
+      <view class="tab-label">{{item.label}}</view>
+      <view class="tab-sub">{{item.sub}}</view>
+    </view>
+  </scroll-view>
+
+  <block wx:if="{{current}}">
+    <!-- 专业概况 -->
+    <view class="card box">
+      <view class="major">
+        <text class="major-code num">{{current.majorCode}}</text>
+        <text class="major-name">{{current.majorName}}</text>
+      </view>
+      <view class="major-college">{{current.college}}</view>
+      <view class="major-tags">
+        <text class="tag {{current.degreeClass}}">{{current.degreeLabel}}</text>
+        <text class="tag tag-orange" wx:if="{{current.is408}}">考 408</text>
+        <text class="tag" wx:else>自命题</text>
+      </view>
+      <view class="subjects">
+        <view class="subject" wx:for="{{current.subjects}}" wx:key="label">
+          <text class="subject-label">{{item.label}}</text>
+          <text class="subject-value">{{item.value}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 历年复试线 -->
+    <view class="card box">
+      <view class="box-title">历年复试线<text class="box-tip">总分</text></view>
+      <view class="chart">
+        <view class="bar-col" wx:for="{{current.bars}}" wx:key="year">
+          <view class="bar-delta {{item.deltaClass}}">{{item.deltaText}}</view>
+          <view class="bar-value num {{item.empty ? 'muted' : ''}}">{{item.value}}</view>
+          <view class="bar-track">
+            <view class="bar {{index === current.bars.length - 1 ? 'bar-last' : ''}}" style="height: {{item.height}}%"></view>
+          </view>
+          <view class="bar-year">{{item.year}}</view>
+        </view>
+      </view>
+
+      <view class="table">
+        <view class="tr th">
+          <view class="td td-year">年份</view>
+          <view class="td">总分</view>
+          <view class="td">政治</view>
+          <view class="td">外语</view>
+          <view class="td">数学</view>
+          <view class="td">专业课</view>
+        </view>
+        <view class="tr" wx:for="{{current.lines}}" wx:key="year">
+          <view class="td td-year">{{item.year}}</view>
+          <view class="td num td-strong">{{item.total}}</view>
+          <view class="td num">{{item.politics}}</view>
+          <view class="td num">{{item.foreign}}</view>
+          <view class="td num">{{item.math}}</view>
+          <view class="td num">{{item.pro}}</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 招生情况 -->
+    <view class="card box">
+      <view class="box-title">招生情况<text class="box-tip">推免占比 = 推免 ÷ (统招 + 推免)</text></view>
+      <view class="table">
+        <view class="tr th">
+          <view class="td td-year">年份</view>
+          <view class="td">统招计划</view>
+          <view class="td">推免</view>
+          <view class="td">推免占比</view>
+          <view class="td">录取</view>
+          <view class="td">复试</view>
+        </view>
+        <view class="tr" wx:for="{{current.enroll}}" wx:key="year">
+          <view class="td td-year">{{item.year}}</view>
+          <view class="td num td-strong">{{item.plan}}</view>
+          <view class="td num">{{item.exempt}}</view>
+          <view class="td num">{{item.exemptRate}}</view>
+          <view class="td num">{{item.admitted}}</view>
+          <view class="td num">{{item.retest}}</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 备注 -->
+    <view class="card box" wx:if="{{current.notes.length || current.remark}}">
+      <view class="box-title">备注</view>
+      <view class="note" wx:for="{{current.notes}}" wx:key="year"><text class="note-year">{{item.year}}</text>{{item.text}}</view>
+      <view class="note" wx:if="{{current.remark}}">{{current.remark}}</view>
+    </view>
+
+    <!-- 数据来源 -->
+    <view class="card box" wx:if="{{current.sources.length}}">
+      <view class="box-title">数据来源</view>
+      <view class="source" wx:for="{{current.sources}}" wx:key="title" bindtap="copyLink" data-url="{{item.url}}">
+        <view class="source-title">{{item.title}}</view>
+        <view class="source-meta" wx:if="{{item.date || item.url}}">{{item.date}}{{item.url ? '　点击复制链接' : ''}}</view>
+      </view>
+    </view>
+  </block>
+
+  <view class="disclaimer">{{disclaimer}}</view>
+</view>
+
+<!-- 底部操作栏 -->
+<view class="footer" wx:if="{{current}}">
+  <view class="footer-cmp" bindtap="goCompare">
+    <text>对比</text>
+    <text class="footer-badge num" wx:if="{{compareCount}}">{{compareCount}}</text>
+  </view>
+  <view class="footer-btn {{inCompare ? 'on' : ''}}" bindtap="onCompare">{{inCompare ? '✓ 已加入对比（点击移出）' : '+ 加入对比'}}</view>
+</view>
