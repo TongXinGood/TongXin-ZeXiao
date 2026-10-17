@@ -7,7 +7,7 @@
     <view class="summary-main">
       <view>
         <text class="summary-label">预估总分</text>
-        <text class="num summary-score">{{score}}</text>
+        <text class="num summary-score">{{scoreText}}</text>
       </view>
       <view class="summary-edit" bindtap="onEdit">修改条件</view>
     </view>
@@ -32,6 +32,7 @@
     item="{{item}}"
     note="{{item.note}}"
     note-class="{{item.noteClass}}"
+    warn="{{item.warn}}"
     in-compare="{{compareMap[item.id]}}"
     bind:open="onOpen"
     bind:compare="onCompare"
@@ -42,7 +43,8 @@
   </view>
 
   <view class="extra">
-    <view wx:if="{{tooHard}}">· 另有 {{tooHard}} 个专业复试线高出你的预估分 {{reachMin}} 分以上，未列入</view>
+    <view wx:if="{{tooHard}}">· 另有 {{tooHard}} 个专业最高分也达不到复试线，未列入</view>
+    <view>· 橙色「⚠」表示该科最低分低于这个专业的单科线，需要注意</view>
     <view wx:if="{{noLine}}">· {{noLine}} 个专业缺少复试线数据，未参与匹配</view>
     <view>· 分档依据最近一年复试线，复试线每年会变化；进复试后还要看复试成绩和名额</view>
   </view>

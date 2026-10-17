@@ -10,7 +10,7 @@
   align-items: center;
 }
 .summary-label { font-size: 26rpx; color: var(--text-2); margin-right: 12rpx; }
-.summary-score { font-size: 56rpx; color: var(--primary); }
+.summary-score { font-size: 52rpx; color: var(--primary); }
 .summary-edit {
   padding: 10rpx 28rpx;
   border-radius: 999rpx;
@@ -18,7 +18,7 @@
   color: var(--primary);
   font-size: 24rpx;
 }
-.summary-cond { margin-top: 4rpx; font-size: 24rpx; color: var(--text-2); }
+.summary-cond { margin-top: 8rpx; font-size: 24rpx; line-height: 1.6; color: var(--text-2); }
 
 /* 分档切换 */
 .tiers {

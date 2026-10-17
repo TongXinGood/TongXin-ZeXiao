@@ -146,6 +146,152 @@
           "date": ""
         }
       ]
+    },
+    {
+      "id": "10336-085411-zs",
+      "college": "计算机学院",
+      "majorCode": "085411",
+      "majorName": "大数据技术与工程",
+      "degreeType": "professional",
+      "exam": {
+        "politics": "思想政治理论",
+        "foreign": "英语二",
+        "math": "数学二",
+        "pro": [
+          {
+            "code": "408",
+            "name": "计算机学科专业基础"
+          }
+        ]
+      },
+      "years": [
+        {
+          "year": 2024,
+          "retestLine": {
+            "total": 285,
+            "politics": 45,
+            "foreign": 45,
+            "math": 68,
+            "pro": 68
+          },
+          "planCount": 60,
+          "exemptCount": 2,
+          "admittedCount": null,
+          "retestCount": null,
+          "note": ""
+        },
+        {
+          "year": 2025,
+          "retestLine": {
+            "total": 290,
+            "politics": 45,
+            "foreign": 45,
+            "math": 68,
+            "pro": 68
+          },
+          "planCount": 70,
+          "exemptCount": 2,
+          "admittedCount": null,
+          "retestCount": null,
+          "note": ""
+        },
+        {
+          "year": 2026,
+          "retestLine": {
+            "total": 295,
+            "politics": 45,
+            "foreign": 45,
+            "math": 68,
+            "pro": 68
+          },
+          "planCount": 80,
+          "exemptCount": 3,
+          "admittedCount": null,
+          "retestCount": null,
+          "note": ""
+        }
+      ],
+      "remark": "",
+      "sources": [
+        {
+          "title": "示例数据（待替换）",
+          "url": "",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "id": "10336-085412-zs",
+      "college": "网络空间安全学院",
+      "majorCode": "085412",
+      "majorName": "网络与信息安全",
+      "degreeType": "professional",
+      "exam": {
+        "politics": "思想政治理论",
+        "foreign": "英语二",
+        "math": "数学二",
+        "pro": [
+          {
+            "code": "853",
+            "name": "网络安全综合"
+          }
+        ]
+      },
+      "years": [
+        {
+          "year": 2024,
+          "retestLine": {
+            "total": 288,
+            "politics": 45,
+            "foreign": 45,
+            "math": 68,
+            "pro": 68
+          },
+          "planCount": 40,
+          "exemptCount": 2,
+          "admittedCount": null,
+          "retestCount": null,
+          "note": ""
+        },
+        {
+          "year": 2025,
+          "retestLine": {
+            "total": 292,
+            "politics": 45,
+            "foreign": 45,
+            "math": 68,
+            "pro": 68
+          },
+          "planCount": 45,
+          "exemptCount": 2,
+          "admittedCount": null,
+          "retestCount": null,
+          "note": ""
+        },
+        {
+          "year": 2026,
+          "retestLine": {
+            "total": 290,
+            "politics": 45,
+            "foreign": 45,
+            "math": 68,
+            "pro": 68
+          },
+          "planCount": 50,
+          "exemptCount": 2,
+          "admittedCount": null,
+          "retestCount": null,
+          "note": ""
+        }
+      ],
+      "remark": "",
+      "sources": [
+        {
+          "title": "示例数据（待替换）",
+          "url": "",
+          "date": ""
+        }
+      ]
     }
   ]
 }

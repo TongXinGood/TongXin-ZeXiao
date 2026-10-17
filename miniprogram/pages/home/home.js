@@ -6,7 +6,7 @@ const { DISCLAIMER } = require('../../config')
 
 // 首页快捷入口：点击后带着筛选条件进入院校库
 const QUICK = [
-  { label: '考 408', filters: { only408: true } },
+  { label: '考 408', filters: { proType: '408' } },
   { label: '数学二', filters: { math: '数学二' } },
   { label: '专硕', filters: { degree: 'professional' } },
   { label: '学硕', filters: { degree: 'academic' } },

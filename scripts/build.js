@@ -20,9 +20,10 @@ const DATA_DIR = path.join(ROOT, 'data')
 const OUT_DIR = path.join(ROOT, 'dist', 'api', 'v1')
 const MOCK_FILE = path.join(ROOT, 'miniprogram', 'mock', 'data.js')
 
+const { LEVELS, REGION_PROVINCES, regionOf, DIRECTIONS, directionOf, STUDY_MODES } = require('../miniprogram/utils/dict')
+
 const YEARS = [2024, 2025, 2026]
-const LEVELS = ['C9', '985', '211', '双一流', '双非']
-const REGIONS = ['华北', '东北', '华东', '华中', '华南', '西南', '西北']
+const REGIONS = REGION_PROVINCES.map((g) => g.region)
 const DEGREE_TYPES = ['academic', 'professional']
 const MATHS = ['数学一', '数学二', null]
 
@@ -53,8 +54,11 @@ schools.forEach((s, i) => {
   if (schoolMap[s.id]) err(where, `id 重复：${s.id}`)
   if (!s.name) err(where, '缺少 name')
   if (!LEVELS.includes(s.level)) err(where, `level 必须是 ${LEVELS.join('/')}`)
-  if (!REGIONS.includes(s.region)) err(where, `region 必须是 ${REGIONS.join('/')}`)
-  if (!s.province) err(where, '缺少 province')
+  // 大区由省份自动推出，不用手填；手填了就校验是否一致
+  const region = regionOf(s.province)
+  if (!region) err(where, `province「${s.province || ''}」不是有效省份（写「北京」「江苏」这样，不带省/市字）`)
+  else if (s.region && s.region !== region) err(where, `region 应为 ${region}（${s.province} 属于${region}）`)
+  s.region = region
   if (!Array.isArray(s.tags)) err(where, 'tags 必须是数组')
   schoolMap[s.id] = s
 })
@@ -80,12 +84,18 @@ detailFiles.forEach((file) => {
     if (!p.id) err(where, '缺少 id')
     if (programIds.has(p.id)) err(where, `id 重复：${p.id}`)
     programIds.add(p.id)
-    if (!/^\d{6}$/.test(p.majorCode || '')) err(where, 'majorCode 必须是 6 位数字')
+    if (!/^[0-9A-Z]{6}$/.test(p.majorCode || '')) err(where, 'majorCode 必须是 6 位（数字或大写字母，如 081200、0812Z1）')
     if (!p.majorName) err(where, '缺少 majorName')
     if (!DEGREE_TYPES.includes(p.degreeType)) err(where, 'degreeType 必须是 academic/professional')
     const exam = p.exam || {}
     if (!MATHS.includes(exam.math === undefined ? null : exam.math)) err(where, 'exam.math 必须是 数学一/数学二/null')
     if (!Array.isArray(exam.pro) || exam.pro.length === 0) err(where, 'exam.pro 至少一门专业课')
+    p.studyMode = p.studyMode || 'full'
+    if (!STUDY_MODES[p.studyMode]) err(where, 'studyMode 必须是 full（全日制）/ part（非全日制）')
+    const direction = directionOf(p)
+    const dirOptions = DIRECTIONS[p.degreeType] || []
+    if (!direction) err(where, `无法从专业代码判断方向，请加 "direction"，可选：${dirOptions.join('/')}`)
+    else if (dirOptions.indexOf(direction) < 0) err(where, `direction「${direction}」不在${p.degreeType === 'academic' ? '学硕' : '专硕'}方向里，可选：${dirOptions.join('/')}`)
 
     const years = (p.years || []).slice().sort((a, b) => a.year - b.year)
     years.forEach((y) => {
@@ -123,6 +133,8 @@ detailFiles.forEach((file) => {
       majorCode: p.majorCode,
       majorName: p.majorName,
       degreeType: p.degreeType,
+      direction,
+      studyMode: p.studyMode,
       math: exam.math || null,
       foreign: exam.foreign || null,
       proCodes: (exam.pro || []).map((x) => x.code),
@@ -130,6 +142,15 @@ detailFiles.forEach((file) => {
       lineYear: last ? last.year : null,
       latestLine: last ? last.retestLine.total : null,
       lineDelta: last && prev ? last.retestLine.total - prev.retestLine.total : null,
+      // 最近一年的单科线，智能择校做单科检查用
+      lineSingles: last
+        ? {
+            politics: isNumOrNull(last.retestLine.politics) ? last.retestLine.politics : null,
+            foreign: isNumOrNull(last.retestLine.foreign) ? last.retestLine.foreign : null,
+            math: isNumOrNull(last.retestLine.math) ? last.retestLine.math : null,
+            pro: isNumOrNull(last.retestLine.pro) ? last.retestLine.pro : null
+          }
+        : null,
       planYear: latest.year || null,
       latestPlan: isNumOrNull(latest.planCount) ? latest.planCount : null,
       latestExempt: isNumOrNull(latest.exemptCount) ? latest.exemptCount : null
@@ -222,6 +243,11 @@ const meta = {
   years: YEARS,
   levels: LEVELS,
   regions: REGIONS.filter((r) => schools.some((s) => s.region === r)),
+  // 各省专业数，问卷和筛选里显示在省份旁边
+  provinceCounts: programs.reduce((m, p) => {
+    m[p.province] = (m[p.province] || 0) + 1
+    return m
+  }, {}),
   schoolCount: Object.keys(details).length,
   programCount: programs.length,
   disclaimer: '数据仅供参考，以研招网和院校官网为准'

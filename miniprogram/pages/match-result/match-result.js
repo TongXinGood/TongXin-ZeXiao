@@ -1,8 +1,9 @@
 const api = require('../../utils/api')
 const compare = require('../../utils/compare')
 const { decorateProgram } = require('../../utils/format')
-const { TIERS, defaultAnswers, matchPrograms, gapText } = require('../../utils/match')
-const { MAX_COMPARE, MATCH } = require('../../config')
+const { TIERS, defaultAnswers, matchPrograms, gapText, weakText } = require('../../utils/match')
+const { MAX_COMPARE } = require('../../config')
+const { STUDY_MODES } = require('../../utils/dict')
 
 function toMap(ids) {
   const m = {}
@@ -10,12 +11,23 @@ function toMap(ids) {
   return m
 }
 
+function short(list, max) {
+  return list.length > max ? list.slice(0, max).join('、') + ' 等 ' + list.length + ' 个' : list.join('、')
+}
+
+/** 条件摘要，如「专硕（计算机技术）· 英语二 · 数学二 · 408 · 全日制 · 江苏、浙江」 */
 function describe(a) {
   const parts = []
-  parts.push(a.regions.length ? a.regions.join('、') : '地区不限')
-  parts.push(a.degree === 'academic' ? '学硕' : a.degree === 'professional' ? '专硕' : '学硕/专硕')
-  parts.push(a.math || '数学不限')
-  if (a.only408) parts.push('只看 408')
+  let degree = a.degree === 'academic' ? '学硕' : a.degree === 'professional' ? '专硕' : '学硕/专硕'
+  if (a.degree && a.directions.length) degree += '（' + short(a.directions, 2) + '）'
+  parts.push(degree)
+  if (a.foreign) parts.push(a.foreign)
+  if (a.math) parts.push(a.math)
+  if (a.proType) parts.push(a.proType === '408' ? '408' : '自命题')
+  parts.push(STUDY_MODES[a.studyMode] || '全日制')
+  if (a.minPlan) parts.push('招生 ≥ ' + a.minPlan + ' 人')
+  if (a.levels.length) parts.push(a.levels.join('/'))
+  parts.push(a.provinces.length ? short(a.provinces, 3) : '省份不限')
   return parts.join(' · ')
 }
 
@@ -23,14 +35,13 @@ Page({
   data: {
     loading: true,
     error: '',
-    score: '',
+    scoreText: '',
     condText: '',
     tiers: [],      // [{ key, label, desc, count }]
     active: 'steady',
     list: [],
     noLine: 0,
     tooHard: 0,
-    reachMin: -MATCH.REACH_MIN,
     compareMap: {}
   },
 
@@ -41,13 +52,16 @@ Page({
     try {
       answers = Object.assign(answers, wx.getStorageSync('match_answers') || {})
     } catch (e) {}
-    this.setData({ score: answers.score, condText: describe(answers) })
+    this.setData({ condText: describe(answers) })
 
     api
       .getPrograms()
       .then((programs) => {
         const r = matchPrograms(programs, answers)
+        if (!r.score.ok) throw new Error(r.score.error)
         this.result = r
+        const sc = r.score
+        this.setData({ scoreText: sc.totalMin === sc.totalMax ? String(sc.totalMin) : sc.totalMin + ' ~ ' + sc.totalMax })
         const tiers = TIERS.map((t) => Object.assign({}, t, { count: r.tiers[t.key].length }))
         // 默认打开「稳」，没有就打开第一个有结果的档
         const first = tiers.filter((t) => t.count)[0]
@@ -65,7 +79,7 @@ Page({
   show(key) {
     const tier = TIERS.find((t) => t.key === key)
     const list = this.result.tiers[key].map((p) =>
-      Object.assign(decorateProgram(p), { note: tier.label + ' · ' + gapText(p.gap), noteClass: key })
+      Object.assign(decorateProgram(p), { note: tier.label + ' · ' + gapText(p), noteClass: key, warn: weakText(p) })
     )
     this.setData({ active: key, list })
     wx.pageScrollTo({ scrollTop: 0, duration: 0 })

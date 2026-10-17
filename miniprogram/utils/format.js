@@ -1,6 +1,8 @@
 /** 把专业索引数据加工成卡片直接可用的展示字段 */
 
-const LEVEL_CLASS = { C9: 'lv-c9', '985': 'lv-985', '211': 'lv-211', '双一流': 'lv-syl', '双非': 'lv-sf' }
+const { directionOf } = require('./dict')
+
+const LEVEL_CLASS = { C9: 'lv-c9', '985': 'lv-985', '211': 'lv-211', '双一流': 'lv-syl', '研究院': 'lv-yjy', '双非': 'lv-sf' }
 
 function dash(v) {
   return v === null || v === undefined ? '—' : v
@@ -19,6 +21,7 @@ function decorateProgram(p) {
     degreeLabel: p.degreeType === 'academic' ? '学硕' : '专硕',
     degreeClass: p.degreeType === 'academic' ? 'tag-blue' : 'tag-green',
     proLabel: p.is408 ? '408' : '自命题 ' + (p.proCodes || []).join('/'),
+    partTime: p.studyMode === 'part',
     lineText: dash(p.latestLine),
     planText: dash(p.latestPlan),
     exemptText: dash(p.latestExempt),
@@ -27,7 +30,7 @@ function decorateProgram(p) {
   })
 }
 
-module.exports = { dash, decorateProgram }
+module.exports = { dash, decorateProgram, LEVEL_CLASS }
 
 /** 详情页：把一个专业的完整数据加工成页面直接可用的结构 */
 function buildDetail(p) {
@@ -85,6 +88,8 @@ function buildDetail(p) {
     degreeLabel: p.degreeType === 'academic' ? '学硕' : '专硕',
     degreeClass: p.degreeType === 'academic' ? 'tag-blue' : 'tag-green',
     is408: !!p.is408,
+    partTime: p.studyMode === 'part',
+    direction: directionOf(p),
     subjects: [
       { label: '政治', value: exam.politics || '—' },
       { label: '外语', value: exam.foreign || '—' },
@@ -134,6 +139,8 @@ function buildCompareRows(items, years) {
   rows.push(row('地区', items.map((x) => x.p.province + ' · ' + x.p.region)))
   rows.push(row('层次', items.map((x) => x.p.level)))
   rows.push(row('类型', items.map((x) => (x.p.degreeType === 'academic' ? '学硕' : '专硕'))))
+  rows.push(row('方向', items.map((x) => x.p.direction)))
+  rows.push(row('学习方式', items.map((x) => (x.p.studyMode === 'part' ? '非全日制' : '全日制'))))
   rows.push(row('数学', items.map((x) => x.p.math || '不考')))
   rows.push(row('外语', items.map((x) => x.p.foreign)))
   rows.push(row('专业课', items.map((x) => (x.p.is408 ? '408' : '自命题 ' + x.p.proCodes.join('/')))))

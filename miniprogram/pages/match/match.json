@@ -1,5 +1,7 @@
 {
   "navigationBarTitleText": "智能择校",
   "navigationBarBackgroundColor": "#EAF6FF",
-  "usingComponents": {}
+  "usingComponents": {
+    "province-picker": "/components/province-picker/province-picker"
+  }
 }

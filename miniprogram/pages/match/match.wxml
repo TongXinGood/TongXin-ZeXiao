@@ -4,64 +4,122 @@ module.exports = { has: has }
 </wxs>
 
 <view class="page">
-  <view class="hero">
-    <view class="hero-title">智能择校</view>
-    <view class="hero-sub">回答 5 个问题，按最近一年复试线帮你分成 冲 / 稳 / 保</view>
-  </view>
-
-  <!-- 1 预估分 -->
-  <view class="card q">
-    <view class="q-title"><text class="q-no">1</text>你的预估总分<text class="q-req">必填</text></view>
-    <view class="score">
-      <input class="score-input num" type="number" maxlength="3" placeholder="如 350" placeholder-class="score-ph"
-        value="{{answers.score}}" bindinput="onScore" />
-      <text class="score-unit">分</text>
+  <!-- 步骤条 -->
+  <view class="stepper">
+    <view wx:for="{{steps}}" wx:key="*this" class="st {{index < step ? 'done' : ''}} {{index === step ? 'cur' : ''}}">
+      <view class="st-dot">{{index < step ? '✓' : index + 1}}</view>
+      <view class="st-label">{{item}}</view>
     </view>
-    <view class="q-tip">建议按模考成绩保守估计，满分 500</view>
+    <view class="st-line"><view class="st-line-in" style="width: {{step * 50}}%"></view></view>
   </view>
 
-  <!-- 2 地区 -->
-  <view class="card q">
-    <view class="q-title"><text class="q-no">2</text>意向地区<text class="q-tip-inline">可多选</text></view>
-    <view class="opts">
-      <view class="opt {{!answers.regions.length ? 'on' : ''}}" bindtap="onRegion" data-value="">不限</view>
-      <view wx:for="{{regionOptions}}" wx:key="*this" class="opt {{u.has(answers.regions, item) ? 'on' : ''}}"
-        bindtap="onRegion" data-value="{{item}}">{{item}}</view>
-    </view>
-  </view>
-
-  <!-- 3 学位类型 -->
-  <view class="card q">
-    <view class="q-title"><text class="q-no">3</text>学硕还是专硕</view>
-    <view class="opts">
-      <view class="opt {{answers.degree === '' ? 'on' : ''}}" bindtap="onPick" data-key="degree" data-value="">都可以</view>
-      <view class="opt {{answers.degree === 'academic' ? 'on' : ''}}" bindtap="onPick" data-key="degree" data-value="academic">学硕</view>
-      <view class="opt {{answers.degree === 'professional' ? 'on' : ''}}" bindtap="onPick" data-key="degree" data-value="professional">专硕</view>
+  <!-- ========== 第 1 步：预估成绩 ========== -->
+  <view wx:if="{{step === 0}}">
+    <view class="card q">
+      <view class="q-head">
+        <text class="q-title">各科预估分</text>
+        <text class="q-total">总分 <text class="num">{{total.text}}</text></text>
+      </view>
+      <view class="q-tip">填一个范围更准：最低分按保守估，最高分按发挥好估；只填最低分也可以</view>
+      <view class="score-row" wx:for="{{subjects}}" wx:key="key">
+        <view class="score-label">{{item.label}}<text class="score-max">/{{item.max}}</text></view>
+        <input class="score-in num" type="number" maxlength="3" placeholder="最低分" placeholder-class="ph"
+          value="{{answers.scores[item.key].min}}" bindinput="onScore" data-key="{{item.key}}" data-end="min" />
+        <text class="score-sep">~</text>
+        <input class="score-in num" type="number" maxlength="3" placeholder="最高分" placeholder-class="ph"
+          value="{{answers.scores[item.key].max}}" bindinput="onScore" data-key="{{item.key}}" data-end="max" />
+      </view>
+      <view class="q-error" wx:if="{{total.error}}">{{total.error}}</view>
     </view>
   </view>
 
-  <!-- 4 数学 -->
-  <view class="card q">
-    <view class="q-title"><text class="q-no">4</text>考哪种数学</view>
-    <view class="opts">
-      <view class="opt {{answers.math === '' ? 'on' : ''}}" bindtap="onPick" data-key="math" data-value="">都可以</view>
-      <view class="opt {{answers.math === '数学一' ? 'on' : ''}}" bindtap="onPick" data-key="math" data-value="数学一">数学一</view>
-      <view class="opt {{answers.math === '数学二' ? 'on' : ''}}" bindtap="onPick" data-key="math" data-value="数学二">数学二</view>
+  <!-- ========== 第 2 步：专业与科目 ========== -->
+  <view wx:if="{{step === 1}}">
+    <view class="tips" bindtap="toggleTips">
+      <view class="tips-head"><text>💡 怎么选？</text><text class="tips-arrow">{{showTips ? '收起' : '展开'}}</text></view>
+      <view wx:if="{{showTips}}" class="tips-body">
+        <view>· 学硕偏科研，一般考英语一、数学一；专硕偏应用，部分学校考英语二、数学二</view>
+        <view>· 408 是全国统考专业课，换学校不用换复习内容；自命题各校不同</view>
+        <view>· 拿不准的选「都可以」，结果更多，之后可以再缩小范围</view>
+      </view>
+    </view>
+
+    <view class="card q">
+      <view class="q-title">学硕还是专硕</view>
+      <view class="opts">
+        <view class="opt {{answers.degree === 'academic' ? 'on' : ''}}" bindtap="onPick" data-key="degree" data-value="academic">学硕</view>
+        <view class="opt {{answers.degree === 'professional' ? 'on' : ''}}" bindtap="onPick" data-key="degree" data-value="professional">专硕</view>
+        <view class="opt {{answers.degree === '' ? 'on' : ''}}" bindtap="onPick" data-key="degree" data-value="">都可以</view>
+      </view>
+      <view class="sub" wx:if="{{dirOptions.length}}">
+        <view class="sub-title">{{answers.degree === 'academic' ? '学硕' : '专硕'}}方向<text class="q-hint">可多选</text></view>
+        <view class="opts">
+          <view class="opt opt-sm {{!answers.directions.length ? 'on' : ''}}" bindtap="onMulti" data-key="directions" data-value="">都可以</view>
+          <view wx:for="{{dirOptions}}" wx:key="*this" class="opt opt-sm {{u.has(answers.directions, item) ? 'on' : ''}}"
+            bindtap="onMulti" data-key="directions" data-value="{{item}}">{{item}}</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="card q">
+      <view class="q-title">英语</view>
+      <view class="opts">
+        <view class="opt {{answers.foreign === '英语一' ? 'on' : ''}}" bindtap="onPick" data-key="foreign" data-value="英语一">英语一</view>
+        <view class="opt {{answers.foreign === '英语二' ? 'on' : ''}}" bindtap="onPick" data-key="foreign" data-value="英语二">英语二</view>
+        <view class="opt {{answers.foreign === '' ? 'on' : ''}}" bindtap="onPick" data-key="foreign" data-value="">都可以</view>
+      </view>
+      <view class="q-title q-title-gap">数学</view>
+      <view class="opts">
+        <view class="opt {{answers.math === '数学一' ? 'on' : ''}}" bindtap="onPick" data-key="math" data-value="数学一">数学一</view>
+        <view class="opt {{answers.math === '数学二' ? 'on' : ''}}" bindtap="onPick" data-key="math" data-value="数学二">数学二</view>
+        <view class="opt {{answers.math === '' ? 'on' : ''}}" bindtap="onPick" data-key="math" data-value="">都可以</view>
+      </view>
+      <view class="q-title q-title-gap">专业课</view>
+      <view class="opts">
+        <view class="opt {{answers.proType === '408' ? 'on' : ''}}" bindtap="onPick" data-key="proType" data-value="408">408</view>
+        <view class="opt {{answers.proType === 'self' ? 'on' : ''}}" bindtap="onPick" data-key="proType" data-value="self">自命题</view>
+        <view class="opt {{answers.proType === '' ? 'on' : ''}}" bindtap="onPick" data-key="proType" data-value="">都可以</view>
+      </view>
     </view>
   </view>
 
-  <!-- 5 专业课 -->
-  <view class="card q">
-    <view class="q-title"><text class="q-no">5</text>专业课</view>
-    <view class="opts">
-      <view class="opt {{!answers.only408 ? 'on' : ''}}" bindtap="onPick" data-key="only408" data-value="no">都可以</view>
-      <view class="opt {{answers.only408 ? 'on' : ''}}" bindtap="onPick" data-key="only408" data-value="yes">只看考 408</view>
+  <!-- ========== 第 3 步：院校偏好 ========== -->
+  <view wx:if="{{step === 2}}">
+    <view class="card q">
+      <view class="q-title">学习方式</view>
+      <view class="opts">
+        <view class="opt {{answers.studyMode === 'full' ? 'on' : ''}}" bindtap="onPick" data-key="studyMode" data-value="full">全日制</view>
+        <view class="opt {{answers.studyMode === 'part' ? 'on' : ''}}" bindtap="onPick" data-key="studyMode" data-value="part">非全日制</view>
+      </view>
+
+      <view class="q-title q-title-gap">最低招生人数<text class="q-hint">按最近一年统招计划</text></view>
+      <view class="opts">
+        <view wx:for="{{planOptions}}" wx:key="*this" class="opt opt-sm {{answers.minPlan === item ? 'on' : ''}}"
+          bindtap="onPick" data-key="minPlan" data-value="{{item}}">{{item ? item + ' 人以上' : '不限'}}</view>
+      </view>
+
+      <view class="q-title q-title-gap">院校层次<text class="q-hint">可多选</text></view>
+      <view class="opts">
+        <view class="opt opt-sm {{!answers.levels.length ? 'on' : ''}}" bindtap="onMulti" data-key="levels" data-value="">不限</view>
+        <view wx:for="{{levelOptions}}" wx:key="*this" class="opt opt-sm {{u.has(answers.levels, item) ? 'on' : ''}}"
+          bindtap="onMulti" data-key="levels" data-value="{{item}}">{{item}}</view>
+      </view>
+    </view>
+
+    <view class="card q">
+      <view class="q-title">意向省份<text class="q-hint">可多选</text></view>
+      <province-picker value="{{answers.provinces}}" counts="{{provinceCounts}}" bind:change="onProvinces" />
     </view>
   </view>
 
-  <view class="disclaimer">匹配结果仅基于历年复试线估算，仅供参考</view>
+  <view class="reset" bindtap="onReset">重新填写</view>
 </view>
 
+<!-- 底部 -->
 <view class="footer">
-  <view class="submit {{valid ? '' : 'disabled'}}" bindtap="onSubmit">开始匹配</view>
+  <view class="footer-info" wx:if="{{step > 0}}">符合第 2、3 步条件的专业：<text class="num footer-num">{{matchCount}}</text> 个</view>
+  <view class="footer-btns">
+    <view class="btn-ghost" wx:if="{{step > 0}}" bindtap="prev">上一步</view>
+    <view class="btn-primary" bindtap="next">{{step === steps.length - 1 ? '查看匹配结果' : '下一步'}}</view>
+  </view>
 </view>

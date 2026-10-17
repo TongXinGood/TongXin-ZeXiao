@@ -27,7 +27,7 @@ module.exports = { has: has }
       </view>
     </view>
     <scroll-view scroll-x class="quick" enable-flex>
-      <view class="chip {{filters.only408 ? 'on' : ''}}" bindtap="onQuick" data-key="only408">考408</view>
+      <view class="chip {{filters.proType === '408' ? 'on' : ''}}" bindtap="onQuick" data-key="proType" data-value="408">考408</view>
       <view class="chip {{filters.degree === 'academic' ? 'on' : ''}}" bindtap="onQuick" data-key="degree" data-value="academic">学硕</view>
       <view class="chip {{filters.degree === 'professional' ? 'on' : ''}}" bindtap="onQuick" data-key="degree" data-value="professional">专硕</view>
       <view class="chip {{filters.math === '数学一' ? 'on' : ''}}" bindtap="onQuick" data-key="math" data-value="数学一">数学一</view>
@@ -77,11 +77,8 @@ module.exports = { has: has }
     <icon type="cancel" size="22" color="#C4CDD6" bindtap="closePanel" />
   </view>
   <scroll-view scroll-y class="panel-body">
-    <view class="sec-title">地区<text class="sec-tip">可多选</text></view>
-    <view class="opts">
-      <view wx:for="{{regionOptions}}" wx:key="*this" class="opt {{u.has(draft.regions, item) ? 'on' : ''}}"
-        bindtap="onToggleMulti" data-key="regions" data-value="{{item}}">{{item}}</view>
-    </view>
+    <view class="sec-title">意向省份<text class="sec-tip">可多选</text></view>
+    <province-picker value="{{draft.provinces}}" counts="{{provinceCounts}}" bind:change="onProvinces" />
 
     <view class="sec-title">院校层次<text class="sec-tip">可多选，按学校最高层次归类</text></view>
     <view class="opts">
@@ -95,6 +92,24 @@ module.exports = { has: has }
       <view class="opt {{draft.degree === 'professional' ? 'on' : ''}}" bindtap="onPickSingle" data-key="degree" data-value="professional">专硕</view>
     </view>
 
+    <view class="sec-title">专业方向<text class="sec-tip">可多选{{draft.degree ? '' : '，先选学硕/专硕可缩小范围'}}</text></view>
+    <view class="opts">
+      <view wx:for="{{dirOptions}}" wx:key="*this" class="opt {{u.has(draft.directions, item) ? 'on' : ''}}"
+        bindtap="onToggleMulti" data-key="directions" data-value="{{item}}">{{item}}</view>
+    </view>
+
+    <view class="sec-title">学习方式</view>
+    <view class="opts">
+      <view class="opt {{draft.studyMode === 'full' ? 'on' : ''}}" bindtap="onPickSingle" data-key="studyMode" data-value="full">全日制</view>
+      <view class="opt {{draft.studyMode === 'part' ? 'on' : ''}}" bindtap="onPickSingle" data-key="studyMode" data-value="part">非全日制</view>
+    </view>
+
+    <view class="sec-title">英语</view>
+    <view class="opts">
+      <view class="opt {{draft.foreign === '英语一' ? 'on' : ''}}" bindtap="onPickSingle" data-key="foreign" data-value="英语一">英语一</view>
+      <view class="opt {{draft.foreign === '英语二' ? 'on' : ''}}" bindtap="onPickSingle" data-key="foreign" data-value="英语二">英语二</view>
+    </view>
+
     <view class="sec-title">数学</view>
     <view class="opts">
       <view class="opt {{draft.math === '数学一' ? 'on' : ''}}" bindtap="onPickSingle" data-key="math" data-value="数学一">数学一</view>
@@ -103,7 +118,14 @@ module.exports = { has: has }
 
     <view class="sec-title">专业课</view>
     <view class="opts">
-      <view class="opt {{draft.only408 ? 'on' : ''}}" bindtap="onToggle408">只看考 408</view>
+      <view class="opt {{draft.proType === '408' ? 'on' : ''}}" bindtap="onPickSingle" data-key="proType" data-value="408">408</view>
+      <view class="opt {{draft.proType === 'self' ? 'on' : ''}}" bindtap="onPickSingle" data-key="proType" data-value="self">自命题</view>
+    </view>
+
+    <view class="sec-title">最低招生人数<text class="sec-tip">按最近一年统招计划</text></view>
+    <view class="opts">
+      <view wx:for="{{planOptions}}" wx:key="*this" class="opt {{draft.minPlan === item ? 'on' : ''}}"
+        bindtap="onPickPlan" data-value="{{item}}">≥{{item}} 人</view>
     </view>
 
     <view class="sec-title">复试线上限<text class="sec-tip">按最近一年复试线，只看 ≤ 该分数的专业</text></view>

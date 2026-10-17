@@ -2,6 +2,7 @@
   "navigationBarTitleText": "院校库",
   "enablePullDownRefresh": true,
   "usingComponents": {
-    "program-card": "/components/program-card/program-card"
+    "program-card": "/components/program-card/program-card",
+    "province-picker": "/components/province-picker/province-picker"
   }
 }

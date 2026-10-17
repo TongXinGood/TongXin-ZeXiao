@@ -34,6 +34,8 @@
       <view class="major-college">{{current.college}}</view>
       <view class="major-tags">
         <text class="tag {{current.degreeClass}}">{{current.degreeLabel}}</text>
+        <text class="tag" wx:if="{{current.direction}}">{{current.direction}}</text>
+        <text class="tag tag-gray" wx:if="{{current.partTime}}">非全日制</text>
         <text class="tag tag-orange" wx:if="{{current.is408}}">考 408</text>
         <text class="tag" wx:else>自命题</text>
       </view>

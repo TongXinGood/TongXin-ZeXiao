@@ -116,6 +116,11 @@
 }
 
 /* 智能择校分档说明 */
+.pc-warn {
+  margin: -6rpx 0 14rpx;
+  font-size: 22rpx;
+  color: var(--orange);
+}
 .pc-note {
   display: inline-block;
   margin-bottom: 14rpx;

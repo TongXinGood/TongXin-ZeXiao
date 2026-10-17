@@ -47,6 +47,7 @@ page {
 .tag-blue { background: var(--primary-light); color: var(--primary-dark); }
 .tag-green { background: var(--green-light); color: var(--green); }
 .tag-orange { background: var(--orange-light); color: var(--orange); font-weight: 600; }
+.tag-gray { background: #EEF1F5; color: var(--text-2); }
 
 /* 院校层次 */
 .lv { height: 34rpx; padding: 0 10rpx; font-size: 20rpx; font-weight: 600; border-radius: 6rpx; }
@@ -54,6 +55,7 @@ page {
 .lv-985 { background: var(--primary-light); color: var(--primary-dark); }
 .lv-211 { background: var(--primary-light); color: var(--primary); }
 .lv-syl { background: #F0F4FF; color: #5B7CFA; }
+.lv-yjy { background: #F3EFFF; color: #7B5CE6; }
 .lv-sf { background: #F2F5F8; color: var(--text-3); }
 
 /* ========== 通用 ========== */

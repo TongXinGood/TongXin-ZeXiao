@@ -23,3 +23,18 @@ node scripts/build.js
 ```
 
 校验失败会列出具体文件和字段；成功后把 `dist/api/v1/` 上传到服务器。
+
+## 数据字段速查（data/detail/*.json 里每个专业）
+
+| 字段 | 说明 |
+|---|---|
+| `majorCode` | 6 位专业代码，如 `085404`、`0812Z1` |
+| `degreeType` | `academic` 学硕 / `professional` 专硕 |
+| `direction` | 可不填，按专业代码自动判断；判断不了时构建会提示你补 |
+| `studyMode` | 可不填，默认 `full` 全日制；非全日制填 `part` |
+| `exam` | 政治、外语（英语一/二）、数学（数学一/二）、专业课（含 408 即视为考 408） |
+| `years[].retestLine` | 复试线：总分 + 单科（政治、外语、数学、专业课），智能择校会做单科检查 |
+
+院校的 `level` 可选：C9 / 985 / 211 / 双一流 / 研究院 / 双非；`region` 不用填，按省份自动归类。
+问卷、院校库筛选、构建校验共用 `miniprogram/utils/dict.js`，要增删方向或层次改这一个文件。
+智能择校算法在 `miniprogram/utils/match.js`，分档参数在 `miniprogram/config.js` 的 `MATCH`。

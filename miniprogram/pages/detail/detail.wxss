@@ -76,7 +76,8 @@
 .major-code { font-size: 28rpx; color: var(--primary); margin-right: 12rpx; }
 .major-name { font-size: 34rpx; font-weight: 700; }
 .major-college { margin-top: 4rpx; font-size: 24rpx; color: var(--text-3); }
-.major-tags { margin-top: 16rpx; display: flex; }
+.major-tags { margin-top: 16rpx; display: flex; flex-wrap: wrap; }
+.major-tags .tag { margin-bottom: 8rpx; }
 .major-tags .tag { margin-right: 12rpx; }
 
 .subjects {

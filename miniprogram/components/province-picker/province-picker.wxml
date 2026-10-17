@@ -1,0 +1,17 @@
+<view class="pp">
+  <view class="pp-any {{!value.length ? 'on' : ''}}" bindtap="onClear">不限省份</view>
+  <view class="pp-group" wx:for="{{groups}}" wx:key="region" wx:for-item="g">
+    <view class="pp-head">
+      <text class="pp-region">{{g.region}}</text>
+      <text class="pp-all {{g.all ? 'on' : ''}}" bindtap="onAll" data-region="{{g.region}}">{{g.all ? '取消全选' : '全选'}}</text>
+    </view>
+    <view class="pp-items">
+      <view wx:for="{{g.items}}" wx:key="name"
+        class="pp-item {{item.on ? 'on' : ''}} {{item.count ? '' : 'empty'}}"
+        bindtap="onToggle" data-name="{{item.name}}">
+        {{item.name}}<text class="pp-count" wx:if="{{item.count}}">{{item.count}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="pp-tip">数字为已收录的专业数；灰色省份暂无数据</view>
+</view>

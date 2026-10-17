@@ -3,6 +3,10 @@ const compare = require('../../utils/compare')
 const { decorateProgram } = require('../../utils/format')
 const { defaultFilters, applyFilters, countActive } = require('../../utils/filter')
 const { DISCLAIMER, MAX_COMPARE } = require('../../config')
+const { LEVELS, DIRECTIONS } = require('../../utils/dict')
+
+// 没选学硕/专硕时，方向选项取两者合集
+const ALL_DIRECTIONS = DIRECTIONS.academic.concat(DIRECTIONS.professional.filter((d) => DIRECTIONS.academic.indexOf(d) < 0))
 
 const SORTS = [
   { key: 'default', label: '默认排序' },
@@ -17,7 +21,7 @@ function toMap(ids) {
 }
 
 function clone(f) {
-  return Object.assign({}, f, { regions: f.regions.slice(), levels: f.levels.slice() })
+  return Object.assign({}, f, { provinces: f.provinces.slice(), levels: f.levels.slice(), directions: f.directions.slice() })
 }
 
 Page({
@@ -36,8 +40,10 @@ Page({
     draft: defaultFilters(),
     draftCount: 0,
     customLine: '', // 自定义复试线输入框的内容
-    regionOptions: [],
-    levelOptions: ['C9', '985', '211', '双一流', '双非'],
+    provinceCounts: {},
+    levelOptions: LEVELS,
+    dirOptions: ALL_DIRECTIONS,
+    planOptions: [5, 10, 15, 20, 30],
     linePresets: [300, 330, 350, 370, 390],
     compareMap: {},
     compareCount: 0,
@@ -64,7 +70,7 @@ Page({
     return Promise.all([api.getMeta(force), api.getPrograms(force)])
       .then(([meta, programs]) => {
         this.allList = programs.map(decorateProgram)
-        this.setData({ loading: false, meta, regionOptions: meta.regions || [], total: this.allList.length })
+        this.setData({ loading: false, meta, provinceCounts: meta.provinceCounts || {}, total: this.allList.length })
         this.refresh()
       })
       .catch((e) => {
@@ -114,8 +120,9 @@ Page({
   onQuick(e) {
     const { key, value } = e.currentTarget.dataset
     const f = this.data.filters
-    if (key === 'only408') this.setFilters({ only408: !f.only408 })
-    else this.setFilters({ [key]: f[key] === value ? '' : value })
+    const patch = { [key]: f[key] === value ? '' : value }
+    if (key === 'degree') patch.directions = [] // 换了学硕/专硕，方向清空
+    this.setFilters(patch)
   },
 
   onSort() {
@@ -129,18 +136,18 @@ Page({
   openPanel() {
     const draft = clone(this.data.filters)
     const isPreset = this.data.linePresets.indexOf(Number(draft.maxLine)) >= 0
-    this.setData({
-      showPanel: true,
-      draft,
-      draftCount: applyFilters(this.allList, draft).length,
-      customLine: isPreset ? '' : draft.maxLine
-    })
+    this.setData({ showPanel: true, customLine: isPreset ? '' : draft.maxLine })
+    this.setDraft(draft)
   },
   closePanel() {
     this.setData({ showPanel: false })
   },
   setDraft(draft) {
-    this.setData({ draft, draftCount: applyFilters(this.allList, draft).length })
+    this.setData({
+      draft,
+      draftCount: applyFilters(this.allList, draft).length,
+      dirOptions: draft.degree ? DIRECTIONS[draft.degree] : ALL_DIRECTIONS
+    })
   },
   onToggleMulti(e) {
     const { key, value } = e.currentTarget.dataset
@@ -155,11 +162,18 @@ Page({
     const { key, value } = e.currentTarget.dataset
     const draft = clone(this.data.draft)
     draft[key] = draft[key] === value ? '' : value
+    if (key === 'degree') draft.directions = []
     this.setDraft(draft)
   },
-  onToggle408() {
+  onPickPlan(e) {
     const draft = clone(this.data.draft)
-    draft.only408 = !draft.only408
+    const v = Number(e.currentTarget.dataset.value)
+    draft.minPlan = draft.minPlan === v ? 0 : v
+    this.setDraft(draft)
+  },
+  onProvinces(e) {
+    const draft = clone(this.data.draft)
+    draft.provinces = e.detail.value
     this.setDraft(draft)
   },
   onPickLine(e) {

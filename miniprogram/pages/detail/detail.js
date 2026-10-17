@@ -1,9 +1,8 @@
 const api = require('../../utils/api')
 const compare = require('../../utils/compare')
-const { buildDetail } = require('../../utils/format')
+const { buildDetail, LEVEL_CLASS } = require('../../utils/format')
 const { DISCLAIMER, MAX_COMPARE } = require('../../config')
 
-const LEVEL_CLASS = { C9: 'lv-c9', '985': 'lv-985', '211': 'lv-211', '双一流': 'lv-syl', '双非': 'lv-sf' }
 
 Page({
   data: {

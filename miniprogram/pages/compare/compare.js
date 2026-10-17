@@ -1,9 +1,8 @@
 const api = require('../../utils/api')
 const compare = require('../../utils/compare')
-const { buildCompareRows } = require('../../utils/format')
+const { buildCompareRows, LEVEL_CLASS } = require('../../utils/format')
 const { DISCLAIMER, MAX_COMPARE } = require('../../config')
 
-const LEVEL_CLASS = { C9: 'lv-c9', '985': 'lv-985', '211': 'lv-211', '双一流': 'lv-syl', '双非': 'lv-sf' }
 const LABEL_W = 150 // 左侧标题列宽度（rpx）
 const AVAILABLE_W = 750 - 48 - LABEL_W // 右侧可用宽度（rpx）
 
