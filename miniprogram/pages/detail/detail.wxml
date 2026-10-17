@@ -104,6 +104,8 @@
       </view>
     </view>
 
+    <view class="legend">「—」表示暂未收录，以院校官网为准</view>
+
     <!-- 备注 -->
     <view class="card box" wx:if="{{current.notes.length || current.remark}}">
       <view class="box-title">备注</view>
@@ -120,6 +122,38 @@
       </view>
     </view>
   </block>
+
+  <!-- 院校评价（学校级） -->
+  <view class="card box review" wx:if="{{review}}">
+    <view class="box-title">院校评价<text class="box-tip" wx:if="{{review.updatedAt}}">更新于 {{review.updatedAt}}</text></view>
+
+    <block wx:if="{{review.editor.length}}">
+      <view class="rv-sub">📝 编辑点评</view>
+      <view class="rv-editor">
+        <view class="rv-para" wx:for="{{review.editor}}" wx:key="*this">{{item}}</view>
+      </view>
+    </block>
+
+    <block wx:if="{{review.photos.length}}">
+      <view class="rv-sub">📷 校园实拍<text class="rv-sub-tip">点击查看大图</text></view>
+      <scroll-view scroll-x class="rv-photos" enable-flex>
+        <view class="rv-photo" wx:for="{{review.photos}}" wx:key="image" bindtap="previewPhoto" data-src="{{item.src}}">
+          <image class="rv-img" src="{{item.src}}" mode="aspectFill" lazy-load />
+          <view class="rv-cap" wx:if="{{item.caption}}">{{item.caption}}</view>
+        </view>
+      </scroll-view>
+    </block>
+
+    <block wx:if="{{review.comments.length}}">
+      <view class="rv-sub">💬 网友说</view>
+      <view class="rv-quote" wx:for="{{review.comments}}" wx:key="text">
+        <view class="rv-text">{{item.text}}</view>
+        <view class="rv-meta">— {{item.author}}{{item.source ? ' · 来源：' + item.source : ''}}{{item.date ? ' · ' + item.date : ''}}</view>
+      </view>
+    </block>
+
+    <view class="rv-note">以上为个人观点，仅供参考</view>
+  </view>
 
   <view class="disclaimer">{{disclaimer}}</view>
 </view>

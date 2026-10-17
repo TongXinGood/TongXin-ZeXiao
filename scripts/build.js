@@ -220,9 +220,70 @@ const newsItems = (newsSrc.items || []).map((n, i) => {
     source: n.source && n.source.title ? n.source : null
   }
 })
+// ---------- 院校评价（data/reviews/{schoolId}.json，挂到学校详情上） ----------
+const REVIEW_DIR = path.join(DATA_DIR, 'reviews')
+const reviewFiles = fs.existsSync(REVIEW_DIR) ? fs.readdirSync(REVIEW_DIR).filter((f) => f.endsWith('.json')).sort() : []
+reviewFiles.forEach((file) => {
+  const r = readJSON(path.join(REVIEW_DIR, file))
+  if (!r) return
+  const where = `reviews/${file}`
+  const sid = r.schoolId
+  if (!details[sid]) return err(where, `schoolId=${sid} 没有对应的学校或专业数据`)
+  if (file !== `${sid}.json`) err(where, `文件名应为 ${sid}.json`)
+  const editor = Array.isArray(r.editor) ? r.editor.filter(Boolean) : r.editor ? [String(r.editor)] : []
+  const photos = (r.photos || []).map((ph, i) => {
+    if (!ph || !ph.image) {
+      err(`${where} photos[${i}]`, '缺少 image')
+      return null
+    }
+    checkImage(`${where} photos[${i}]`, ph.image)
+    return { image: ph.image, caption: ph.caption || '' }
+  }).filter(Boolean)
+  const comments = (r.comments || []).map((c, i) => {
+    if (!c || !c.text) {
+      err(`${where} comments[${i}]`, '缺少 text')
+      return null
+    }
+    return { text: c.text, author: c.author || '网友', source: c.source || '', date: c.date || '' }
+  }).filter(Boolean)
+  if (!editor.length && !photos.length && !comments.length) return err(where, '编辑点评、照片、网友评价至少要有一项')
+  details[sid].review = { editor, photos, comments, updatedAt: r.updatedAt || '' }
+})
+
 // 置顶在前，其余按日期倒序
 newsItems.sort((a, b) => (b.pinned - a.pinned) || b.date.localeCompare(a.date))
 const news = { countdown: newsSrc.countdown || null, items: newsItems }
+
+// ---------- 待补充清单（null = 还没收集到） ----------
+const FIELD_LABELS = [
+  ['retestLine', '复试线'],
+  ['planCount', '统招计划'],
+  ['exemptCount', '推免人数'],
+  ['admittedCount', '录取人数'],
+  ['retestCount', '复试人数']
+]
+// 把 [2024, 2025, 2026] 压缩成「2024–2026」，[2024, 2026] 写成「2024、2026」
+function yearText(ys) {
+  if (ys.length > 1 && ys[ys.length - 1] - ys[0] === ys.length - 1) return ys[0] + '–' + ys[ys.length - 1]
+  return ys.join('、')
+}
+const missing = []
+Object.keys(details).forEach((sid) => {
+  details[sid].programs.forEach((p) => {
+    const lack = {} // 项目名 → [年份]
+    const add = (label, y) => (lack[label] = lack[label] || []).push(y)
+    YEARS.forEach((year) => {
+      const y = p.years.filter((x) => x.year === year)[0]
+      if (!y) return add('整年数据', year)
+      FIELD_LABELS.forEach(([k, label]) => {
+        if (y[k] === null || y[k] === undefined) add(label, year)
+      })
+      if (y.retestLine && ['politics', 'foreign', 'math', 'pro'].some((k) => typeof y.retestLine[k] !== 'number')) add('单科线', year)
+    })
+    const items = Object.keys(lack).map((label) => yearText(lack[label]) + ' ' + label)
+    if (items.length) missing.push(`${details[sid].school.name} ${p.majorCode} ${p.majorName}${p.studyMode === 'part' ? '（非全）' : ''}：${items.join('、')}`)
+  })
+})
 
 if (errors.length) {
   console.error(`\n数据校验失败，共 ${errors.length} 处：`)
@@ -282,5 +343,18 @@ fs.writeFileSync(
 const size = (f) => (fs.statSync(f).size / 1024).toFixed(1) + ' KB'
 console.log(`构建完成：${meta.schoolCount} 所学校，${meta.programCount} 个专业，版本 ${meta.version}${meta.sample ? '（示例数据）' : ''}`)
 console.log(`  programs.json ${size(path.join(OUT_DIR, 'programs.json'))}`)
+console.log(`  院校评价 ${Object.keys(details).filter((sid) => details[sid].review).length} 所`)
 console.log(`  资讯 ${news.items.length} 条${news.countdown ? '，倒计时：' + news.countdown.title + ' ' + news.countdown.date : ''}`)
 console.log(`  输出目录 ${path.relative(ROOT, OUT_DIR)}，mock ${path.relative(ROOT, MOCK_FILE)}`)
+
+const MISSING_FILE = path.join(DATA_DIR, 'MISSING.txt')
+if (missing.length) {
+  fs.writeFileSync(MISSING_FILE, `待补充清单（${meta.updatedAt} 生成，共 ${missing.length} 个专业有缺项）\n\n` + missing.join('\n') + '\n')
+  const SHOW = 10
+  console.log(`\n待补充：${missing.length} 个专业有缺项${missing.length > SHOW ? `（下面列前 ${SHOW} 个）` : ''}`)
+  missing.slice(0, SHOW).forEach((m) => console.log('  ' + m))
+  console.log(`  完整清单：${path.relative(ROOT, MISSING_FILE)}`)
+} else {
+  fs.rmSync(MISSING_FILE, { force: true })
+  console.log('\n数据完整，没有待补充项')
+}

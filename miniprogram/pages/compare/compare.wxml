@@ -63,6 +63,7 @@
   <view class="tips">
     <view>· 复试线、推免占比：越低越好；统招计划：越多越好</view>
     <view>· 「最近变化」为最近两年有数据的复试线之差</view>
+    <view>· 「—」表示暂未收录，不参与最优值比较</view>
     <view wx:if="{{cols.length > 2}}">· 专业较多时，表格可左右滑动</view>
   </view>
   <view class="disclaimer">{{disclaimer}}</view>

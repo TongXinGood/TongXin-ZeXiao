@@ -38,3 +38,37 @@ node scripts/build.js
 院校的 `level` 可选：C9 / 985 / 211 / 双一流 / 研究院 / 双非；`region` 不用填，按省份自动归类。
 问卷、院校库筛选、构建校验共用 `miniprogram/utils/dict.js`，要增删方向或层次改这一个文件。
 智能择校算法在 `miniprogram/utils/match.js`，分档参数在 `miniprogram/config.js` 的 `MATCH`。
+
+## 院校评价（data/reviews/{院校代码}.json）
+
+```json
+{
+  "schoolId": "10335",
+  "updatedAt": "2026-10-17",
+  "editor": ["编辑点评第一段", "第二段"],
+  "photos": [{ "image": "reviews/10335-dorm.jpg", "caption": "宿舍" }],
+  "comments": [{ "text": "原话摘录", "author": "某 2025 级研究生", "source": "知乎", "date": "2026-09" }]
+}
+```
+
+三项至少有一项；照片放 `data/images/reviews/`，单张 500 KB 以内。没有评价文件的学校，详情页不显示这个板块。
+
+## 服务器部署（Ubuntu 24.04 + Nginx）
+
+数据由 Claude 构建好（`dist/` 已提交到仓库），服务器只需拉代码，不用装 Node.js。
+
+首次部署：
+```bash
+sudo git clone https://github.com/TongXinGood/TongXin-ZeXiao.git /var/www/kaoyan
+sudo chown -R ubuntu:ubuntu /var/www/kaoyan
+sudo cp /var/www/kaoyan/server/nginx-kaoyan.conf /etc/nginx/snippets/kaoyan.conf
+sudo sed -i 's/^\s*server_name _;/&\n\tinclude snippets\/kaoyan.conf;/' /etc/nginx/sites-available/default
+sudo nginx -t && sudo systemctl reload nginx
+```
+
+以后更新数据：
+```bash
+bash /var/www/kaoyan/scripts/deploy.sh
+```
+
+访问地址：`http://服务器IP/kaoyan/api/v1/meta.json`

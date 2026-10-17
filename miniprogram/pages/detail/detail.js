@@ -1,6 +1,6 @@
 const api = require('../../utils/api')
 const compare = require('../../utils/compare')
-const { buildDetail, LEVEL_CLASS } = require('../../utils/format')
+const { buildDetail, LEVEL_CLASS, imgUrl } = require('../../utils/format')
 const { DISCLAIMER, MAX_COMPARE } = require('../../config')
 
 
@@ -11,6 +11,7 @@ Page({
     school: null,
     tabs: [],      // 本校所有专业，用于切换
     current: null, // 当前专业（已加工）
+    review: null,  // 院校评价（学校级，切换专业不变）
     inCompare: false,
     compareCount: 0,
     disclaimer: DISCLAIMER
@@ -44,7 +45,11 @@ Page({
           sub: p.degreeType === 'academic' ? '学硕' : '专硕'
         }))
         wx.setNavigationBarTitle({ title: school.name })
-        this.setData({ loading: false, school, tabs })
+        const r = d.review
+        const review = r
+          ? Object.assign({}, r, { photos: r.photos.map((ph) => Object.assign({}, ph, { src: imgUrl(ph.image) })) })
+          : null
+        this.setData({ loading: false, school, tabs, review })
         this.select(this.query.id)
       })
       .catch((e) => {
@@ -77,6 +82,14 @@ Page({
     }
     wx.showToast({ title: res.added ? '已加入对比' : '已移出对比', icon: 'none' })
     this.syncCompare()
+  },
+
+  // 点照片放大，可左右滑动看全部照片
+  previewPhoto(e) {
+    wx.previewImage({
+      current: e.currentTarget.dataset.src,
+      urls: this.data.review.photos.map((ph) => ph.src)
+    })
   },
 
   goCompare() {

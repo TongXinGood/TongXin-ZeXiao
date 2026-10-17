@@ -234,3 +234,78 @@
   background: var(--primary-light);
   color: var(--primary-dark);
 }
+
+.legend {
+  margin: -8rpx 32rpx 24rpx;
+  font-size: 22rpx;
+  color: var(--text-3);
+}
+
+/* ---------- 院校评价 ---------- */
+.rv-sub {
+  margin: 28rpx 0 14rpx;
+  font-size: 26rpx;
+  font-weight: 700;
+  color: var(--text-1);
+}
+.review .box-title + .rv-sub { margin-top: 0; }
+.rv-sub-tip { margin-left: 12rpx; font-size: 22rpx; font-weight: 400; color: var(--text-3); }
+.rv-editor {
+  padding: 20rpx 24rpx;
+  border-radius: 16rpx;
+  background: var(--primary-light);
+}
+.rv-para {
+  font-size: 26rpx;
+  line-height: 1.75;
+  color: var(--text-1);
+}
+.rv-para + .rv-para { margin-top: 12rpx; }
+
+.rv-photos {
+  white-space: nowrap;
+  display: flex;
+}
+.rv-photo {
+  display: inline-block;
+  flex-shrink: 0;
+  width: 240rpx;
+  margin-right: 16rpx;
+}
+.rv-img {
+  display: block;
+  width: 240rpx;
+  height: 180rpx;
+  border-radius: 12rpx;
+  background: var(--bg);
+}
+.rv-cap {
+  margin-top: 8rpx;
+  text-align: center;
+  font-size: 22rpx;
+  color: var(--text-2);
+}
+
+.rv-quote {
+  padding: 20rpx 24rpx;
+  margin-bottom: 16rpx;
+  border-radius: 16rpx;
+  background: var(--bg);
+  border-left: 6rpx solid #B9DEFF;
+}
+.rv-text {
+  font-size: 26rpx;
+  line-height: 1.7;
+  color: var(--text-1);
+}
+.rv-meta {
+  margin-top: 8rpx;
+  text-align: right;
+  font-size: 22rpx;
+  color: var(--text-3);
+}
+.rv-note {
+  margin-top: 8rpx;
+  font-size: 22rpx;
+  color: var(--text-3);
+}
