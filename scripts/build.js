@@ -8,6 +8,8 @@
  *   dist/api/v1/schools.json
  *   dist/api/v1/programs.json
  *   dist/api/v1/detail/{schoolId}.json
+ *   dist/api/v1/news.json
+ *   dist/api/v1/images/...（来自 data/images/）
  *   miniprogram/mock/data.js
  */
 const fs = require('fs')
@@ -140,6 +142,67 @@ Object.keys(schoolMap).forEach((sid) => {
   if (!details[sid]) console.warn(`提示：学校 ${schoolMap[sid].name}(${sid}) 还没有专业数据`)
 })
 
+// ---------- 资讯 ----------
+const DATE_RE = /^\d{4}-\d{2}-\d{2}$/
+const newsSrc = readJSON(path.join(DATA_DIR, 'news.json')) || { items: [] }
+const cd = newsSrc.countdown || {}
+if (newsSrc.countdown) {
+  if (!cd.title) err('news.json countdown', '缺少 title')
+  if (!DATE_RE.test(cd.date || '')) err('news.json countdown', 'date 必须是 YYYY-MM-DD')
+}
+const IMG_DIR = path.join(DATA_DIR, 'images')
+const IMG_MAX_KB = 500
+function checkImage(where, rel) {
+  if (!/^[\w\-./]+\.(jpg|jpeg|png|webp)$/i.test(rel) || rel.indexOf('..') >= 0) {
+    return err(where, `图片路径 ${rel} 只能用英文、数字、- _ /，后缀 jpg/png/webp`)
+  }
+  const f = path.join(IMG_DIR, rel)
+  if (!fs.existsSync(f)) return err(where, `图片不存在：data/images/${rel}`)
+  const kb = fs.statSync(f).size / 1024
+  if (kb > IMG_MAX_KB) err(where, `图片 ${rel} 有 ${kb.toFixed(0)} KB，请压缩到 ${IMG_MAX_KB} KB 以内`)
+}
+const newsIds = new Set()
+const newsItems = (newsSrc.items || []).map((n, i) => {
+  const where = `news.json items[${i}] ${n.title || ''}`
+  if (!n.id) err(where, '缺少 id')
+  if (newsIds.has(n.id)) err(where, `id 重复：${n.id}`)
+  newsIds.add(n.id)
+  if (!n.title) err(where, '缺少 title')
+  if (!DATE_RE.test(n.date || '')) err(where, 'date 必须是 YYYY-MM-DD')
+  if (n.schoolId && !schoolMap[n.schoolId]) err(where, `schoolId=${n.schoolId} 在 schools.json 中不存在`)
+  // 正文：字符串 = 一段文字；{ image, caption } = 一张图片（路径相对 data/images/）
+  const raw = Array.isArray(n.content) ? n.content : n.content ? [String(n.content)] : []
+  if (!raw.length) err(where, 'content 至少一段')
+  const content = raw.map((b, j) => {
+    if (typeof b === 'string') return { text: b }
+    if (b && b.image) {
+      checkImage(`${where} content[${j}]`, b.image)
+      return { image: b.image, caption: b.caption || '' }
+    }
+    err(`${where} content[${j}]`, '必须是文字，或 { "image": "news/xxx.jpg", "caption": "说明" }')
+    return { text: '' }
+  })
+  // 列表缩略图：优先用 cover，否则用正文第一张图
+  const firstImg = content.filter((b) => b.image)[0]
+  if (n.cover) checkImage(`${where} cover`, n.cover)
+  const firstText = content.filter((b) => b.text)[0]
+  return {
+    id: n.id,
+    title: n.title,
+    summary: n.summary || (firstText ? firstText.text : ''),
+    cover: n.cover || (firstImg ? firstImg.image : ''),
+    date: n.date,
+    pinned: !!n.pinned,
+    content,
+    schoolId: n.schoolId || '',
+    schoolName: n.schoolId && schoolMap[n.schoolId] ? schoolMap[n.schoolId].name : '',
+    source: n.source && n.source.title ? n.source : null
+  }
+})
+// 置顶在前，其余按日期倒序
+newsItems.sort((a, b) => (b.pinned - a.pinned) || b.date.localeCompare(a.date))
+const news = { countdown: newsSrc.countdown || null, items: newsItems }
+
 if (errors.length) {
   console.error(`\n数据校验失败，共 ${errors.length} 处：`)
   errors.forEach((e) => console.error('  - ' + e))
@@ -172,16 +235,26 @@ write(path.join(OUT_DIR, 'meta.json'), meta)
 write(path.join(OUT_DIR, 'schools.json'), schools)
 write(path.join(OUT_DIR, 'programs.json'), programs)
 Object.keys(details).forEach((sid) => write(path.join(OUT_DIR, 'detail', `${sid}.json`), details[sid]))
+write(path.join(OUT_DIR, 'news.json'), news)
+
+// 图片：服务器用 dist/api/v1/images/，本地调试用 miniprogram/mock/images/
+const MOCK_IMG_DIR = path.join(ROOT, 'miniprogram', 'mock', 'images')
+fs.rmSync(MOCK_IMG_DIR, { recursive: true, force: true })
+if (fs.existsSync(IMG_DIR)) {
+  fs.cpSync(IMG_DIR, path.join(OUT_DIR, 'images'), { recursive: true })
+  fs.cpSync(IMG_DIR, MOCK_IMG_DIR, { recursive: true })
+}
 
 fs.writeFileSync(
   MOCK_FILE,
   '// 由 scripts/build.js 自动生成，请勿手改。仅在 config.js 中 USE_MOCK=true 时使用。\n' +
     'module.exports = ' +
-    JSON.stringify({ meta, schools, programs, details }) +
+    JSON.stringify({ meta, schools, programs, details, news }) +
     '\n'
 )
 
 const size = (f) => (fs.statSync(f).size / 1024).toFixed(1) + ' KB'
 console.log(`构建完成：${meta.schoolCount} 所学校，${meta.programCount} 个专业，版本 ${meta.version}${meta.sample ? '（示例数据）' : ''}`)
 console.log(`  programs.json ${size(path.join(OUT_DIR, 'programs.json'))}`)
+console.log(`  资讯 ${news.items.length} 条${news.countdown ? '，倒计时：' + news.countdown.title + ' ' + news.countdown.date : ''}`)
 console.log(`  输出目录 ${path.relative(ROOT, OUT_DIR)}，mock ${path.relative(ROOT, MOCK_FILE)}`)

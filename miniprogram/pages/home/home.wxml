@@ -11,6 +11,25 @@
     </view>
   </view>
 
+  <!-- 倒计时 -->
+  <view class="countdown" wx:if="{{countdown}}">
+    <view class="cd-left">
+      <view class="cd-title">距 {{countdown.title}}</view>
+      <view class="cd-date">{{countdown.date}}{{countdown.note ? ' · ' + countdown.note : ''}}</view>
+    </view>
+    <view class="cd-right" wx:if="{{countdown.isToday}}"><text class="cd-today">就是今天</text></view>
+    <view class="cd-right" wx:elif="{{countdown.ended}}"><text class="cd-today">已结束</text></view>
+    <view class="cd-right" wx:else>
+      <text class="cd-pre">还有</text><text class="num cd-days">{{countdown.days}}</text><text class="cd-unit">天</text>
+    </view>
+  </view>
+
+  <!-- 热点信息入口 -->
+  <view class="hot card" bindtap="onMoreNews" hover-class="entry-hover">
+    <text class="hot-title">热点信息</text>
+    <text class="hot-more">全部 ›</text>
+  </view>
+
   <!-- 两个主入口 -->
   <view class="entries">
     <view class="entry entry-match" bindtap="onMatch" hover-class="entry-hover">

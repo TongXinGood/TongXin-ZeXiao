@@ -1,0 +1,36 @@
+<view wx:if="{{loading}}" class="state">加载中…</view>
+<view wx:elif="{{error}}" class="state">
+  <view>{{error}}</view>
+  <view class="state-btn" bindtap="retry">重新加载</view>
+</view>
+
+<view wx:else class="page">
+  <view class="card article">
+    <view class="title">{{item.title}}</view>
+    <view class="meta">
+      <text class="pin" wx:if="{{item.pinned}}">置顶</text>
+      <text>{{item.date}}</text>
+    </view>
+    <view class="body">
+      <block wx:for="{{item.content}}" wx:key="k" wx:for-item="b">
+        <view wx:if="{{b.src}}" class="figure">
+          <image class="img" src="{{b.src}}" mode="widthFix" lazy-load show-menu-by-longpress
+            bindtap="previewImage" data-src="{{b.src}}" />
+          <view class="caption" wx:if="{{b.caption}}">{{b.caption}}</view>
+        </view>
+        <view wx:else class="para">{{b.text}}</view>
+      </block>
+    </view>
+
+    <view class="link" wx:if="{{item.schoolId}}" bindtap="goSchool">
+      <text>相关院校：{{item.schoolName}}</text>
+      <text class="link-go">查看 ›</text>
+    </view>
+    <view class="link" wx:if="{{item.source}}" bindtap="copyLink">
+      <text>来源：{{item.source.title}}</text>
+      <text class="link-go" wx:if="{{item.source.url}}">复制链接</text>
+    </view>
+  </view>
+
+  <view class="disclaimer">资讯仅供参考，以研招网及院校官方公告为准</view>
+</view>

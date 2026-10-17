@@ -1,0 +1,10 @@
+<view wx:if="{{loading}}" class="state">加载中…</view>
+<view wx:elif="{{error}}" class="state">
+  <view>{{error}}</view>
+  <view class="state-btn" bindtap="retry">重新加载</view>
+</view>
+<view wx:else class="page">
+  <news-card wx:for="{{list}}" wx:key="id" item="{{item}}" bind:open="onOpen" />
+  <view wx:if="{{!list.length}}" class="state">暂无资讯</view>
+  <view class="disclaimer">{{disclaimer}}</view>
+</view>

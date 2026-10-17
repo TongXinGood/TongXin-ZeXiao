@@ -1,0 +1,15 @@
+<view class="card nc" hover-class="nc-hover" hover-stay-time="80" bindtap="onTap">
+  <view class="nc-main">
+    <view class="nc-text">
+      <view class="nc-title">
+        <text class="nc-pin" wx:if="{{item.pinned}}">置顶</text>{{item.title}}
+      </view>
+      <view class="nc-summary">{{item.summary}}</view>
+    </view>
+    <image wx:if="{{item.coverUrl}}" class="nc-cover" src="{{item.coverUrl}}" mode="aspectFill" lazy-load />
+  </view>
+  <view class="nc-foot">
+    <text>{{item.dateText}}</text>
+    <text class="nc-more">查看全文 ›</text>
+  </view>
+</view>

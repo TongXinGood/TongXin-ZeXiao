@@ -182,3 +182,49 @@ function buildCompareRows(items, years) {
 }
 
 module.exports.buildCompareRows = buildCompareRows
+
+/** 倒计时：返回 { title, days, text, note }；date 为 'YYYY-MM-DD' */
+function buildCountdown(cd, now) {
+  if (!cd || !cd.date) return null
+  const parts = cd.date.split('-').map(Number)
+  const target = new Date(parts[0], parts[1] - 1, parts[2]) // 本地时间零点，避免时区和 iOS 解析问题
+  const n = now || new Date()
+  const today = new Date(n.getFullYear(), n.getMonth(), n.getDate())
+  const days = Math.round((target - today) / 86400000)
+  return {
+    title: cd.title,
+    date: cd.date,
+    days,
+    note: cd.note || '',
+    ended: days < 0,
+    isToday: days === 0
+  }
+}
+
+/** 资讯日期显示：今年的只显示 月-日 */
+function newsDate(date, now) {
+  const y = String((now || new Date()).getFullYear())
+  return date.indexOf(y + '-') === 0 ? date.slice(5) : date
+}
+
+module.exports.buildCountdown = buildCountdown
+module.exports.newsDate = newsDate
+
+/** 图片地址：本地调试读代码包里的 mock/images，线上读服务器 /images */
+function imgUrl(rel) {
+  if (!rel) return ''
+  const config = require('../config')
+  return config.USE_MOCK ? '/mock/images/' + rel : config.BASE_URL + '/images/' + rel
+}
+
+/** 资讯：补上显示用字段（日期、缩略图、正文图片完整地址） */
+function decorateNews(n) {
+  return Object.assign({}, n, {
+    dateText: newsDate(n.date),
+    coverUrl: imgUrl(n.cover),
+    content: (n.content || []).map((b, i) => Object.assign({ k: i }, b, b.image ? { src: imgUrl(b.image) } : {}))
+  })
+}
+
+module.exports.imgUrl = imgUrl
+module.exports.decorateNews = decorateNews

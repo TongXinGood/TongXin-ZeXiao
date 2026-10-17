@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "热点信息",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "news-card": "/components/news-card/news-card"
+  }
+}

@@ -1,0 +1,58 @@
+.nc {
+  margin: 0 24rpx 20rpx;
+  padding: 28rpx;
+}
+.nc-hover { opacity: 0.85; }
+.nc-title {
+  font-size: 30rpx;
+  font-weight: 700;
+  line-height: 1.45;
+  color: var(--text-1);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.nc-pin {
+  display: inline-block;
+  margin-right: 10rpx;
+  padding: 0 10rpx;
+  height: 34rpx;
+  line-height: 34rpx;
+  border-radius: 6rpx;
+  background: var(--primary);
+  color: #fff;
+  font-size: 20rpx;
+  font-weight: 600;
+  vertical-align: 4rpx;
+}
+.nc-summary {
+  margin-top: 10rpx;
+  font-size: 26rpx;
+  line-height: 1.6;
+  color: var(--text-2);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.nc-foot {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16rpx;
+  font-size: 22rpx;
+  color: var(--text-3);
+}
+.nc-more { color: var(--primary); }
+
+/* 有图时：左文右图 */
+.nc-main { display: flex; }
+.nc-text { flex: 1; min-width: 0; }
+.nc-cover {
+  flex-shrink: 0;
+  width: 200rpx;
+  height: 150rpx;
+  margin-left: 20rpx;
+  border-radius: 12rpx;
+  background: var(--bg);
+}

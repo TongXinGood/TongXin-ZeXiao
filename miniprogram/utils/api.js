@@ -88,4 +88,9 @@ function getSchoolDetail(schoolId) {
   return getVersioned('detail_' + schoolId, '/detail/' + schoolId + '.json')
 }
 
-module.exports = { getMeta, getPrograms, getSchoolDetail }
+function getNews(force) {
+  if (config.USE_MOCK) return Promise.resolve(require('../mock/data.js').news || { countdown: null, items: [] })
+  return getVersioned('news', '/news.json', force)
+}
+
+module.exports = { getMeta, getPrograms, getSchoolDetail, getNews }

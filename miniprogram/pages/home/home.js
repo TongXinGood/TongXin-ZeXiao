@@ -1,6 +1,7 @@
 const api = require('../../utils/api')
 const compare = require('../../utils/compare')
 const { defaultFilters, applyFilters } = require('../../utils/filter')
+const { buildCountdown } = require('../../utils/format')
 const { DISCLAIMER } = require('../../config')
 
 // 首页快捷入口：点击后带着筛选条件进入院校库
@@ -18,6 +19,7 @@ Page({
     meta: null,
     quick: QUICK.map((q) => ({ label: q.label, count: '' })),
     compareCount: 0,
+    countdown: null,
     disclaimer: DISCLAIMER
   },
 
@@ -30,10 +32,27 @@ Page({
         })
       })
       .catch(() => {})
+    this.loadNews()
   },
 
   onShow() {
     this.setData({ compareCount: compare.getIds().length })
+    // 跨天后重新算倒计时
+    if (this.countdownSrc) this.setData({ countdown: buildCountdown(this.countdownSrc) })
+  },
+
+  loadNews() {
+    api
+      .getNews()
+      .then((n) => {
+        this.countdownSrc = n.countdown
+        this.setData({ countdown: buildCountdown(n.countdown) })
+      })
+      .catch(() => {})
+  },
+
+  onMoreNews() {
+    wx.navigateTo({ url: '/pages/news/news' })
   },
 
   goLibrary(filters, focus) {
