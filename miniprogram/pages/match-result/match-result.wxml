@@ -43,10 +43,11 @@
   </view>
 
   <view class="extra">
-    <view wx:if="{{tooHard}}">· 另有 {{tooHard}} 个专业最高分也达不到复试线，未列入</view>
-    <view>· 橙色「⚠」表示该科最低分低于这个专业的单科线，需要注意</view>
+    <view wx:if="{{tooHard}}">· 另有 {{tooHard}} 个专业低于预测线超过 1 倍历年波动，未列入</view>
+    <view>· 预测线 = 最近一年复试线 + 一半的年均涨幅；历年波动越大，同样的分差风险越高</view>
+    <view>· 橙色「⚠」表示单科可能不过线，或名额少、分数线容易大起大落</view>
     <view wx:if="{{noLine}}">· {{noLine}} 个专业缺少复试线数据，未参与匹配</view>
-    <view>· 分档依据最近一年复试线，复试线每年会变化；进复试后还要看复试成绩和名额</view>
+    <view>· 预估分取你填写的总分范围中间值；进复试后还要看复试成绩和名额</view>
   </view>
   <view class="disclaimer">数据仅供参考，以研招网和院校官网为准</view>
 </view>

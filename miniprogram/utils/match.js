@@ -3,14 +3,19 @@
  *
  * 1. 先按问卷条件筛掉不符合的专业（省份、层次、学硕/专硕、方向、学习方式、科目、招生人数），
  *    条件判断和院校库筛选共用 utils/filter.js 的 passBasic，两边结果一致。
- * 2. 再用预估总分范围 [最低, 最高] 与该专业「最近一年复试线」比较分档：
- *      保：最低分 − 复试线 > SAFE_GAP
- *      稳：最低分 ≥ 复试线
- *      冲：最低分 < 复试线，且 最高分 ≥ 复试线 − REACH_MAX_GAP
- *      其余：不推荐（计入 tooHard）
+ * 2. 再看「预估分」比「预测线」高出多少个「历年波动」：
+ *      预估分   = (总分最低 + 总分最高) ÷ 2
+ *      预测线   predLine  = 最近一年复试线 + 0.5 × 年均变化（考虑分数线逐年上涨）
+ *      历年波动 lineSigma = 历年复试线的标准差（下限 8；只有一年数据取 15；名额 < 5 再 +5）
+ *      k = (预估分 − predLine) ÷ lineSigma
+ *    同样高出 10 分，分数线稳定的学校 k 大、更稳；波动大的学校 k 小、风险更高。
+ *    分档（阈值在 config.js 的 MATCH）：
+ *      保：k > SAFE_K(1)
+ *      稳：STEADY_K(0) < k ≤ SAFE_K(1)
+ *      冲：REACH_K(-1) < k ≤ STEADY_K(0)
+ *      其余（k ≤ -1）：不推荐，计入 tooHard
+ *    predLine / lineSigma 由 scripts/build.js 调用 scripts/line-stats.js 预先算好写进 programs.json。
  * 3. 单科检查：某科最低分 < 该专业单科线 → 卡片上提醒，但不剔除（单科线数据可能不全）。
- *
- * 参数在 config.js 的 MATCH 里调整。
  */
 const { MATCH } = require('../config')
 const { defaultFilters, passBasic } = require('./filter')
@@ -23,9 +28,9 @@ const SUBJECTS = [
 ]
 
 const TIERS = [
-  { key: 'reach', label: '冲', desc: '最低分没过线，发挥好才能过' },
-  { key: 'steady', label: '稳', desc: '最低分也能过线，高出 0–' + MATCH.SAFE_GAP + ' 分' },
-  { key: 'safe', label: '保', desc: '最低分也高出复试线 ' + MATCH.SAFE_GAP + ' 分以上' }
+  { key: 'reach', label: '冲', desc: '略低于预测线，差距在 1 倍历年波动以内，发挥好有机会' },
+  { key: 'steady', label: '稳', desc: '高出预测线，但不到 1 倍历年波动，正常发挥大概率过线' },
+  { key: 'safe', label: '保', desc: '高出预测线超过 1 倍历年波动，比较稳妥' }
 ]
 
 function defaultAnswers() {
@@ -84,7 +89,7 @@ function answersToFilters(a) {
 
 /**
  * 返回 { tiers: { reach, steady, safe }, noLine, tooHard, score }
- * 每个专业附加：gapMin, gapMax, weak（单科可能不过线的科目名数组）
+ * 每个专业附加：predLine, lineSigma, diff（预估分 − 预测线）, k, weak（单科可能不过线的科目名数组）
  */
 function matchPrograms(programs, answers) {
   const score = parseScores(answers.scores)
@@ -94,37 +99,44 @@ function matchPrograms(programs, answers) {
   let tooHard = 0
   if (!score.ok) return { tiers, noLine, tooHard, score }
 
+  const userScore = (score.totalMin + score.totalMax) / 2
   programs.forEach((p) => {
     if (!passBasic(p, f)) return
-    if (typeof p.latestLine !== 'number') {
+    if (typeof p.predLine !== 'number' || typeof p.lineSigma !== 'number' || p.lineSigma <= 0) {
       noLine++
       return
     }
-    const gapMin = score.totalMin - p.latestLine
-    const gapMax = score.totalMax - p.latestLine
+    const diff = userScore - p.predLine
+    const k = diff / p.lineSigma
     const singles = p.lineSingles || {}
     const weak = SUBJECTS.filter((s) => typeof singles[s.key] === 'number' && score.min[s.key] < singles[s.key]).map((s) => s.label)
-    const item = Object.assign({}, p, { gapMin, gapMax, weak })
+    const item = Object.assign({}, p, { diff, k, weak })
 
-    if (gapMin > MATCH.SAFE_GAP) tiers.safe.push(item)
-    else if (gapMin >= 0) tiers.steady.push(item)
-    else if (gapMax >= -MATCH.REACH_MAX_GAP) tiers.reach.push(item)
+    if (k > MATCH.SAFE_K) tiers.safe.push(item)
+    else if (k > MATCH.STEADY_K) tiers.steady.push(item)
+    else if (k > MATCH.REACH_K) tiers.reach.push(item)
     else tooHard++
   })
   // 每档内：复试线高的（通常学校更好）排前面
-  Object.keys(tiers).forEach((k) => tiers[k].sort((a, b) => b.latestLine - a.latestLine))
+  Object.keys(tiers).forEach((key) => tiers[key].sort((a, b) => b.latestLine - a.latestLine))
   return { tiers, noLine, tooHard, score }
 }
 
-/** 卡片上的分差说明 */
+/** 卡片上的分差说明，如「高出预测线 8 分，历年波动 ±10 分」 */
 function gapText(p) {
-  if (p.gapMin >= 0) return '最低分高出复试线 ' + p.gapMin + ' 分'
-  const hi = p.gapMax > 0 ? '最高分高出 ' + p.gapMax + ' 分' : p.gapMax === 0 ? '最高分刚好持平' : '最高分差 ' + -p.gapMax + ' 分'
-  return '最低分差 ' + -p.gapMin + ' 分，' + hi
+  const d = Math.round(Math.abs(p.diff))
+  const sigma = Math.round(p.lineSigma)
+  if (p.diff > 0 && d > 0) return '高出预测线 ' + d + ' 分，历年波动 ±' + sigma + ' 分'
+  if (p.diff < 0 && d > 0) return '低于预测线 ' + d + ' 分'
+  return '与预测线持平，历年波动 ±' + sigma + ' 分'
 }
 
+/** 橙色提醒：单科可能不过线、名额少 */
 function weakText(p) {
-  return p.weak && p.weak.length ? '⚠ ' + p.weak.join('、') + '最低分低于单科线' : ''
+  const parts = []
+  if (p.weak && p.weak.length) parts.push(p.weak.join('、') + '最低分低于单科线')
+  if (typeof p.latestPlan === 'number' && p.latestPlan < MATCH.LOW_PLAN) parts.push('名额少，分数线波动大')
+  return parts.length ? '⚠ ' + parts.join('；') : ''
 }
 
 module.exports = { SUBJECTS, TIERS, defaultAnswers, parseScores, answersToFilters, matchPrograms, gapText, weakText }

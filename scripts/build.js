@@ -2,7 +2,8 @@
 /**
  * 数据构建脚本：校验 data/ 下的源数据，生成服务器用的 JSON 和小程序本地调试用的 mock。
  *
- * 用法：node scripts/build.js
+ * 用法：node scripts/build.js          （只生成服务器数据，日常用这个）
+ *       node scripts/build.js --mock   （额外生成小程序本地调试数据，不连服务器时用）
  * 输出：
  *   dist/api/v1/meta.json
  *   dist/api/v1/schools.json
@@ -10,7 +11,7 @@
  *   dist/api/v1/detail/{schoolId}.json
  *   dist/api/v1/news.json
  *   dist/api/v1/images/...（来自 data/images/）
- *   miniprogram/mock/data.js
+ *   miniprogram/mock/data.js（不加 --mock 时是空壳）
  */
 const fs = require('fs')
 const path = require('path')
@@ -21,6 +22,7 @@ const OUT_DIR = path.join(ROOT, 'dist', 'api', 'v1')
 const MOCK_FILE = path.join(ROOT, 'miniprogram', 'mock', 'data.js')
 
 const { LEVELS, REGION_PROVINCES, regionOf, DIRECTIONS, directionOf, STUDY_MODES } = require('../miniprogram/utils/dict')
+const { lineStats } = require('./line-stats')
 
 const YEARS = [2024, 2025, 2026]
 const REGIONS = REGION_PROVINCES.map((g) => g.region)
@@ -153,7 +155,9 @@ detailFiles.forEach((file) => {
         : null,
       planYear: latest.year || null,
       latestPlan: isNumOrNull(latest.planCount) ? latest.planCount : null,
-      latestExempt: isNumOrNull(latest.exemptCount) ? latest.exemptCount : null
+      latestExempt: isNumOrNull(latest.exemptCount) ? latest.exemptCount : null,
+      // 智能择校用：预测线、历年波动（算法见 scripts/line-stats.js）
+      ...lineStats(years, isNumOrNull(latest.planCount) ? latest.planCount : null)
     })
   })
   details[sid] = { school, programs: progs }
@@ -324,20 +328,20 @@ write(path.join(OUT_DIR, 'programs.json'), programs)
 Object.keys(details).forEach((sid) => write(path.join(OUT_DIR, 'detail', `${sid}.json`), details[sid]))
 write(path.join(OUT_DIR, 'news.json'), news)
 
-// 图片：服务器用 dist/api/v1/images/，本地调试用 miniprogram/mock/images/
+// 图片：服务器用 dist/api/v1/images/
+if (fs.existsSync(IMG_DIR)) fs.cpSync(IMG_DIR, path.join(OUT_DIR, 'images'), { recursive: true })
+
+// 本地调试数据：只有加 --mock 才生成完整数据；否则写一个空壳，发布包里不带示例数据和图片
+const WITH_MOCK = process.argv.indexOf('--mock') >= 0
 const MOCK_IMG_DIR = path.join(ROOT, 'miniprogram', 'mock', 'images')
 fs.rmSync(MOCK_IMG_DIR, { recursive: true, force: true })
-if (fs.existsSync(IMG_DIR)) {
-  fs.cpSync(IMG_DIR, path.join(OUT_DIR, 'images'), { recursive: true })
-  fs.cpSync(IMG_DIR, MOCK_IMG_DIR, { recursive: true })
-}
-
+if (WITH_MOCK && fs.existsSync(IMG_DIR)) fs.cpSync(IMG_DIR, MOCK_IMG_DIR, { recursive: true })
 fs.writeFileSync(
   MOCK_FILE,
   '// 由 scripts/build.js 自动生成，请勿手改。仅在 config.js 中 USE_MOCK=true 时使用。\n' +
-    'module.exports = ' +
-    JSON.stringify({ meta, schools, programs, details, news }) +
-    '\n'
+    (WITH_MOCK
+      ? 'module.exports = ' + JSON.stringify({ meta, schools, programs, details, news }) + '\n'
+      : '// 当前未生成本地数据（运行 node scripts/build.js --mock 可生成）\nmodule.exports = null\n')
 )
 
 const size = (f) => (fs.statSync(f).size / 1024).toFixed(1) + ' KB'
@@ -345,7 +349,7 @@ console.log(`构建完成：${meta.schoolCount} 所学校，${meta.programCount}
 console.log(`  programs.json ${size(path.join(OUT_DIR, 'programs.json'))}`)
 console.log(`  院校评价 ${Object.keys(details).filter((sid) => details[sid].review).length} 所`)
 console.log(`  资讯 ${news.items.length} 条${news.countdown ? '，倒计时：' + news.countdown.title + ' ' + news.countdown.date : ''}`)
-console.log(`  输出目录 ${path.relative(ROOT, OUT_DIR)}，mock ${path.relative(ROOT, MOCK_FILE)}`)
+console.log(`  输出目录 ${path.relative(ROOT, OUT_DIR)}${WITH_MOCK ? '，本地调试数据 ' + path.relative(ROOT, MOCK_FILE) : '（未生成本地调试数据）'}`)
 
 const MISSING_FILE = path.join(DATA_DIR, 'MISSING.txt')
 if (missing.length) {

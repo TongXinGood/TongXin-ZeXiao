@@ -37,7 +37,9 @@ node scripts/build.js
 
 院校的 `level` 可选：C9 / 985 / 211 / 双一流 / 研究院 / 双非；`region` 不用填，按省份自动归类。
 问卷、院校库筛选、构建校验共用 `miniprogram/utils/dict.js`，要增删方向或层次改这一个文件。
-智能择校算法在 `miniprogram/utils/match.js`，分档参数在 `miniprogram/config.js` 的 `MATCH`。
+智能择校算法在 `miniprogram/utils/match.js`，分档参数在 `miniprogram/config.js` 的 `MATCH`；
+预测线 `predLine` 和历年波动 `lineSigma` 由 `scripts/line-stats.js` 计算，构建时写进 `programs.json`。
+改了算法后运行 `node scripts/build.js && node scripts/test-match.js` 检查。
 
 ## 院校评价（data/reviews/{院校代码}.json）
 

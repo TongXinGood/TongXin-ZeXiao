@@ -8,13 +8,16 @@
  * 备案完成后：改成 https://你的域名/kaoyan/api/v1
  */
 module.exports = {
-  USE_MOCK: true,
-  BASE_URL: 'http://YOUR_SERVER_IP/kaoyan/api/v1',
+  USE_MOCK: false,
+  BASE_URL: 'http://124.221.122.184/kaoyan/api/v1', // 域名备案通过后改成 https://tongxingood.online/kaoyan/api/v1
   MAX_COMPARE: 4,
   // 智能择校分档参数（算法见 utils/match.js）
+  // k = (预估分 − 预测线) ÷ 历年波动；k 越大越稳
   MATCH: {
-    SAFE_GAP: 15,    // 保：最低分比复试线高出 15 分以上
-    REACH_MAX_GAP: 0 // 冲：最高分 ≥ 复试线 − 这个值（0 表示最高分要能过线）
+    SAFE_K: 1,    // k > 1：保
+    STEADY_K: 0,  // 0 < k ≤ 1：稳
+    REACH_K: -1,  // -1 < k ≤ 0：冲；k ≤ -1 不推荐
+    LOW_PLAN: 5   // 最近一年统招计划少于这个数，视为名额少（波动 +5，并在卡片上提醒）
   },
   DISCLAIMER: '数据仅供参考，以研招网和院校官网为准'
 }
