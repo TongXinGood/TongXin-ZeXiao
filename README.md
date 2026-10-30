@@ -74,3 +74,8 @@ bash /var/www/kaoyan/scripts/deploy.sh
 ```
 
 访问地址：`http://服务器IP/kaoyan/api/v1/meta.json`
+
+## 网站首页（site/）
+
+`site/index.html` 是域名首页（个人学习笔记页），备案要求网站能正常访问、底部挂 ICP 备案号。
+`scripts/deploy.sh` 每次会把 `site/` 同步到 `/var/www/html/`。

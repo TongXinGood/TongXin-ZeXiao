@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>童心的学习笔记</title>
+<meta name="description" content="个人学习笔记，记录计算机专业课的复习要点。">
+<style>
+  :root {
+    --primary: #3BA7FF;
+    --primary-dark: #1E8FEA;
+    --primary-light: #EAF6FF;
+    --bg: #F5F9FD;
+    --card: #FFFFFF;
+    --text-1: #1F2D3D;
+    --text-2: #5B6B7B;
+    --text-3: #9AA8B6;
+    --line: #EEF2F6;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text-1);
+    font: 16px/1.75 -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 16px; }
+  header {
+    padding: 56px 0 32px;
+    background: linear-gradient(180deg, var(--primary-light) 0%, var(--bg) 100%);
+  }
+  h1 { margin: 0; font-size: 30px; }
+  .sub { margin-top: 6px; color: var(--text-2); }
+  .note {
+    margin-bottom: 16px;
+    padding: 20px 22px;
+    border-radius: 14px;
+    background: var(--card);
+    box-shadow: 0 2px 10px rgba(59, 167, 255, 0.08);
+  }
+  .note h2 { margin: 0 0 4px; font-size: 19px; }
+  .meta { font-size: 13px; color: var(--text-3); }
+  .tag {
+    display: inline-block;
+    margin-right: 8px;
+    padding: 0 8px;
+    border-radius: 6px;
+    background: var(--primary-light);
+    color: var(--primary-dark);
+    font-size: 12px;
+  }
+  .note p, .note ul { margin: 10px 0 0; color: var(--text-1); }
+  .note ul { padding-left: 20px; }
+  footer {
+    margin-top: 32px;
+    padding: 24px 0 40px;
+    border-top: 1px solid var(--line);
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-3);
+  }
+  footer a { color: var(--text-3); text-decoration: none; }
+  footer a:hover { color: var(--primary-dark); }
+  footer .row + .row { margin-top: 4px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>童心的学习笔记</h1>
+    <div class="sub">记录计算机专业课的复习要点，边学边整理。</div>
+  </div>
+</header>
+
+<main class="wrap">
+  <article class="note">
+    <h2>数据结构：栈和队列</h2>
+    <div class="meta"><span class="tag">数据结构</span>2026-10</div>
+    <ul>
+      <li>栈：后进先出（LIFO），只在栈顶插入和删除；典型应用是括号匹配、表达式求值、函数调用。</li>
+      <li>队列：先进先出（FIFO），队尾入队、队头出队；循环队列用取模避免“假溢出”。</li>
+      <li>循环队列判满常用“牺牲一个单元”：(rear + 1) % maxSize == front。</li>
+    </ul>
+  </article>
+
+  <article class="note">
+    <h2>计算机组成原理：Cache 映射方式</h2>
+    <div class="meta"><span class="tag">计组</span>2026-10</div>
+    <ul>
+      <li>直接映射：每个主存块只能放到固定的一行，硬件简单，冲突多。</li>
+      <li>全相联映射：可以放到任意一行，命中率高，比较电路成本高。</li>
+      <li>组相联映射：先固定到某一组，组内任意放，是前两者的折中。</li>
+    </ul>
+  </article>
+
+  <article class="note">
+    <h2>操作系统：常见进程调度算法</h2>
+    <div class="meta"><span class="tag">操作系统</span>2026-10</div>
+    <ul>
+      <li>先来先服务（FCFS）：实现简单，对短作业不利。</li>
+      <li>短作业优先（SJF）：平均等待时间最短，可能导致长作业“饥饿”。</li>
+      <li>时间片轮转（RR）：公平、响应快，时间片太小会增加切换开销。</li>
+    </ul>
+  </article>
+
+  <article class="note">
+    <h2>计算机网络：TCP 三次握手</h2>
+    <div class="meta"><span class="tag">计网</span>2026-10</div>
+    <p>客户端发送 SYN → 服务器回复 SYN + ACK → 客户端再发送 ACK，连接建立。需要第三次握手，是为了防止已经失效的连接请求又传到服务器，导致服务器错误地建立连接。</p>
+  </article>
+</main>
+
+<footer>
+  <div class="wrap">
+    <!-- ICP 备案号：把下面的「X ICP备XXXXXXXX号-1」换成你的备案号（在腾讯云备案详情里能看到） -->
+    <div class="row"><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">X ICP备XXXXXXXX号-1</a></div>
+    <!-- 公安备案通过后，把下面这一行取消注释，并填上公安备案号和编号
+    <div class="row"><a href="https://beian.mps.gov.cn/#/query/webSearch?code=编号" target="_blank" rel="noopener">X 公网安备 XXXXXXXXXXXXXX 号</a></div>
+    -->
+    <div class="row">© 2026 童心的学习笔记</div>
+  </div>
+</footer>
+</body>
+</html>

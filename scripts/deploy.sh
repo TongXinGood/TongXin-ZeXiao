@@ -14,5 +14,9 @@ if [ "$OLD_CONF" != "$NEW_CONF" ]; then
   sudo nginx -t && sudo systemctl reload nginx
 fi
 
+# 网站首页（个人学习笔记页，备案要求网站能正常访问并挂备案号）
+sudo cp -r site/. /var/www/html/
+echo "网站首页已同步到 /var/www/html"
+
 echo "当前数据版本：$(grep -o '"version":"[0-9]*"' dist/api/v1/meta.json)"
 echo "更新完成"
