@@ -4,18 +4,5 @@
     "date": "2027-12-19",
     "note": "暂定日期，以研招网正式公告为准"
   },
-  "items": [
-    {
-      "id": "test-001",
-      "title": "测试",
-      "summary": "测试",
-      "date": "2026-10-30",
-      "pinned": false,
-      "content": [
-        "测试"
-      ],
-      "schoolId": "",
-      "source": null
-    }
-  ]
+  "items": []
 }
