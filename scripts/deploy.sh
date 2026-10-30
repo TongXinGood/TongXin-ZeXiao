@@ -1,13 +1,20 @@
 #!/usr/bin/env bash
-# 服务器上更新数据：bash /var/www/kaoyan/scripts/deploy.sh
+# 服务器上更新数据和网站：bash /var/www/kaoyan/scripts/deploy.sh
 set -e
-cd /var/www/kaoyan
+REPO=/var/www/kaoyan
+cd "$REPO"
 
-OLD_CONF=$(md5sum server/nginx-kaoyan.conf | cut -d' ' -f1)
-git pull --ff-only
-NEW_CONF=$(md5sum server/nginx-kaoyan.conf | cut -d' ' -f1)
+# 第一步：拉取最新代码，然后用「拉下来的新版本脚本」继续执行后面的步骤。
+# （git pull 可能会更新这个脚本本身，不重新执行的话，跑的还是旧内容）
+if [ "$1" != "--after-pull" ]; then
+  OLD_CONF=$(md5sum server/nginx-kaoyan.conf | cut -d' ' -f1)
+  git pull --ff-only
+  exec bash "$REPO/scripts/deploy.sh" --after-pull "$OLD_CONF"
+fi
+OLD_CONF="$2"
 
 # Nginx 配置有变化才重载
+NEW_CONF=$(md5sum server/nginx-kaoyan.conf | cut -d' ' -f1)
 if [ "$OLD_CONF" != "$NEW_CONF" ]; then
   echo "Nginx 配置有更新，重新加载……"
   sudo cp server/nginx-kaoyan.conf /etc/nginx/snippets/kaoyan.conf
