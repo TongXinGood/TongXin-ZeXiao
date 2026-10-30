@@ -11,7 +11,7 @@ miniprogram/        小程序代码（开发者工具打开仓库根目录即可
 data/
   schools.json      院校基础信息
   detail/{院校代码}.json  每校的专业及 2024–2026 历年数据
-  SAMPLE            存在即表示示例数据，页面会显示提示条
+  csv/              整理数据时用的原始表格（留档，便于核对）
 scripts/build.js    校验数据并生成 dist/ 与 mock
 dist/api/v1/        上传到服务器的 JSON（已 gitignore）
 ```

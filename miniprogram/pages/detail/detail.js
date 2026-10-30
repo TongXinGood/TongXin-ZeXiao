@@ -42,7 +42,8 @@ Page({
         const tabs = this.programs.map((p) => ({
           id: p.id,
           label: p.majorCode + ' ' + p.majorName,
-          sub: p.degreeType === 'academic' ? '学硕' : '专硕'
+          // 同一学校可能有多个同名专业（不同学院），标签下注明学院以便区分；学院名去掉括号里的别称
+          sub: (p.degreeType === 'academic' ? '学硕' : '专硕') + ' · ' + (p.college || '').replace(/[（(].*?[）)]/g, '')
         }))
         wx.setNavigationBarTitle({ title: school.name })
         const r = d.review

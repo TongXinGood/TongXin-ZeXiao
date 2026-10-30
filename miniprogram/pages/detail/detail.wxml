@@ -50,7 +50,8 @@
     <!-- 历年复试线 -->
     <view class="card box">
       <view class="box-title">历年复试线<text class="box-tip">总分</text></view>
-      <view class="chart">
+      <view class="empty-tip" wx:if="{{!current.lines.length}}">暂未收录复试线数据，以院校官网为准</view>
+      <view class="chart" wx:if="{{current.lines.length}}">
         <view class="bar-col" wx:for="{{current.bars}}" wx:key="year">
           <view class="bar-delta {{item.deltaClass}}">{{item.deltaText}}</view>
           <view class="bar-value num {{item.empty ? 'muted' : ''}}">{{item.value}}</view>
@@ -61,7 +62,7 @@
         </view>
       </view>
 
-      <view class="table">
+      <view class="table" wx:if="{{current.lines.length}}">
         <view class="tr th">
           <view class="td td-year">年份</view>
           <view class="td">总分</view>
@@ -84,7 +85,8 @@
     <!-- 招生情况 -->
     <view class="card box">
       <view class="box-title">招生情况<text class="box-tip">推免占比 = 推免 ÷ (统招 + 推免)</text></view>
-      <view class="table">
+      <view class="empty-tip" wx:if="{{!current.enroll.length}}">暂未收录招生数据，以院校官网为准</view>
+      <view class="table" wx:if="{{current.enroll.length}}">
         <view class="tr th">
           <view class="td td-year">年份</view>
           <view class="td">统招计划</view>

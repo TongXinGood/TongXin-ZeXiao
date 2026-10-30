@@ -1,0 +1,341 @@
+{
+  "schoolId": "10358",
+  "programs": [
+    {
+      "id": "10358-1oqhc-081200",
+      "college": "计算机科学与技术学院",
+      "majorCode": "081200",
+      "majorName": "计算机科学与技术",
+      "degreeType": "academic",
+      "exam": {
+        "politics": "思想政治理论",
+        "foreign": "英语一",
+        "math": "数学一",
+        "pro": [
+          {
+            "code": "408",
+            "name": "计算机学科专业基础"
+          }
+        ]
+      },
+      "years": [
+        {
+          "year": 2024,
+          "retestLine": {
+            "total": 365,
+            "politics": 55,
+            "foreign": 55,
+            "math": 100,
+            "pro": 100
+          },
+          "planCount": null,
+          "exemptCount": null,
+          "admittedCount": null,
+          "retestCount": null,
+          "note": ""
+        },
+        {
+          "year": 2025,
+          "retestLine": {
+            "total": 350,
+            "politics": 55,
+            "foreign": 55,
+            "math": 100,
+            "pro": 110
+          },
+          "planCount": 25,
+          "exemptCount": 115,
+          "admittedCount": null,
+          "retestCount": null,
+          "note": ""
+        }
+      ],
+      "remark": "",
+      "sources": [
+        {
+          "title": "AI 汇总（待核对）：招生目录、2025 复试线、2024 复试线",
+          "url": "",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "id": "10358-1oqhc-085400-085404",
+      "college": "计算机科学与技术学院",
+      "majorCode": "085400",
+      "majorName": "电子信息（计算机技术）",
+      "degreeType": "professional",
+      "direction": "计算机技术",
+      "exam": {
+        "politics": "思想政治理论",
+        "foreign": "英语一",
+        "math": "数学一",
+        "pro": [
+          {
+            "code": "408",
+            "name": "计算机学科专业基础"
+          }
+        ]
+      },
+      "years": [
+        {
+          "year": 2024,
+          "retestLine": {
+            "total": 350,
+            "politics": 55,
+            "foreign": 55,
+            "math": 95,
+            "pro": 100
+          },
+          "planCount": null,
+          "exemptCount": null,
+          "admittedCount": null,
+          "retestCount": null,
+          "note": ""
+        },
+        {
+          "year": 2025,
+          "retestLine": {
+            "total": 340,
+            "politics": 50,
+            "foreign": 50,
+            "math": 90,
+            "pro": 90
+          },
+          "planCount": null,
+          "exemptCount": null,
+          "admittedCount": null,
+          "retestCount": null,
+          "note": ""
+        }
+      ],
+      "remark": "",
+      "sources": [
+        {
+          "title": "AI 汇总（待核对）：招生目录、2025 复试线、2024 复试线",
+          "url": "",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "id": "10358-g59dm-085405",
+      "college": "软件学院",
+      "majorCode": "085405",
+      "majorName": "软件工程",
+      "degreeType": "professional",
+      "exam": {
+        "politics": "思想政治理论",
+        "foreign": "英语二",
+        "math": "数学二",
+        "pro": [
+          {
+            "code": "408",
+            "name": "计算机学科专业基础"
+          }
+        ]
+      },
+      "years": [
+        {
+          "year": 2024,
+          "retestLine": {
+            "total": 376,
+            "politics": 60,
+            "foreign": 60,
+            "math": 100,
+            "pro": 100
+          },
+          "planCount": 480,
+          "exemptCount": 0,
+          "admittedCount": null,
+          "retestCount": null,
+          "note": ""
+        }
+      ],
+      "remark": "常规班",
+      "sources": [
+        {
+          "title": "AI 汇总（待核对）：招生目录、2024 复试线",
+          "url": "",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "id": "10358-1ptqe-081200",
+      "college": "研究生院科学岛分院（合肥物质院）",
+      "majorCode": "081200",
+      "majorName": "计算机科学与技术",
+      "degreeType": "academic",
+      "exam": {
+        "politics": "思想政治理论",
+        "foreign": "英语一",
+        "math": "数学一",
+        "pro": [
+          {
+            "code": "408",
+            "name": "计算机学科专业基础"
+          }
+        ]
+      },
+      "years": [
+        {
+          "year": 2026,
+          "retestLine": {
+            "total": 344,
+            "politics": 50,
+            "foreign": 50,
+            "math": 80,
+            "pro": 80
+          },
+          "planCount": 7,
+          "exemptCount": 10,
+          "admittedCount": null,
+          "retestCount": null,
+          "note": ""
+        }
+      ],
+      "remark": "",
+      "sources": [
+        {
+          "title": "AI 汇总（待核对）：招生目录、2026 复试线",
+          "url": "",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "id": "10358-1q7sl-085400-085404",
+      "college": "先进技术研究院（国家卓越工程师学院）",
+      "majorCode": "085400",
+      "majorName": "电子信息（计算机技术）",
+      "degreeType": "professional",
+      "direction": "计算机技术",
+      "exam": {
+        "politics": "思想政治理论",
+        "foreign": "英语一",
+        "math": "数学一",
+        "pro": [
+          {
+            "code": "408",
+            "name": "计算机学科专业基础"
+          }
+        ]
+      },
+      "years": [
+        {
+          "year": 2024,
+          "retestLine": {
+            "total": 339,
+            "politics": 50,
+            "foreign": 50,
+            "math": 70,
+            "pro": 70
+          },
+          "planCount": 61,
+          "exemptCount": 28,
+          "admittedCount": null,
+          "retestCount": null,
+          "note": ""
+        },
+        {
+          "year": 2025,
+          "retestLine": {
+            "total": 323,
+            "politics": 45,
+            "foreign": 45,
+            "math": 70,
+            "pro": 70
+          },
+          "planCount": null,
+          "exemptCount": null,
+          "admittedCount": null,
+          "retestCount": null,
+          "note": ""
+        },
+        {
+          "year": 2026,
+          "retestLine": {
+            "total": 347,
+            "politics": 50,
+            "foreign": 50,
+            "math": 70,
+            "pro": 70
+          },
+          "planCount": null,
+          "exemptCount": null,
+          "admittedCount": null,
+          "retestCount": null,
+          "note": ""
+        }
+      ],
+      "remark": "",
+      "sources": [
+        {
+          "title": "AI 汇总（待核对）：2024 招生目录、2024 复试线、2025 复试线、2026 复试线",
+          "url": "",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "id": "10358-1q7sl-085400-085405",
+      "college": "先进技术研究院（国家卓越工程师学院）",
+      "majorCode": "085400",
+      "majorName": "电子信息（软件工程）",
+      "degreeType": "professional",
+      "direction": "软件工程",
+      "exam": {
+        "politics": "思想政治理论",
+        "foreign": "英语一",
+        "math": "数学一",
+        "pro": [
+          {
+            "code": "408",
+            "name": "计算机学科专业基础"
+          }
+        ]
+      },
+      "years": [
+        {
+          "year": 2024,
+          "retestLine": {
+            "total": 340,
+            "politics": 50,
+            "foreign": 50,
+            "math": 70,
+            "pro": 70
+          },
+          "planCount": null,
+          "exemptCount": null,
+          "admittedCount": null,
+          "retestCount": null,
+          "note": ""
+        },
+        {
+          "year": 2025,
+          "retestLine": {
+            "total": 365,
+            "politics": 45,
+            "foreign": 45,
+            "math": 70,
+            "pro": 70
+          },
+          "planCount": 21,
+          "exemptCount": 5,
+          "admittedCount": null,
+          "retestCount": null,
+          "note": ""
+        }
+      ],
+      "remark": "",
+      "sources": [
+        {
+          "title": "AI 汇总（待核对）：2025 招生目录、2024 复试线、2025 复试线",
+          "url": "",
+          "date": ""
+        }
+      ]
+    }
+  ]
+}

@@ -119,7 +119,9 @@ detailFiles.forEach((file) => {
 
     // 最近一年（有复试线的那年）及与上一年的变化
     const withLine = years.filter((y) => y.retestLine && typeof y.retestLine.total === 'number')
-    const latest = years[years.length - 1] || {}
+    // 招生人数：取最近一个「有统招计划或推免人数」的年份（没有就用最近一年），卡片上显示「XXXX 统招计划」
+    const withCount = years.filter((y) => isNumOrNull(y.planCount) && y.planCount !== null || isNumOrNull(y.exemptCount) && y.exemptCount !== null)
+    const latest = withCount[withCount.length - 1] || years[years.length - 1] || {}
     const last = withLine[withLine.length - 1]
     const prev = withLine[withLine.length - 2]
     programs.push({
