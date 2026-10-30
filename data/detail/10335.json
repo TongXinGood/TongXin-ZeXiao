@@ -1,0 +1,87 @@
+{
+  "schoolId": "10335",
+  "programs": [
+    {
+      "id": "10335-cs-081200",
+      "college": "计算机科学与技术学院",
+      "majorCode": "081200",
+      "majorName": "计算机科学与技术",
+      "degreeType": "academic",
+      "exam": {
+        "politics": "思想政治理论",
+        "foreign": "英语一",
+        "math": "数学一",
+        "pro": [
+          {
+            "code": "408",
+            "name": "计算机学科专业基础"
+          }
+        ]
+      },
+      "years": [
+        {
+          "year": 2024,
+          "retestLine": {
+            "total": 381,
+            "politics": 55,
+            "foreign": 55,
+            "math": 80,
+            "pro": 80
+          },
+          "planCount": 19,
+          "exemptCount": null,
+          "admittedCount": 20,
+          "retestCount": 26,
+          "admitMin": 381,
+          "admitAvg": 403.15,
+          "admitMax": 440,
+          "note": ""
+        },
+        {
+          "year": 2025,
+          "retestLine": {
+            "total": 375,
+            "politics": 50,
+            "foreign": 50,
+            "math": 75,
+            "pro": 75
+          },
+          "planCount": 17,
+          "exemptCount": null,
+          "admittedCount": 17,
+          "retestCount": 23,
+          "admitMin": 376,
+          "admitAvg": 393,
+          "admitMax": 433,
+          "note": ""
+        },
+        {
+          "year": 2026,
+          "retestLine": {
+            "total": 382,
+            "politics": 50,
+            "foreign": 50,
+            "math": 75,
+            "pro": 75
+          },
+          "planCount": 9,
+          "exemptCount": null,
+          "admittedCount": 9,
+          "retestCount": 14,
+          "admitMin": 393,
+          "admitAvg": 409,
+          "admitMax": 423,
+          "note": ""
+        }
+      ],
+      "remark": "含二级学科：081201 计算机系统结构、081203 计算机应用技术。以上为一志愿统考数据，不含士兵、少干计划。",
+      "sources": [
+        {
+          "title": "第三方数据平台整理（复试线、招生 / 复试 / 录取人数、录取分数），待与学院官网核对",
+          "url": "",
+          "date": ""
+        }
+      ]
+    }
+  ]
+}
