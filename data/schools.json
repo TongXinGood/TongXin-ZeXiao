@@ -1,4 +1,5 @@
 [
   {"id": "10358", "name": "中国科学技术大学", "province": "安徽", "city": "合肥", "region": "华东", "level": "C9", "tags": ["C9", "985", "211", "双一流", "自划线"], "website": "https://yz.ustc.edu.cn"},
-  {"id": "10335", "name": "浙江大学", "province": "浙江", "city": "杭州", "region": "华东", "level": "C9", "tags": ["C9", "985", "211", "双一流", "自划线"], "website": "http://www.grs.zju.edu.cn"}
+  {"id": "10335", "name": "浙江大学", "province": "浙江", "city": "杭州", "region": "华东", "level": "C9", "tags": ["C9", "985", "211", "双一流", "自划线"], "website": "http://www.grs.zju.edu.cn"},
+  {"id": "10359", "name": "合肥工业大学", "province": "安徽", "city": "合肥", "region": "华东", "level": "211", "tags": ["211", "双一流"], "website": "https://yjsy.hfut.edu.cn"}
 ]

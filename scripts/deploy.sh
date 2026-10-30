@@ -4,11 +4,25 @@ set -e
 REPO=/var/www/kaoyan
 cd "$REPO"
 
-# 第一步：拉取最新代码，然后用「拉下来的新版本脚本」继续执行后面的步骤。
-# （git pull 可能会更新这个脚本本身，不重新执行的话，跑的还是旧内容）
+# 第一步：拉取最新代码（GitHub 在国内不稳定：自动重试，网速太慢时提前放弃本次）
+# 然后用「拉下来的新版本脚本」继续执行后面的步骤（脚本可能更新了它自己）
 if [ "$1" != "--after-pull" ]; then
   OLD_CONF=$(md5sum server/nginx-kaoyan.conf | cut -d' ' -f1)
-  git pull --ff-only
+  TRIES=5
+  for i in $(seq 1 $TRIES); do
+    echo "正在从 GitHub 拉取（第 $i/$TRIES 次）……"
+    if git -c http.version=HTTP/1.1 -c http.lowSpeedLimit=1000 -c http.lowSpeedTime=20 fetch origin main; then
+      break
+    fi
+    if [ "$i" = "$TRIES" ]; then
+      echo "连续 $TRIES 次都连不上 GitHub，请过几分钟再运行一次。服务器上的数据没有变化。"
+      exit 1
+    fi
+    echo "没连上，10 秒后重试……"
+    sleep 10
+  done
+  # 服务器上不手工改代码，一律以 GitHub 为准（也能覆盖手动传上来的文件，避免冲突）
+  git reset --hard origin/main
   exec bash "$REPO/scripts/deploy.sh" --after-pull "$OLD_CONF"
 fi
 OLD_CONF="$2"
