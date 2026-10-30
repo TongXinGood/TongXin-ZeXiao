@@ -34,6 +34,8 @@ node scripts/build.js
 | `studyMode` | 可不填，默认 `full` 全日制；非全日制填 `part` |
 | `exam` | 政治、外语（英语一/二）、数学（数学一/二）、专业课（含 408 即视为考 408） |
 | `years[].retestLine` | 复试线：总分 + 单科（政治、外语、数学、专业课），智能择校会做单科检查 |
+| `years[].retestCount` / `admittedCount` | 复试人数 / 录取人数，详情页自动算复录比 |
+| `years[].admitMin` / `admitAvg` / `admitMax` | 录取最低 / 平均 / 最高分（可选，来自拟录取名单） |
 
 院校的 `level` 可选：C9 / 985 / 211 / 双一流 / 研究院 / 双非；`region` 不用填，按省份自动归类。
 问卷、院校库筛选、构建校验共用 `miniprogram/utils/dict.js`，要增删方向或层次改这一个文件。

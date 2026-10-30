@@ -318,3 +318,16 @@
   background: var(--bg);
   border-radius: 16rpx;
 }
+
+.td-label {
+  flex: 0 0 170rpx;
+  padding-left: 20rpx;
+  text-align: left;
+  color: var(--text-2);
+  font-size: 24rpx;
+}
+.admit-tip {
+  margin-top: 14rpx;
+  font-size: 22rpx;
+  color: var(--text-3);
+}

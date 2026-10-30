@@ -111,6 +111,8 @@ detailFiles.forEach((file) => {
       checkRange(yw, 'exemptCount', y.exemptCount, 0, 2000)
       checkRange(yw, 'admittedCount', y.admittedCount === undefined ? null : y.admittedCount, 0, 2000)
       checkRange(yw, 'retestCount', y.retestCount === undefined ? null : y.retestCount, 0, 5000)
+      // 录取分数（可选，来自拟录取名单）：最低 / 平均 / 最高
+      ;['admitMin', 'admitAvg', 'admitMax'].forEach((k) => checkRange(yw, k, y[k] === undefined ? null : y[k], 200, 500))
     })
 
     p.schoolId = sid

@@ -92,18 +92,31 @@
           <view class="td">统招计划</view>
           <view class="td">推免</view>
           <view class="td">推免占比</view>
-          <view class="td">录取</view>
-          <view class="td">复试</view>
         </view>
         <view class="tr" wx:for="{{current.enroll}}" wx:key="year">
           <view class="td td-year">{{item.year}}</view>
           <view class="td num td-strong">{{item.plan}}</view>
           <view class="td num">{{item.exempt}}</view>
           <view class="td num">{{item.exemptRate}}</view>
-          <view class="td num">{{item.admitted}}</view>
-          <view class="td num">{{item.retest}}</view>
         </view>
       </view>
+    </view>
+
+    <!-- 招录数据：年份做列 -->
+    <view class="card box">
+      <view class="box-title">招录数据<text class="box-tip">复录比 = 复试人数 ÷ 录取人数</text></view>
+      <view class="empty-tip" wx:if="{{!current.admit.rows.length}}">暂未收录复试 / 录取数据，以院校官网为准</view>
+      <view class="table" wx:if="{{current.admit.rows.length}}">
+        <view class="tr th">
+          <view class="td td-label">指标</view>
+          <view class="td" wx:for="{{current.admit.years}}" wx:key="*this">{{item}}</view>
+        </view>
+        <view class="tr" wx:for="{{current.admit.rows}}" wx:key="label" wx:for-item="r">
+          <view class="td td-label">{{r.label}}</view>
+          <view class="td num {{r.strong ? 'td-strong' : ''}}" wx:for="{{r.cells}}" wx:key="year" wx:for-item="c">{{c.text}}</view>
+        </view>
+      </view>
+      <view class="admit-tip" wx:if="{{current.admit.rows.length}}">复录比越接近 1，进入复试后被刷的比例越低</view>
     </view>
 
     <view class="legend">「—」表示暂未收录，以院校官网为准</view>

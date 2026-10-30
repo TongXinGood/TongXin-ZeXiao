@@ -72,10 +72,30 @@ function buildDetail(p) {
       plan: dash(plan),
       exempt: dash(exempt),
       exemptRate,
-      admitted: dash(y.admittedCount),
-      retest: dash(y.retestCount)
     }
   })
+
+  // 招录数据：年份做列、指标做行；整行都没有数据的指标不显示
+  const num = (v) => (typeof v === 'number' ? v : null)
+  const ratio = (y) => {
+    const r = num(y.retestCount)
+    const a = num(y.admittedCount)
+    return r !== null && a ? (r / a).toFixed(2) : null
+  }
+  const ADMIT_ROWS = [
+    { label: '复试人数', get: (y) => num(y.retestCount) },
+    { label: '录取人数', get: (y) => num(y.admittedCount) },
+    { label: '复录比', get: ratio, strong: true },
+    { label: '录取最低分', get: (y) => num(y.admitMin) },
+    { label: '录取平均分', get: (y) => (num(y.admitAvg) === null ? null : Math.round(y.admitAvg * 10) / 10) },
+    { label: '录取最高分', get: (y) => num(y.admitMax) }
+  ]
+  const admitRows = ADMIT_ROWS.map((r) => ({
+    label: r.label,
+    strong: !!r.strong,
+    cells: years.map((y) => ({ year: y.year, text: dash(r.get(y)) }))
+  })).filter((r) => r.cells.some((c) => c.text !== '—'))
+  const admit = { years: years.map((y) => y.year), rows: admitRows }
 
   const notes = years.filter((y) => y.note).map((y) => ({ year: y.year, text: y.note }))
   const exam = p.exam || {}
@@ -99,6 +119,7 @@ function buildDetail(p) {
     bars,
     lines,
     enroll,
+    admit,
     notes,
     remark: p.remark || '',
     sources: (p.sources || []).filter((s) => s.title)
@@ -185,6 +206,19 @@ function buildCompareRows(items, years) {
     )
   )
   rows.push(row('录取', items.map((x) => num(yearData(x.full, last).admittedCount))))
+  rows.push(
+    row(
+      '复录比',
+      items.map((x) => {
+        const d = yearData(x.full, last)
+        const r = num(d.retestCount)
+        const a = num(d.admittedCount)
+        return r !== null && a ? Math.round((r / a) * 100) / 100 : null
+      }),
+      'min',
+      (v) => v.toFixed(2)
+    )
+  )
   return rows
 }
 
