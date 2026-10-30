@@ -145,17 +145,47 @@
             "math": 100,
             "pro": 100
           },
+          "planCount": 501,
+          "exemptCount": 0,
+          "admittedCount": 500,
+          "retestCount": 607,
+          "note": ""
+        },
+        {
+          "year": 2025,
+          "retestLine": {
+            "total": 370,
+            "politics": 60,
+            "foreign": 60,
+            "math": 100,
+            "pro": 100
+          },
+          "planCount": 481,
+          "exemptCount": 0,
+          "admittedCount": 480,
+          "retestCount": 580,
+          "note": ""
+        },
+        {
+          "year": 2026,
+          "retestLine": {
+            "total": 388,
+            "politics": 60,
+            "foreign": 60,
+            "math": 100,
+            "pro": 100
+          },
           "planCount": 480,
           "exemptCount": 0,
-          "admittedCount": null,
-          "retestCount": null,
+          "admittedCount": 482,
+          "retestCount": 598,
           "note": ""
         }
       ],
-      "remark": "常规班",
+      "remark": "常规班，仅招收统考生（推免生进特色化创新试点班）。",
       "sources": [
         {
-          "title": "AI 汇总（待核对）：招生目录、2024 复试线",
+          "title": "多方汇总（2024–2026 复试线、招生 / 复试 / 录取人数），待与学院官网核对",
           "url": "",
           "date": ""
         }
