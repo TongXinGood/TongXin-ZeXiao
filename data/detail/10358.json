@@ -22,17 +22,20 @@
         {
           "year": 2024,
           "retestLine": {
-            "total": 365,
+            "total": 375,
             "politics": 55,
             "foreign": 55,
             "math": 100,
             "pro": 100
           },
-          "planCount": null,
+          "planCount": 26,
           "exemptCount": null,
-          "admittedCount": null,
-          "retestCount": null,
-          "note": ""
+          "admittedCount": 70,
+          "retestCount": 87,
+          "admitMin": 376,
+          "admitAvg": 386.11,
+          "admitMax": 427,
+          "note": "复试线：第三方平台为 375，之前 AI 汇总为 365，待官网核对；录取 70 人明显多于招生计划 26 人，口径待核对"
         },
         {
           "year": 2025,
@@ -43,17 +46,43 @@
             "math": 100,
             "pro": 110
           },
-          "planCount": 25,
+          "planCount": 28,
           "exemptCount": 115,
-          "admittedCount": null,
-          "retestCount": null,
-          "note": ""
+          "admittedCount": 31,
+          "retestCount": 37,
+          "admitMin": 350,
+          "admitAvg": 374.0,
+          "admitMax": 407,
+          "note": "招生人数：第三方平台为 28，之前 AI 汇总（招生目录）为 25；推免 115 人来自 AI 汇总；录取中位数 369"
+        },
+        {
+          "year": 2026,
+          "retestLine": {
+            "total": 355,
+            "politics": 55,
+            "foreign": 55,
+            "math": 105,
+            "pro": 100
+          },
+          "planCount": 26,
+          "exemptCount": null,
+          "admittedCount": 25,
+          "retestCount": 36,
+          "admitMin": 361,
+          "admitAvg": 383.0,
+          "admitMax": 418,
+          "note": "进复试考生平均分 378（政 66 / 英 73 / 数 128 / 专 111），录取中位数 381"
         }
       ],
-      "remark": "",
+      "remark": "学科评估 A。另有士兵计划，以上为一志愿统考数据，招生人数不含推免。",
       "sources": [
         {
-          "title": "AI 汇总（待核对）：招生目录、2025 复试线、2024 复试线",
+          "title": "第三方数据平台整理（复试线、招生 / 复试 / 录取人数、录取分数），待与学院官网核对",
+          "url": "",
+          "date": ""
+        },
+        {
+          "title": "AI 汇总（待核对）：2025 推免人数",
           "url": "",
           "date": ""
         }
@@ -90,7 +119,7 @@
           "exemptCount": null,
           "admittedCount": null,
           "retestCount": null,
-          "note": ""
+          "note": "2024 年数据仅来自 AI 汇总，第三方平台无此年份，待官网核对"
         },
         {
           "year": 2025,
@@ -101,17 +130,43 @@
             "math": 90,
             "pro": 90
           },
-          "planCount": null,
+          "planCount": 49,
           "exemptCount": null,
-          "admittedCount": null,
-          "retestCount": null,
-          "note": ""
+          "admittedCount": 94,
+          "retestCount": 109,
+          "admitMin": 342,
+          "admitAvg": 367.0,
+          "admitMax": 412,
+          "note": "录取中位数 366"
+        },
+        {
+          "year": 2026,
+          "retestLine": {
+            "total": 355,
+            "politics": 50,
+            "foreign": 50,
+            "math": 100,
+            "pro": 95
+          },
+          "planCount": 49,
+          "exemptCount": null,
+          "admittedCount": 78,
+          "retestCount": 98,
+          "admitMin": 355,
+          "admitAvg": 383.0,
+          "admitMax": 427,
+          "note": "进复试考生平均分 379（政 65 / 英 74 / 数 127 / 专 112），录取中位数 380"
         }
       ],
-      "remark": "",
+      "remark": "中科大招生目录中专业写作「085400 电子信息」，领域为计算机技术。参考：2023 年复试线 360（55/60/100/100），复试 74 人、录取 64 人，录取最低 / 平均 / 最高 361 / 386 / 431。另有士兵计划，以上为一志愿统考数据，招生人数不含推免。",
       "sources": [
         {
-          "title": "AI 汇总（待核对）：招生目录、2025 复试线、2024 复试线",
+          "title": "第三方数据平台整理（2023、2025、2026 年复试线、招生 / 复试 / 录取人数、录取分数），待与学院官网核对",
+          "url": "",
+          "date": ""
+        },
+        {
+          "title": "AI 汇总（待核对）：2024 复试线",
           "url": "",
           "date": ""
         }
