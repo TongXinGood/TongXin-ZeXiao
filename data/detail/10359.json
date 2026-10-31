@@ -165,6 +165,89 @@
           "date": ""
         }
       ]
+    },
+    {
+      "id": "10359-cs-085400-085410",
+      "college": "计算机与信息学院",
+      "majorCode": "085400",
+      "majorName": "电子信息（人工智能）",
+      "degreeType": "professional",
+      "direction": "人工智能",
+      "exam": {
+        "politics": "思想政治理论",
+        "foreign": "英语二",
+        "math": "数学二",
+        "pro": [
+          {
+            "code": "408",
+            "name": "计算机学科专业基础"
+          }
+        ]
+      },
+      "years": [
+        {
+          "year": 2024,
+          "retestLine": {
+            "total": 327,
+            "politics": 37,
+            "foreign": 37,
+            "math": 56,
+            "pro": 56
+          },
+          "planCount": 23,
+          "exemptCount": null,
+          "admittedCount": 23,
+          "retestCount": 31,
+          "admitMin": 327,
+          "admitAvg": 352.09,
+          "admitMax": 389,
+          "note": "当年考数学一"
+        },
+        {
+          "year": 2025,
+          "retestLine": {
+            "total": 317,
+            "politics": 34,
+            "foreign": 34,
+            "math": 51,
+            "pro": 51
+          },
+          "planCount": 26,
+          "exemptCount": null,
+          "admittedCount": 26,
+          "retestCount": 34,
+          "admitMin": 317,
+          "admitAvg": 342.35,
+          "admitMax": 384,
+          "note": "当年考数学一；录取中位数 338.5"
+        },
+        {
+          "year": 2026,
+          "retestLine": {
+            "total": 356,
+            "politics": 35,
+            "foreign": 35,
+            "math": 53,
+            "pro": 53
+          },
+          "planCount": 34,
+          "exemptCount": null,
+          "admittedCount": 46,
+          "retestCount": 61,
+          "admitMin": 356,
+          "admitAvg": 375.5,
+          "admitMax": 420,
+          "note": "2026 年起数学改考数学二；录取 46 人多于招生计划 34 人；进复试考生平均分 373（政 64 / 英 78 / 数 130 / 专 101），录取中位数 373.5"
+        }
+      ],
+      "remark": "不区分研究方向。注意：2024、2025 年考英语二、数学一，2026 年改为英语二、数学二，分数线前后可比性有限。以上为一志愿统考数据，招生人数不含推免。",
+      "sources": [
+        {
+          "title": "第三方数据平台整理（复试线、招生 / 复试 / 录取人数、录取分数），待与学院官网核对",
+          "url": "",
+          "date": ""
+        }
+      ]
     }
   ]
 }
