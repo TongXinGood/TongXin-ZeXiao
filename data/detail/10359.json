@@ -86,10 +86,9 @@
     {
       "id": "10359-cs-085400-085404",
       "college": "计算机与信息学院",
-      "majorCode": "085400",
-      "majorName": "电子信息（计算机技术）",
+      "majorCode": "085404",
+      "majorName": "计算机技术",
       "degreeType": "professional",
-      "direction": "计算机技术",
       "exam": {
         "politics": "思想政治理论",
         "foreign": "英语二",
@@ -169,10 +168,9 @@
     {
       "id": "10359-cs-085400-085410",
       "college": "计算机与信息学院",
-      "majorCode": "085400",
-      "majorName": "电子信息（人工智能）",
+      "majorCode": "085410",
+      "majorName": "人工智能",
       "degreeType": "professional",
-      "direction": "人工智能",
       "exam": {
         "politics": "思想政治理论",
         "foreign": "英语二",

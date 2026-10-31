@@ -62,10 +62,9 @@
     {
       "id": "10358-1oqhc-085400-085404",
       "college": "计算机科学与技术学院",
-      "majorCode": "085400",
-      "majorName": "电子信息（计算机技术）",
+      "majorCode": "085404",
+      "majorName": "计算机技术",
       "degreeType": "professional",
-      "direction": "计算机技术",
       "exam": {
         "politics": "思想政治理论",
         "foreign": "英语一",
@@ -237,10 +236,9 @@
     {
       "id": "10358-1q7sl-085400-085404",
       "college": "先进技术研究院（国家卓越工程师学院）",
-      "majorCode": "085400",
-      "majorName": "电子信息（计算机技术）",
+      "majorCode": "085404",
+      "majorName": "计算机技术",
       "degreeType": "professional",
-      "direction": "计算机技术",
       "exam": {
         "politics": "思想政治理论",
         "foreign": "英语一",
@@ -311,10 +309,9 @@
     {
       "id": "10358-1q7sl-085400-085405",
       "college": "先进技术研究院（国家卓越工程师学院）",
-      "majorCode": "085400",
-      "majorName": "电子信息（软件工程）",
+      "majorCode": "085405",
+      "majorName": "软件工程",
       "degreeType": "professional",
-      "direction": "软件工程",
       "exam": {
         "politics": "思想政治理论",
         "foreign": "英语一",
