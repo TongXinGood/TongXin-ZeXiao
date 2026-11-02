@@ -35,7 +35,7 @@
     <view class="entry entry-match" bindtap="onMatch" hover-class="entry-hover">
       <view class="entry-icon">🎯</view>
       <view class="entry-title">智能择校</view>
-      <view class="entry-desc">填 5 个问题，按冲 / 稳 / 保帮你匹配</view>
+      <view class="entry-desc">填 5 个问题，按冲击 / 稳妥 / 保底帮你匹配</view>
     </view>
     <view class="entry entry-lib card" bindtap="onLibrary" hover-class="entry-hover">
       <view class="entry-icon entry-icon-lib">🏫</view>

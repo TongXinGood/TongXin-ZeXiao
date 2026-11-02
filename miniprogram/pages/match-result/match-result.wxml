@@ -14,7 +14,7 @@
     <view class="summary-cond">{{condText}}</view>
   </view>
 
-  <!-- 冲 / 稳 / 保 -->
+  <!-- 冲击 / 稳妥 / 保底 -->
   <view class="tiers">
     <view wx:for="{{tiers}}" wx:key="key" class="tier tier-{{item.key}} {{active === item.key ? 'on' : ''}}"
       bindtap="onTier" data-key="{{item.key}}">
@@ -43,9 +43,9 @@
   </view>
 
   <view class="extra">
-    <view wx:if="{{tooHard}}">· 另有 {{tooHard}} 个专业低于预测线超过 1 倍历年波动，未列入</view>
-    <view>· 预测线 = 最近一年复试线 + 一半的年均涨幅；历年波动越大，同样的分差风险越高</view>
-    <view>· 橙色「⚠」表示单科可能不过线，或名额少、分数线容易大起大落</view>
+    <view wx:if="{{tooHard}}">· 另有 {{tooHard}} 个专业低于最近一年复试线，未列入</view>
+    <view>· 分档都按最近一年数据：比录取平均分高 10 分以上为保底，比录取最低分高 10 分以上为稳妥，过复试线为冲击</view>
+    <view>· 橙色「⚠」表示单科可能不过线或名额少；「复录比 淘汰率高」表示复试刷人比例高，刚过线有风险</view>
     <view wx:if="{{noLine}}">· {{noLine}} 个专业缺少复试线数据，未参与匹配</view>
     <view>· 预估分取你填写的总分范围中间值；进复试后还要看复试成绩和名额</view>
   </view>

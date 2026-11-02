@@ -1,0 +1,87 @@
+{
+  "schoolId": "10007",
+  "programs": [
+    {
+      "id": "10007-cs-081200",
+      "college": "计算机学院",
+      "majorCode": "081200",
+      "majorName": "计算机科学与技术",
+      "degreeType": "academic",
+      "exam": {
+        "politics": "思想政治理论",
+        "foreign": "英语一",
+        "math": "数学一",
+        "pro": [
+          {
+            "code": "408",
+            "name": "计算机学科专业基础"
+          }
+        ]
+      },
+      "years": [
+        {
+          "year": 2024,
+          "retestLine": {
+            "total": 360,
+            "politics": 40,
+            "foreign": 40,
+            "math": 60,
+            "pro": 60
+          },
+          "planCount": 27,
+          "exemptCount": null,
+          "admittedCount": 27,
+          "retestCount": 45,
+          "admitMin": 363,
+          "admitAvg": 379.0,
+          "admitMax": 409,
+          "note": ""
+        },
+        {
+          "year": 2025,
+          "retestLine": {
+            "total": 331,
+            "politics": 40,
+            "foreign": 40,
+            "math": 60,
+            "pro": 60
+          },
+          "planCount": 27,
+          "exemptCount": null,
+          "admittedCount": 47,
+          "retestCount": 54,
+          "admitMin": 331,
+          "admitAvg": 357.0,
+          "admitMax": 417,
+          "note": "录取中位数 350"
+        },
+        {
+          "year": 2026,
+          "retestLine": {
+            "total": 338,
+            "politics": 40,
+            "foreign": 40,
+            "math": 60,
+            "pro": 60
+          },
+          "planCount": 27,
+          "exemptCount": null,
+          "admittedCount": 44,
+          "retestCount": 58,
+          "admitMin": 338,
+          "admitAvg": 370.0,
+          "admitMax": 406,
+          "note": "进复试考生平均分 366（政 61 / 英 70 / 数 126 / 专 109），录取中位数 374；录取 44 人含 7 名异地研究院"
+        }
+      ],
+      "remark": "学科评估 A。研究方向：01 语言智能与社会计算、02 图像计算与感知智能、03 数据科学与知识工程、04 软件智能与软件工程、05 可视媒体…（平台显示不全）。另有士兵、少干计划，以上为一志愿统考数据，招生人数不含推免；2025、2026 年录取人数多于招生计划。",
+      "sources": [
+        {
+          "title": "第三方数据平台整理（复试线、招生 / 复试 / 录取人数、录取分数），待与学院官网核对",
+          "url": "",
+          "date": ""
+        }
+      ]
+    }
+  ]
+}

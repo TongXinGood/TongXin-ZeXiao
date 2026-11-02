@@ -8,8 +8,7 @@ const path = require('path')
 const assert = require('assert')
 
 const ROOT = path.resolve(__dirname, '..')
-const { lineStats } = require('./line-stats')
-const { defaultAnswers, matchPrograms, TIERS, gapText, weakText } = require('../miniprogram/utils/match')
+const { defaultAnswers, matchPrograms, tierOf, TIERS, gapText, weakText } = require('../miniprogram/utils/match')
 
 let failed = 0
 function check(name, fn) {
@@ -21,48 +20,37 @@ function check(name, fn) {
     console.log('  ✗ ' + name + '\n      ' + e.message)
   }
 }
-const yearsOf = (lines) => lines.map((t, i) => ({ year: 2024 + i, retestLine: t === null ? null : { total: t } }))
 
-// ---------- 1. 预测线与波动 ----------
-console.log('\n【1】predLine / lineSigma 计算')
-check('复试线 370→380→390 时 predLine 为 395', () => {
-  assert.strictEqual(lineStats(yearsOf([370, 380, 390]), 30).predLine, 395)
-})
-check('只有一年数据时 lineSigma 为 15（名额 ≥ 5）', () => {
-  const r = lineStats(yearsOf([null, null, 350]), 20)
-  assert.strictEqual(r.lineSigma, 15)
-  assert.strictEqual(r.predLine, 350)
-})
-check('只有一年数据且名额 < 5 时 lineSigma 为 20', () => {
-  assert.strictEqual(lineStats(yearsOf([null, null, 350]), 3).lineSigma, 20)
-})
-check('波动很小时取下限 8', () => {
-  assert.strictEqual(lineStats(yearsOf([350, 351, 350]), 30).lineSigma, 8)
-})
-check('波动大时用标准差：330→360→340 → σ ≈ 15.3', () => {
-  assert.strictEqual(lineStats(yearsOf([330, 360, 340]), 30).lineSigma, 15.3)
-})
-check('跳过为 null 的年份：320→330→null → predLine 335', () => {
-  assert.strictEqual(lineStats(yearsOf([320, 330, null]), 30).predLine, 335)
-})
-check('没有任何复试线 → 都是 null', () => {
-  assert.deepStrictEqual(lineStats(yearsOf([null, null, null]), 30), { predLine: null, lineSigma: null })
-})
+// ---------- 1. 分档边界（复试线 338，录取最低 340，平均 370）----------
+console.log('\n【1】分档边界')
+const P = { latestLine: 338, latestAdmitMin: 340, latestAdmitAvg: 370 }
+const T = (score, p) => (tierOf(p || P, score) || {}).tier
+check('337 低于复试线 → 不推荐', () => assert.strictEqual(T(337), null))
+check('338 刚好擦线 → 冲击', () => assert.strictEqual(T(338), 'reach'))
+check('345 过了录取最低分但不到 +10 → 冲击', () => assert.strictEqual(T(345), 'reach'))
+check('350 = 录取最低分 +10 → 稳妥', () => assert.strictEqual(T(350), 'steady'))
+check('370 与平均分持平 → 稳妥', () => assert.strictEqual(T(370), 'steady'))
+check('379 不到平均分 +10 → 稳妥', () => assert.strictEqual(T(379), 'steady'))
+check('380 = 平均分 +10 → 保底', () => assert.strictEqual(T(380), 'safe'))
+check('缺录取最低分时按复试线算：348 → 稳妥', () => assert.strictEqual(T(348, { latestLine: 338, latestAdmitAvg: 370 }), 'steady'))
+check('缺录取平均分时最高只到稳妥：420 → 稳妥', () => assert.strictEqual(T(420, { latestLine: 338, latestAdmitMin: 340 }), 'steady'))
+check('缺复试线 → 无法判断', () => assert.strictEqual(tierOf({ latestLine: null }, 400), null))
 
-// ---------- 2. programs.json 里的字段与重新计算一致 ----------
+// ---------- 2. programs.json 字段与最近一年数据一致 ----------
 console.log('\n【2】dist/api/v1/programs.json 字段检查')
 const programs = JSON.parse(fs.readFileSync(path.join(ROOT, 'dist/api/v1/programs.json'), 'utf8'))
-check(`${programs.length} 个专业都有 predLine / lineSigma 字段`, () => {
-  programs.forEach((p) => {
-    assert.ok('predLine' in p && 'lineSigma' in p, p.id + ' 缺字段')
-  })
-})
-check('与 detail 原始数据重新计算的结果一致', () => {
+check(`${programs.length} 个专业的最近一年复试线 / 录取分 / 复录比与 detail 一致`, () => {
   programs.forEach((p) => {
     const d = JSON.parse(fs.readFileSync(path.join(ROOT, 'dist/api/v1/detail', p.schoolId + '.json'), 'utf8'))
     const full = d.programs.filter((x) => x.id === p.id)[0]
-    const r = lineStats(full.years, p.latestPlan)
-    assert.deepStrictEqual({ predLine: p.predLine, lineSigma: p.lineSigma }, r, p.id)
+    const ys = full.years.filter((y) => y.retestLine && typeof y.retestLine.total === 'number').sort((a, b) => a.year - b.year)
+    const y = ys[ys.length - 1] || {}
+    const num = (v) => (typeof v === 'number' ? v : null)
+    assert.strictEqual(p.lineYear, y.year || null, p.id)
+    assert.strictEqual(p.latestAdmitMin, num(y.admitMin), p.id)
+    assert.strictEqual(p.latestAdmitAvg, num(y.admitAvg), p.id)
+    const ratio = num(y.retestCount) !== null && num(y.admittedCount) ? Math.round((y.retestCount / y.admittedCount) * 100) / 100 : null
+    assert.strictEqual(p.retestRatio, ratio, p.id)
   })
 })
 
@@ -88,25 +76,26 @@ Object.keys(SPLITS).forEach((total) => {
     list.forEach((p) => {
       const name = (p.schoolName + ' ' + p.majorCode + ' ' + p.majorName).padEnd(22, '　')
       const warn = weakText(p)
-      console.log(`    ${name} predLine ${p.predLine}  σ ${String(p.lineSigma).padEnd(4)}  k ${p.k.toFixed(2).padStart(5)}  ${gapText(p)}${warn ? '  ' + warn : ''}`)
+      const ratio = typeof p.retestRatio === 'number' && p.retestRatio > 1.3 ? '  [复录比 ' + p.retestRatio + ']' : ''
+      console.log(`    ${name} ${gapText(p)}${ratio}${warn ? '  ' + warn : ''}`)
     })
   })
 })
 
 console.log('\n【4】分档逻辑检查')
-check('每个结果的 k 都落在所在档的区间内', () => {
+check('每个结果都符合所在档的规则', () => {
   Object.keys(results).forEach((total) => {
     const t = results[total].tiers
-    t.safe.forEach((p) => assert.ok(p.k > 1, p.id))
-    t.steady.forEach((p) => assert.ok(p.k > 0 && p.k <= 1, p.id))
-    t.reach.forEach((p) => assert.ok(p.k > -1 && p.k <= 0, p.id))
+    t.safe.forEach((p) => assert.ok(p.avg !== null && p.userScore >= p.avg + 10, p.id))
+    t.steady.forEach((p) => assert.ok(p.userScore >= p.min + 10 && (p.avg === null || p.userScore < p.avg + 10), p.id))
+    t.reach.forEach((p) => assert.ok(p.userScore >= p.line && p.userScore < p.min + 10, p.id))
   })
 })
-check('分数越高，「保」的数量不减少', () => {
+check('分数越高，「保底」的数量不减少', () => {
   assert.ok(results[330].tiers.safe.length <= results[360].tiers.safe.length)
   assert.ok(results[360].tiers.safe.length <= results[390].tiers.safe.length)
 })
-check('每组：保 + 稳 + 冲 + 不推荐 + 缺线 = 参与筛选的专业数（全日制）', () => {
+check('每组：保底 + 稳妥 + 冲击 + 不推荐 + 缺线 = 参与筛选的专业数（全日制）', () => {
   const full = programs.filter((p) => p.studyMode === 'full').length
   Object.keys(results).forEach((total) => {
     const r = results[total]

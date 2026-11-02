@@ -1,6 +1,7 @@
 /** 把专业索引数据加工成卡片直接可用的展示字段 */
 
 const { directionOf } = require('./dict')
+const { MATCH } = require('../config')
 
 const LEVEL_CLASS = { C9: 'lv-c9', '985': 'lv-985', '211': 'lv-211', '双一流': 'lv-syl', '研究院': 'lv-yjy', '双非': 'lv-sf' }
 
@@ -26,7 +27,9 @@ function decorateProgram(p) {
     planText: dash(p.latestPlan),
     exemptText: dash(p.latestExempt),
     deltaText,
-    deltaClass
+    deltaClass,
+    // 最近一年复录比偏高：卡片标签行提醒「复录比 1.32 淘汰率高」
+    ratioText: typeof p.retestRatio === 'number' && p.retestRatio > MATCH.HIGH_RATIO ? '复录比 ' + p.retestRatio.toFixed(2) + ' 淘汰率高' : ''
   })
 }
 
@@ -188,6 +191,11 @@ function buildCompareRows(items, years) {
   })
   rows.push(delta)
 
+  rows.push({ type: 'sec', label: '录取最低分' })
+  desc.forEach((y) => {
+    rows.push(row(y + ' 年', items.map((x) => num(yearData(x.full, y).admitMin)), 'min'))
+  })
+
   const last = desc[0]
   rows.push({ type: 'sec', label: '招生（' + last + ' 年）' })
   rows.push(row('统招计划', items.map((x) => num(yearData(x.full, last).planCount)), 'max'))
@@ -219,6 +227,8 @@ function buildCompareRows(items, years) {
       (v) => v.toFixed(2)
     )
   )
+  // 不同分区里有同名的行（如「2026 年」），列表渲染用 key 区分
+  rows.forEach((r, i) => { r.key = i })
   return rows
 }
 

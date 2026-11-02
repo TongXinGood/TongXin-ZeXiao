@@ -27,6 +27,7 @@
     <text class="tag" wx:else>不考数学</text>
     <text class="tag {{item.is408 ? 'tag-orange' : ''}}">{{item.proLabel}}</text>
     <text class="tag tag-gray" wx:if="{{item.partTime}}">非全日制</text>
+    <text class="tag tag-orange" wx:if="{{item.ratioText}}">{{item.ratioText}}</text>
   </view>
 
   <!-- 第四行：核心数据 -->

@@ -22,7 +22,6 @@ const OUT_DIR = path.join(ROOT, 'dist', 'api', 'v1')
 const MOCK_FILE = path.join(ROOT, 'miniprogram', 'mock', 'data.js')
 
 const { LEVELS, REGION_PROVINCES, regionOf, DIRECTIONS, directionOf, STUDY_MODES } = require('../miniprogram/utils/dict')
-const { lineStats } = require('./line-stats')
 
 const YEARS = [2024, 2025, 2026]
 const REGIONS = REGION_PROVINCES.map((g) => g.region)
@@ -160,8 +159,13 @@ detailFiles.forEach((file) => {
       planYear: latest.year || null,
       latestPlan: isNumOrNull(latest.planCount) ? latest.planCount : null,
       latestExempt: isNumOrNull(latest.exemptCount) ? latest.exemptCount : null,
-      // 智能择校用：预测线、历年波动（算法见 scripts/line-stats.js）
-      ...lineStats(years, isNumOrNull(latest.planCount) ? latest.planCount : null)
+      // 智能择校用：最近一年（有复试线的那年）的录取最低 / 平均分、复录比（算法见 miniprogram/utils/match.js）
+      latestAdmitMin: last && typeof last.admitMin === 'number' ? last.admitMin : null,
+      latestAdmitAvg: last && typeof last.admitAvg === 'number' ? last.admitAvg : null,
+      retestRatio:
+        last && typeof last.retestCount === 'number' && typeof last.admittedCount === 'number' && last.admittedCount > 0
+          ? Math.round((last.retestCount / last.admittedCount) * 100) / 100
+          : null
     })
   })
   details[sid] = { school, programs: progs }

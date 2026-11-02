@@ -63,7 +63,7 @@ Page({
         const sc = r.score
         this.setData({ scoreText: sc.totalMin === sc.totalMax ? String(sc.totalMin) : sc.totalMin + ' ~ ' + sc.totalMax })
         const tiers = TIERS.map((t) => Object.assign({}, t, { count: r.tiers[t.key].length }))
-        // 默认打开「稳」，没有就打开第一个有结果的档
+        // 默认打开「稳妥」，没有就打开第一个有结果的档
         const first = tiers.filter((t) => t.count)[0]
         const active = r.tiers.steady.length ? 'steady' : first ? first.key : 'steady'
         this.setData({ loading: false, tiers, noLine: r.noLine, tooHard: r.tooHard })
