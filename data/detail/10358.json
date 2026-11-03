@@ -264,6 +264,24 @@
       },
       "years": [
         {
+          "year": 2025,
+          "retestLine": {
+            "total": 300,
+            "politics": 45,
+            "foreign": 45,
+            "math": 70,
+            "pro": 70
+          },
+          "planCount": 4,
+          "exemptCount": null,
+          "admittedCount": null,
+          "retestCount": null,
+          "admitMin": 300,
+          "admitAvg": 342.0,
+          "admitMax": 414,
+          "note": "录取中位数 340。复试 370 人、录取 371 人为所有方向合计，未计入本专业"
+        },
+        {
           "year": 2026,
           "retestLine": {
             "total": 344,
@@ -276,13 +294,21 @@
           "exemptCount": 10,
           "admittedCount": null,
           "retestCount": null,
-          "note": ""
+          "note": "进复试考生平均分 364（政 65 / 英 76 / 数 121 / 专 103），录取中位数 368。平台给的录取最低分 307 含专项计划、低于复试线，未采用；复试 474 人、录取 336 人为全院合计，未计入本专业",
+          "admitMin": null,
+          "admitAvg": 368.0,
+          "admitMax": 403
         }
       ],
-      "remark": "",
+      "remark": "不区分研究方向。招生名额很少（2025 年 4 人、2026 年 7 人），平台上的复试、录取人数是全院合计，录取分数可能也包含其他方向，仅供参考。以上为一志愿统考数据，招生人数不含推免。2023 年（第三方平台）：复试线 310（50/50/80/80），复试 157 人、录取 5 人，录取最低 311 / 平均 338.6 / 最高 373。",
       "sources": [
         {
-          "title": "AI 汇总（待核对）：招生目录、2026 复试线",
+          "title": "第三方数据平台整理（2025–2026 复试线、招生人数、录取分数），待与学院官网核对",
+          "url": "",
+          "date": ""
+        },
+        {
+          "title": "AI 汇总（待核对）：招生目录、2026 复试线、2026 推免人数",
           "url": "",
           "date": ""
         }
@@ -319,7 +345,7 @@
           "exemptCount": 28,
           "admittedCount": null,
           "retestCount": null,
-          "note": ""
+          "note": "2024 年数据来自 AI 汇总，第三方平台未提供该年"
         },
         {
           "year": 2025,
@@ -330,11 +356,14 @@
             "math": 70,
             "pro": 70
           },
-          "planCount": null,
+          "planCount": 80,
           "exemptCount": null,
-          "admittedCount": null,
-          "retestCount": null,
-          "note": ""
+          "admittedCount": 94,
+          "retestCount": 125,
+          "note": "录取中位数 355",
+          "admitMin": 323,
+          "admitAvg": 355.0,
+          "admitMax": 402
         },
         {
           "year": 2026,
@@ -345,17 +374,25 @@
             "math": 70,
             "pro": 70
           },
-          "planCount": null,
+          "planCount": 56,
           "exemptCount": null,
-          "admittedCount": null,
-          "retestCount": null,
-          "note": ""
+          "admittedCount": 56,
+          "retestCount": 79,
+          "note": "进复试考生平均分 369（政 65 / 英 74 / 数 123 / 专 108），录取中位数 377",
+          "admitMin": 347,
+          "admitAvg": 373.0,
+          "admitMax": 404
         }
       ],
-      "remark": "",
+      "remark": "招生目录中为 085400 电子信息下的「3、计算机技术方向（085404 计算机技术）」。另有士兵计划，以上为一志愿统考数据，招生人数不含推免。2023 年（第三方平台）：复试线 316（50/50/70/70），复试 126 人、录取 94 人，录取最低 317 / 平均 353.4 / 最高 402。",
       "sources": [
         {
-          "title": "AI 汇总（待核对）：2024 招生目录、2024 复试线、2025 复试线、2026 复试线",
+          "title": "第三方数据平台整理（2025–2026 复试线、招生 / 复试 / 录取人数、录取分数），待与学院官网核对",
+          "url": "",
+          "date": ""
+        },
+        {
+          "title": "AI 汇总（待核对）：2024 招生目录、2024 复试线",
           "url": "",
           "date": ""
         }
