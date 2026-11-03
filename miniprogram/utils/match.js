@@ -11,7 +11,7 @@
  *      稳妥：min + GAP ≤ 预估分 < avg + GAP
  *      冲击：line ≤ 预估分 < min + GAP（刚好擦线也算）
  *      低于复试线：不推荐，计入 tooHard
- *    没有录取最低分时 min 按复试线算；没有录取平均分时不判保底（最高到稳妥），卡片上注明。
+ *    没有录取最低分时 min 按复试线算；没有录取平均分时按「复试线 + EST_AVG_GAP」估算，卡片上注明。
  * 3. 单科检查：某科最低分 < 该专业单科线 → 卡片上提醒，但不剔除（单科线数据可能不全）。
  *    名额 < LOW_PLAN 也在卡片上提醒；复录比 > HIGH_RATIO 的标签由 utils/format.js 加在所有专业卡片上。
  */
@@ -87,24 +87,26 @@ function answersToFilters(a) {
 
 /**
  * 某个专业按最近一年数据分档。返回 null 表示缺复试线，无法判断。
- * 返回 { tier: 'safe' | 'steady' | 'reach' | null(低于复试线), line, min, avg, hasMin, noAdmit }
+ * 返回 { tier: 'safe' | 'steady' | 'reach' | null(低于复试线), line, min, avg, hasMin, hasAvg }
  */
 function tierOf(p, userScore) {
   const line = p.latestLine
   if (typeof line !== 'number') return null
-  const min = typeof p.latestAdmitMin === 'number' ? Math.max(p.latestAdmitMin, line) : line
-  const avg = typeof p.latestAdmitAvg === 'number' ? p.latestAdmitAvg : null
+  const hasMin = typeof p.latestAdmitMin === 'number'
+  const hasAvg = typeof p.latestAdmitAvg === 'number'
+  const min = hasMin ? Math.max(p.latestAdmitMin, line) : line
+  // 没有录取平均分：按「复试线 + EST_AVG_GAP」估算，避免高分也排不进保底
+  const avg = hasAvg ? p.latestAdmitAvg : Math.max(min, line + MATCH.EST_AVG_GAP)
   let tier = null
-  if (avg !== null && userScore >= avg + MATCH.GAP) tier = 'safe'
+  if (userScore >= avg + MATCH.GAP) tier = 'safe'
   else if (userScore >= min + MATCH.GAP) tier = 'steady'
   else if (userScore >= line) tier = 'reach'
-  const hasMin = typeof p.latestAdmitMin === 'number'
-  return { tier, line, min, avg, hasMin, noAdmit: !hasMin || avg === null }
+  return { tier, line, min, avg, hasMin, hasAvg }
 }
 
 /**
  * 返回 { tiers: { reach, steady, safe }, noLine, tooHard, score }
- * 每个专业附加：userScore, line, min, avg, noAdmit, weak（单科可能不过线的科目名数组）
+ * 每个专业附加：userScore, line, min, avg, hasMin, hasAvg, weak（单科可能不过线的科目名数组）
  */
 function matchPrograms(programs, answers) {
   const score = parseScores(answers.scores)
@@ -145,13 +147,14 @@ function diffText(d, name, v) {
 function gapText(p) {
   const y = p.lineYear ? ' ' + p.lineYear + ' 年' : ''
   const s = p.userScore
-  const avg = p.avg === null ? '' : '，录取平均分 ' + p.avg
-  let t
-  if (p.tier === 'safe') t = diffText(s - p.avg, y + '录取平均分', p.avg)
-  else if (p.tier === 'steady') t = diffText(s - p.min, y + (p.hasMin ? '录取最低分' : '复试线'), p.min) + avg
-  else t = diffText(s - p.line, y + '复试线', p.line) + (p.min > p.line ? '，录取最低分 ' + p.min : '') + avg
-  if (p.noAdmit) t += '（缺录取分数据，仅供参考）'
-  return t
+  if (!p.hasAvg) {
+    // 没有录取分数：只能和复试线比
+    return diffText(s - p.line, y + '复试线', p.line) + '（该专业暂无录取分数，按复试线估算）'
+  }
+  const avg = '，录取平均分 ' + p.avg
+  if (p.tier === 'safe') return diffText(s - p.avg, y + '录取平均分', p.avg)
+  if (p.tier === 'steady') return diffText(s - p.min, y + (p.hasMin ? '录取最低分' : '复试线'), p.min) + avg
+  return diffText(s - p.line, y + '复试线', p.line) + (p.min > p.line ? '，录取最低分 ' + p.min : '') + avg
 }
 
 /** 橙色提醒：单科可能不过线、名额少 */

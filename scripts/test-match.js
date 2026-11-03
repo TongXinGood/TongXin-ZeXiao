@@ -33,7 +33,15 @@ check('370 与平均分持平 → 稳妥', () => assert.strictEqual(T(370), 'ste
 check('379 不到平均分 +10 → 稳妥', () => assert.strictEqual(T(379), 'steady'))
 check('380 = 平均分 +10 → 保底', () => assert.strictEqual(T(380), 'safe'))
 check('缺录取最低分时按复试线算：348 → 稳妥', () => assert.strictEqual(T(348, { latestLine: 338, latestAdmitAvg: 370 }), 'steady'))
-check('缺录取平均分时最高只到稳妥：420 → 稳妥', () => assert.strictEqual(T(420, { latestLine: 338, latestAdmitMin: 340 }), 'steady'))
+check('缺录取平均分时按复试线 +25 估算：372 → 稳妥，373 → 保底', () => {
+  assert.strictEqual(T(372, { latestLine: 338, latestAdmitMin: 340 }), 'steady')
+  assert.strictEqual(T(373, { latestLine: 338, latestAdmitMin: 340 }), 'safe')
+})
+check('只有复试线：347 → 冲击，348 → 稳妥，373 → 保底', () => {
+  assert.strictEqual(T(347, { latestLine: 338 }), 'reach')
+  assert.strictEqual(T(348, { latestLine: 338 }), 'steady')
+  assert.strictEqual(T(373, { latestLine: 338 }), 'safe')
+})
 check('缺复试线 → 无法判断', () => assert.strictEqual(tierOf({ latestLine: null }, 400), null))
 
 // ---------- 2. programs.json 字段与最近一年数据一致 ----------
@@ -56,7 +64,7 @@ check(`${programs.length} 个专业的最近一年复试线 / 录取分 / 复录
 
 // ---------- 3. 三组分数跑匹配 ----------
 console.log('\n【3】匹配结果（不加任何筛选条件，学习方式默认全日制）')
-const SPLITS = { 330: [65, 65, 100, 100], 360: [70, 70, 110, 110], 390: [75, 75, 120, 120] }
+const SPLITS = { 330: [65, 65, 100, 100], 360: [70, 70, 110, 110], 390: [75, 75, 120, 120], 410: [75, 75, 130, 130] }
 const results = {}
 Object.keys(SPLITS).forEach((total) => {
   const a = defaultAnswers()
@@ -86,14 +94,15 @@ console.log('\n【4】分档逻辑检查')
 check('每个结果都符合所在档的规则', () => {
   Object.keys(results).forEach((total) => {
     const t = results[total].tiers
-    t.safe.forEach((p) => assert.ok(p.avg !== null && p.userScore >= p.avg + 10, p.id))
-    t.steady.forEach((p) => assert.ok(p.userScore >= p.min + 10 && (p.avg === null || p.userScore < p.avg + 10), p.id))
+    t.safe.forEach((p) => assert.ok(p.userScore >= p.avg + 10, p.id))
+    t.steady.forEach((p) => assert.ok(p.userScore >= p.min + 10 && p.userScore < p.avg + 10, p.id))
     t.reach.forEach((p) => assert.ok(p.userScore >= p.line && p.userScore < p.min + 10, p.id))
   })
 })
 check('分数越高，「保底」的数量不减少', () => {
   assert.ok(results[330].tiers.safe.length <= results[360].tiers.safe.length)
   assert.ok(results[360].tiers.safe.length <= results[390].tiers.safe.length)
+  assert.ok(results[390].tiers.safe.length <= results[410].tiers.safe.length)
 })
 check('每组：保底 + 稳妥 + 冲击 + 不推荐 + 缺线 = 参与筛选的专业数（全日制）', () => {
   const full = programs.filter((p) => p.studyMode === 'full').length

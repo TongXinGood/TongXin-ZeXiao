@@ -1,0 +1,87 @@
+{
+  "schoolId": "10336",
+  "programs": [
+    {
+      "id": "10336-cs-081200",
+      "college": "计算机学院",
+      "majorCode": "081200",
+      "majorName": "计算机科学与技术",
+      "degreeType": "academic",
+      "exam": {
+        "politics": "思想政治理论",
+        "foreign": "英语一",
+        "math": "数学一",
+        "pro": [
+          {
+            "code": "408",
+            "name": "计算机学科专业基础"
+          }
+        ]
+      },
+      "years": [
+        {
+          "year": 2024,
+          "retestLine": {
+            "total": 300,
+            "politics": 37,
+            "foreign": 37,
+            "math": 56,
+            "pro": 56
+          },
+          "planCount": 72,
+          "exemptCount": null,
+          "admittedCount": 91,
+          "retestCount": 120,
+          "admitMin": 300,
+          "admitAvg": 341.23,
+          "admitMax": 425,
+          "note": ""
+        },
+        {
+          "year": 2025,
+          "retestLine": {
+            "total": 285,
+            "politics": 34,
+            "foreign": 34,
+            "math": 51,
+            "pro": 51
+          },
+          "planCount": 78,
+          "exemptCount": null,
+          "admittedCount": 96,
+          "retestCount": 119,
+          "admitMin": 285,
+          "admitAvg": 322.61,
+          "admitMax": 376,
+          "note": "录取中位数 321.5"
+        },
+        {
+          "year": 2026,
+          "retestLine": {
+            "total": 325,
+            "politics": 35,
+            "foreign": 35,
+            "math": 53,
+            "pro": 53
+          },
+          "planCount": 90,
+          "exemptCount": null,
+          "admittedCount": 114,
+          "retestCount": 150,
+          "admitMin": 325,
+          "admitAvg": 355.0,
+          "admitMax": 395,
+          "note": "进复试考生平均分 350（政 65 / 英 68 / 数 115 / 专 103），录取中位数 353"
+        }
+      ],
+      "remark": "学科评估 A-。研究方向：01 计算机系统结构、02 计算机软件与理论、03 计算机应用技术、04 物联网技术。另有士兵计划，以上为一志愿统考数据，招生人数不含推免；录取人数每年都多于招生计划。",
+      "sources": [
+        {
+          "title": "第三方数据平台整理（复试线、招生 / 复试 / 录取人数、录取分数），待与学院官网核对",
+          "url": "",
+          "date": ""
+        }
+      ]
+    }
+  ]
+}
