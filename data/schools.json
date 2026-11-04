@@ -7,5 +7,10 @@
   {"id": "10357", "name": "安徽大学", "province": "安徽", "city": "合肥", "region": "华东", "level": "211", "tags": ["211", "双一流"], "website": "https://graschool.ahu.edu.cn"},
   {"id": "10336", "name": "杭州电子科技大学", "province": "浙江", "city": "杭州", "region": "华东", "level": "双非", "tags": ["双非"], "website": "https://grs.hdu.edu.cn"},
   {"id": "10701", "name": "西安电子科技大学", "province": "陕西", "city": "西安", "region": "西北", "level": "211", "tags": ["211", "双一流"], "website": "https://gr.xidian.edu.cn"},
-  {"id": "10027", "name": "北京师范大学", "province": "北京", "city": "北京", "region": "华北", "level": "985", "tags": ["985", "211", "双一流"], "website": "https://yz.bnu.edu.cn"}
+  {"id": "10027", "name": "北京师范大学", "province": "北京", "city": "北京", "region": "华北", "level": "985", "tags": ["985", "211", "双一流"], "website": "https://yz.bnu.edu.cn"},
+  {"id": "10287", "name": "南京航空航天大学", "province": "江苏", "city": "南京", "region": "华东", "level": "211", "tags": ["211", "双一流"], "website": "https://graduate.nuaa.edu.cn"},
+  {"id": "10004", "name": "北京交通大学", "province": "北京", "city": "北京", "region": "华北", "level": "211", "tags": ["211", "双一流"], "website": "https://gs.bjtu.edu.cn"},
+  {"id": "10217", "name": "哈尔滨工程大学", "province": "黑龙江", "city": "哈尔滨", "region": "东北", "level": "211", "tags": ["211", "双一流"], "website": "https://yzb.hrbeu.edu.cn"},
+  {"id": "10617", "name": "重庆邮电大学", "province": "重庆", "city": "重庆", "region": "西南", "level": "双非", "tags": ["双非"], "website": "https://yjs.cqupt.edu.cn"},
+  {"id": "10497", "name": "武汉理工大学", "province": "湖北", "city": "武汉", "region": "华中", "level": "211", "tags": ["211", "双一流"], "website": "https://gs.whut.edu.cn"}
 ]

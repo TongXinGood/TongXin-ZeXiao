@@ -1,0 +1,333 @@
+{
+  "schoolId": "10287",
+  "programs": [
+    {
+      "id": "10287-cs-081200",
+      "college": "计算机科学与技术学院/软件学院",
+      "majorCode": "081200",
+      "majorName": "计算机科学与技术",
+      "degreeType": "academic",
+      "exam": {
+        "politics": "思想政治理论",
+        "foreign": "英语一",
+        "math": "数学一",
+        "pro": [
+          {
+            "code": "408",
+            "name": "计算机学科专业基础"
+          }
+        ]
+      },
+      "years": [
+        {
+          "year": 2024,
+          "retestLine": {
+            "total": 330,
+            "politics": 37,
+            "foreign": 37,
+            "math": 56,
+            "pro": 56
+          },
+          "planCount": 29,
+          "exemptCount": null,
+          "admittedCount": 30,
+          "retestCount": 40,
+          "admitMin": 330,
+          "admitAvg": 353.23,
+          "admitMax": 388,
+          "note": ""
+        },
+        {
+          "year": 2025,
+          "retestLine": {
+            "total": 330,
+            "politics": 34,
+            "foreign": 34,
+            "math": 51,
+            "pro": 51
+          },
+          "planCount": 31,
+          "exemptCount": null,
+          "admittedCount": 35,
+          "retestCount": 50,
+          "admitMin": 333,
+          "admitAvg": 357.6,
+          "admitMax": 393,
+          "note": "录取中位数 357"
+        },
+        {
+          "year": 2026,
+          "retestLine": {
+            "total": 340,
+            "politics": 35,
+            "foreign": 35,
+            "math": 53,
+            "pro": 53
+          },
+          "planCount": 27,
+          "exemptCount": null,
+          "admittedCount": 30,
+          "retestCount": 44,
+          "admitMin": 353,
+          "admitAvg": 368.0,
+          "admitMax": 397,
+          "note": "进复试考生平均分 361（政 65 / 英 70 / 数 120 / 专 107），录取中位数 365"
+        }
+      ],
+      "remark": "学科评估 B+。研究方向：01 理论计算机科学、02 计算机系统结构、03 人工智能、04 计算机应用技术。另有少干计划，以上为一志愿统考数据，招生人数不含推免；录取人数每年都多于招生计划。",
+      "sources": [
+        {
+          "title": "第三方数据平台整理（复试线、招生 / 复试 / 录取人数、录取分数），待与学院官网核对",
+          "url": "",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "id": "10287-cs-083500",
+      "college": "计算机科学与技术学院/软件学院",
+      "majorCode": "083500",
+      "majorName": "软件工程",
+      "degreeType": "academic",
+      "exam": {
+        "politics": "思想政治理论",
+        "foreign": "英语一",
+        "math": "数学一",
+        "pro": [
+          {
+            "code": "408",
+            "name": "计算机学科专业基础"
+          }
+        ]
+      },
+      "years": [
+        {
+          "year": 2024,
+          "retestLine": {
+            "total": 315,
+            "politics": 37,
+            "foreign": 37,
+            "math": 56,
+            "pro": 56
+          },
+          "planCount": 17,
+          "exemptCount": null,
+          "admittedCount": 17,
+          "retestCount": 23,
+          "admitMin": 319,
+          "admitAvg": 345.88,
+          "admitMax": 374,
+          "note": ""
+        },
+        {
+          "year": 2025,
+          "retestLine": {
+            "total": 315,
+            "politics": 34,
+            "foreign": 34,
+            "math": 51,
+            "pro": 51
+          },
+          "planCount": 17,
+          "exemptCount": null,
+          "admittedCount": 20,
+          "retestCount": 27,
+          "admitMin": 327,
+          "admitAvg": 342.4,
+          "admitMax": 377,
+          "note": "录取中位数 341.5"
+        },
+        {
+          "year": 2026,
+          "retestLine": {
+            "total": 340,
+            "politics": 35,
+            "foreign": 35,
+            "math": 53,
+            "pro": 53
+          },
+          "planCount": 15,
+          "exemptCount": null,
+          "admittedCount": 15,
+          "retestCount": 22,
+          "admitMin": 348,
+          "admitAvg": 369.0,
+          "admitMax": 412,
+          "note": "进复试考生平均分 363（政 64 / 英 69 / 数 119 / 专 111），录取中位数 367"
+        }
+      ],
+      "remark": "学科评估 A-。研究方向：01 软件工程理论与方法、02 软件工程技术、03 领域软件工程与工业软件。另有少干计划，以上为一志愿统考数据，招生人数不含推免。",
+      "sources": [
+        {
+          "title": "第三方数据平台整理（复试线、招生 / 复试 / 录取人数、录取分数），待与学院官网核对",
+          "url": "",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "id": "10287-cs-085404",
+      "college": "计算机科学与技术学院/软件学院",
+      "majorCode": "085404",
+      "majorName": "计算机技术",
+      "degreeType": "professional",
+      "exam": {
+        "politics": "思想政治理论",
+        "foreign": "英语一",
+        "math": "数学二",
+        "pro": [
+          {
+            "code": "408",
+            "name": "计算机学科专业基础"
+          }
+        ]
+      },
+      "years": [
+        {
+          "year": 2024,
+          "retestLine": {
+            "total": 312,
+            "politics": 37,
+            "foreign": 37,
+            "math": 56,
+            "pro": 56
+          },
+          "planCount": 34,
+          "exemptCount": null,
+          "admittedCount": 43,
+          "retestCount": 57,
+          "admitMin": 312,
+          "admitAvg": 342.02,
+          "admitMax": 402,
+          "note": ""
+        },
+        {
+          "year": 2025,
+          "retestLine": {
+            "total": 341,
+            "politics": 34,
+            "foreign": 34,
+            "math": 51,
+            "pro": 51
+          },
+          "planCount": 36,
+          "exemptCount": null,
+          "admittedCount": 50,
+          "retestCount": 73,
+          "admitMin": 346,
+          "admitAvg": 363.6,
+          "admitMax": 398,
+          "note": "录取中位数 361"
+        },
+        {
+          "year": 2026,
+          "retestLine": {
+            "total": 341,
+            "politics": 35,
+            "foreign": 35,
+            "math": 53,
+            "pro": 53
+          },
+          "planCount": 25,
+          "exemptCount": null,
+          "admittedCount": 25,
+          "retestCount": 48,
+          "admitMin": 346,
+          "admitAvg": 373.0,
+          "admitMax": 413,
+          "note": "进复试考生平均分 365（政 64 / 英 71 / 数 131 / 专 101，四科相加 367，以平台为准），录取中位数 370"
+        }
+      ],
+      "remark": "研究方向：01 图形学与图像处理技术、02 人工智能与数据挖掘、03 数据与信息安全技术、04 软件质量与软件工程技术、05…（平台显示不全）。专硕考英语一、数学二。学费 10000 元/年。另有士兵、少干计划，以上为一志愿统考数据，招生人数不含推免。2026 年招生减到 25 人，复录比约 1.9，竞争明显加剧。",
+      "sources": [
+        {
+          "title": "第三方数据平台整理（复试线、招生 / 复试 / 录取人数、录取分数），待与学院官网核对",
+          "url": "",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "id": "10287-cs-085405",
+      "college": "计算机科学与技术学院/软件学院",
+      "majorCode": "085405",
+      "majorName": "软件工程",
+      "degreeType": "professional",
+      "exam": {
+        "politics": "思想政治理论",
+        "foreign": "英语一",
+        "math": "数学二",
+        "pro": [
+          {
+            "code": "408",
+            "name": "计算机学科专业基础"
+          }
+        ]
+      },
+      "years": [
+        {
+          "year": 2024,
+          "retestLine": {
+            "total": 306,
+            "politics": 37,
+            "foreign": 37,
+            "math": 56,
+            "pro": 56
+          },
+          "planCount": 31,
+          "exemptCount": null,
+          "admittedCount": 26,
+          "retestCount": 35,
+          "admitMin": 307,
+          "admitAvg": 341.96,
+          "admitMax": 393,
+          "note": ""
+        },
+        {
+          "year": 2025,
+          "retestLine": {
+            "total": 331,
+            "politics": 34,
+            "foreign": 34,
+            "math": 51,
+            "pro": 51
+          },
+          "planCount": 21,
+          "exemptCount": null,
+          "admittedCount": 30,
+          "retestCount": 40,
+          "admitMin": 333,
+          "admitAvg": 350.5,
+          "admitMax": 380,
+          "note": "录取中位数 348"
+        },
+        {
+          "year": 2026,
+          "retestLine": {
+            "total": 369,
+            "politics": 35,
+            "foreign": 35,
+            "math": 53,
+            "pro": 53
+          },
+          "planCount": 15,
+          "exemptCount": null,
+          "admittedCount": 16,
+          "retestCount": 25,
+          "admitMin": 369,
+          "admitAvg": 389.0,
+          "admitMax": 407,
+          "note": "进复试考生平均分 384（政 64 / 英 72 / 数 138 / 专 110），录取中位数 388"
+        }
+      ],
+      "remark": "研究方向：01 图形学与图像处理技术、02 人工智能与数据挖掘、03 数据与信息安全技术、04 软件质量与软件工程技术、05…（平台显示不全）。专硕考英语一、数学二。另有少干计划，以上为一志愿统考数据，招生人数不含推免。招生人数逐年减少（31→21→15），2026 年复试线比上年涨 38 分。",
+      "sources": [
+        {
+          "title": "第三方数据平台整理（复试线、招生 / 复试 / 录取人数、录取分数），待与学院官网核对",
+          "url": "",
+          "date": ""
+        }
+      ]
+    }
+  ]
+}

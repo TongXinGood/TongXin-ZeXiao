@@ -256,6 +256,170 @@
           "date": ""
         }
       ]
+    },
+    {
+      "id": "10013-cyber-083900",
+      "college": "网络空间安全学院",
+      "majorCode": "083900",
+      "majorName": "网络空间安全",
+      "degreeType": "academic",
+      "exam": {
+        "politics": "思想政治理论",
+        "foreign": "英语一",
+        "math": "数学一",
+        "pro": [
+          {
+            "code": "408",
+            "name": "计算机学科专业基础"
+          }
+        ]
+      },
+      "years": [
+        {
+          "year": 2024,
+          "retestLine": {
+            "total": 309,
+            "politics": 37,
+            "foreign": 37,
+            "math": 56,
+            "pro": 56
+          },
+          "planCount": 46,
+          "exemptCount": null,
+          "admittedCount": 77,
+          "retestCount": 100,
+          "admitMin": 310,
+          "admitAvg": 343.31,
+          "admitMax": 389,
+          "note": ""
+        },
+        {
+          "year": 2025,
+          "retestLine": {
+            "total": 324,
+            "politics": 34,
+            "foreign": 34,
+            "math": 51,
+            "pro": 51
+          },
+          "planCount": 47,
+          "exemptCount": null,
+          "admittedCount": 65,
+          "retestCount": 81,
+          "admitMin": 324,
+          "admitAvg": 344.0,
+          "admitMax": 400,
+          "note": "录取中位数 342"
+        },
+        {
+          "year": 2026,
+          "retestLine": {
+            "total": 328,
+            "politics": 35,
+            "foreign": 35,
+            "math": 53,
+            "pro": 53
+          },
+          "planCount": 53,
+          "exemptCount": null,
+          "admittedCount": 72,
+          "retestCount": 82,
+          "admitMin": 328,
+          "admitAvg": 353.0,
+          "admitMax": 407,
+          "note": "进复试考生平均分 350（政 60 / 英 68 / 数 119 / 专 106，四科相加 353，以平台为准），录取中位数 349"
+        }
+      ],
+      "remark": "另有少干计划，以上为一志愿统考数据，招生人数不含推免；录取人数每年都多于招生计划。",
+      "sources": [
+        {
+          "title": "第三方数据平台整理（复试线、招生 / 复试 / 录取人数、录取分数），待与学院官网核对",
+          "url": "",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "id": "10013-cyber-085412",
+      "college": "网络空间安全学院",
+      "majorCode": "085412",
+      "majorName": "网络与信息安全",
+      "degreeType": "professional",
+      "exam": {
+        "politics": "思想政治理论",
+        "foreign": "英语一",
+        "math": "数学一",
+        "pro": [
+          {
+            "code": "408",
+            "name": "计算机学科专业基础"
+          }
+        ]
+      },
+      "years": [
+        {
+          "year": 2024,
+          "retestLine": {
+            "total": 313,
+            "politics": 37,
+            "foreign": 37,
+            "math": 56,
+            "pro": 56
+          },
+          "planCount": 40,
+          "exemptCount": null,
+          "admittedCount": 62,
+          "retestCount": 79,
+          "admitMin": 316,
+          "admitAvg": 345.55,
+          "admitMax": 404,
+          "note": ""
+        },
+        {
+          "year": 2025,
+          "retestLine": {
+            "total": 303,
+            "politics": 34,
+            "foreign": 34,
+            "math": 51,
+            "pro": 51
+          },
+          "planCount": 38,
+          "exemptCount": null,
+          "admittedCount": 62,
+          "retestCount": 68,
+          "admitMin": 303,
+          "admitAvg": 330.0,
+          "admitMax": 391,
+          "note": "录取中位数 323.5"
+        },
+        {
+          "year": 2026,
+          "retestLine": {
+            "total": 337,
+            "politics": 35,
+            "foreign": 35,
+            "math": 53,
+            "pro": 53
+          },
+          "planCount": 41,
+          "exemptCount": null,
+          "admittedCount": 63,
+          "retestCount": 74,
+          "admitMin": 337,
+          "admitAvg": 360.0,
+          "admitMax": 405,
+          "note": "进复试考生平均分 358（政 60 / 英 69 / 数 121 / 专 107，四科相加 357，以平台为准），录取中位数 354"
+        }
+      ],
+      "remark": "专硕但考英语一、数学一。以上为一志愿统考数据，招生人数不含推免；录取人数每年都多于招生计划。",
+      "sources": [
+        {
+          "title": "第三方数据平台整理（复试线、招生 / 复试 / 录取人数、录取分数），待与学院官网核对",
+          "url": "",
+          "date": ""
+        }
+      ]
     }
   ]
 }
