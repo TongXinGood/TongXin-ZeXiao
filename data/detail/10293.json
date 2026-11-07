@@ -1,0 +1,251 @@
+{
+  "schoolId": "10293",
+  "programs": [
+    {
+      "id": "10293-cs-081200",
+      "college": "计算机学院/软件学院/网络空间安全学院",
+      "majorCode": "081200",
+      "majorName": "计算机科学与技术",
+      "degreeType": "academic",
+      "exam": {
+        "politics": "思想政治理论",
+        "foreign": "英语一",
+        "math": "数学一",
+        "pro": [
+          {
+            "code": "408",
+            "name": "计算机学科专业基础"
+          }
+        ]
+      },
+      "years": [
+        {
+          "year": 2024,
+          "retestLine": {
+            "total": 341,
+            "politics": 37,
+            "foreign": 37,
+            "math": 56,
+            "pro": 56
+          },
+          "planCount": 33,
+          "exemptCount": null,
+          "admittedCount": 36,
+          "retestCount": 82,
+          "admitMin": 347,
+          "admitAvg": 373.97,
+          "admitMax": 400,
+          "note": "该年专业课考 811 数据结构（自命题），不是 408"
+        },
+        {
+          "year": 2025,
+          "retestLine": {
+            "total": 289,
+            "politics": 34,
+            "foreign": 34,
+            "math": 51,
+            "pro": 51
+          },
+          "planCount": 33,
+          "exemptCount": null,
+          "admittedCount": 32,
+          "retestCount": 58,
+          "admitMin": 307,
+          "admitAvg": 345.19,
+          "admitMax": 392,
+          "note": "该年专业课考 811 数据结构（自命题），不是 408"
+        },
+        {
+          "year": 2026,
+          "retestLine": {
+            "total": 303,
+            "politics": 35,
+            "foreign": 35,
+            "math": 53,
+            "pro": 53
+          },
+          "planCount": 19,
+          "exemptCount": null,
+          "admittedCount": 28,
+          "retestCount": 50,
+          "admitMin": 314,
+          "admitAvg": 344.0,
+          "admitMax": 387,
+          "note": "进复试考生平均分 331（政 63 / 英 67 / 数 105 / 专 96），录取中位数 342"
+        }
+      ],
+      "remark": "学科评估 B-。研究方向：01 移动计算与泛在物联、02 计算机系统结构、03 模式分析与计算机视觉、04 计算机应用技术。注意：2024、2025 年专业课为自命题 811 数据结构，2026 年改考 408，可比性有限。复试淘汰率高（复录比常年 1.8 以上）。另有士兵、少干计划，以上为一志愿统考数据，招生人数不含推免。",
+      "sources": [
+        {
+          "title": "第三方数据平台整理（复试线、招生 / 复试 / 录取人数、录取分数），待与学院官网核对",
+          "url": "",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "id": "10293-cs-083500",
+      "college": "计算机学院/软件学院/网络空间安全学院",
+      "majorCode": "083500",
+      "majorName": "软件工程",
+      "degreeType": "academic",
+      "exam": {
+        "politics": "思想政治理论",
+        "foreign": "英语一",
+        "math": "数学一",
+        "pro": [
+          {
+            "code": "408",
+            "name": "计算机学科专业基础"
+          }
+        ]
+      },
+      "years": [
+        {
+          "year": 2024,
+          "retestLine": {
+            "total": 311,
+            "politics": 37,
+            "foreign": 37,
+            "math": 56,
+            "pro": 56
+          },
+          "planCount": 10,
+          "exemptCount": null,
+          "admittedCount": 10,
+          "retestCount": 22,
+          "admitMin": 329,
+          "admitAvg": 361.5,
+          "admitMax": 377,
+          "note": "该年专业课考 811 数据结构（自命题），不是 408"
+        },
+        {
+          "year": 2025,
+          "retestLine": {
+            "total": 281,
+            "politics": 34,
+            "foreign": 34,
+            "math": 51,
+            "pro": 51
+          },
+          "planCount": 10,
+          "exemptCount": null,
+          "admittedCount": 10,
+          "retestCount": 16,
+          "admitMin": 304,
+          "admitAvg": 321.3,
+          "admitMax": 359,
+          "note": "该年专业课考 811 数据结构（自命题），不是 408"
+        },
+        {
+          "year": 2026,
+          "retestLine": {
+            "total": 271,
+            "politics": 35,
+            "foreign": 35,
+            "math": 53,
+            "pro": 53
+          },
+          "planCount": 5,
+          "exemptCount": null,
+          "admittedCount": 10,
+          "retestCount": 11,
+          "admitMin": 277,
+          "admitAvg": 329.0,
+          "admitMax": 381,
+          "note": "进复试考生平均分 324（政 66 / 英 67 / 数 99 / 专 93，四科相加 325，以平台为准），录取中位数 326"
+        }
+      ],
+      "remark": "学科评估 B。研究方向：01 软件工程理论与方法、02 软件安全与可信计算、03 数据挖掘与智能软件、04 分布式软件及网络信息系统。名额少（2026 年计划 5 人，实际录取 10 人）。注意：2024、2025 年专业课为自命题 811 数据结构，2026 年改考 408，可比性有限。另有士兵计划，以上为一志愿统考数据，招生人数不含推免。",
+      "sources": [
+        {
+          "title": "第三方数据平台整理（复试线、招生 / 复试 / 录取人数、录取分数），待与学院官网核对",
+          "url": "",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "id": "10293-cs-085404",
+      "college": "计算机学院/软件学院/网络空间安全学院",
+      "majorCode": "085404",
+      "majorName": "计算机技术",
+      "degreeType": "professional",
+      "exam": {
+        "politics": "思想政治理论",
+        "foreign": "英语二",
+        "math": "数学二",
+        "pro": [
+          {
+            "code": "408",
+            "name": "计算机学科专业基础"
+          }
+        ]
+      },
+      "years": [
+        {
+          "year": 2024,
+          "retestLine": {
+            "total": 339,
+            "politics": 37,
+            "foreign": 37,
+            "math": 56,
+            "pro": 56
+          },
+          "planCount": 187,
+          "exemptCount": null,
+          "admittedCount": 214,
+          "retestCount": 363,
+          "admitMin": 339,
+          "admitAvg": 375.59,
+          "admitMax": 437,
+          "note": "该年专业课考 811 数据结构（自命题），不是 408"
+        },
+        {
+          "year": 2025,
+          "retestLine": {
+            "total": 339,
+            "politics": 34,
+            "foreign": 34,
+            "math": 51,
+            "pro": 51
+          },
+          "planCount": 195,
+          "exemptCount": null,
+          "admittedCount": 225,
+          "retestCount": 375,
+          "admitMin": 339,
+          "admitAvg": 372.65,
+          "admitMax": 440,
+          "note": "该年专业课考 811 数据结构（自命题），不是 408；复试、录取人数和分数含非全日制"
+        },
+        {
+          "year": 2026,
+          "retestLine": {
+            "total": 339,
+            "politics": 35,
+            "foreign": 35,
+            "math": 53,
+            "pro": 53
+          },
+          "planCount": 200,
+          "exemptCount": null,
+          "admittedCount": 214,
+          "retestCount": 416,
+          "admitMin": 350,
+          "admitAvg": 378.0,
+          "admitMax": 428,
+          "note": "进复试考生平均分 365（政 63 / 英 78 / 数 125 / 专 99），录取中位数 377"
+        }
+      ],
+      "remark": "研究方向：01 人工智能技术与应用、02 软件工程及嵌入式系统、03 云计算、大数据及物联网技术、04 网络安全与数据隐私…（平台显示不全）。专硕考英语二、数学二。复试线三年都是 339；招生人数多（约 200 人），但复试淘汰率高（复录比 1.7~1.9）。注意：2024、2025 年专业课为自命题 811 数据结构，2026 年改考 408。以上为一志愿统考数据，招生人数不含推免。",
+      "sources": [
+        {
+          "title": "第三方数据平台整理（复试线、招生 / 复试 / 录取人数、录取分数），待与学院官网核对",
+          "url": "",
+          "date": ""
+        }
+      ]
+    }
+  ]
+}

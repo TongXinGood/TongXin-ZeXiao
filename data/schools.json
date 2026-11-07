@@ -12,5 +12,8 @@
   {"id": "10004", "name": "北京交通大学", "province": "北京", "city": "北京", "region": "华北", "level": "211", "tags": ["211", "双一流"], "website": "https://gs.bjtu.edu.cn"},
   {"id": "10217", "name": "哈尔滨工程大学", "province": "黑龙江", "city": "哈尔滨", "region": "东北", "level": "211", "tags": ["211", "双一流"], "website": "https://yzb.hrbeu.edu.cn"},
   {"id": "10617", "name": "重庆邮电大学", "province": "重庆", "city": "重庆", "region": "西南", "level": "双非", "tags": ["双非"], "website": "https://yjs.cqupt.edu.cn"},
-  {"id": "10497", "name": "武汉理工大学", "province": "湖北", "city": "武汉", "region": "华中", "level": "211", "tags": ["211", "双一流"], "website": "https://gs.whut.edu.cn"}
+  {"id": "10497", "name": "武汉理工大学", "province": "湖北", "city": "武汉", "region": "华中", "level": "211", "tags": ["211", "双一流"], "website": "https://gs.whut.edu.cn"},
+  {"id": "10284", "name": "南京大学", "province": "江苏", "city": "南京", "region": "华东", "level": "C9", "tags": ["C9", "985", "211", "双一流", "自划线"], "website": "https://yzb.nju.edu.cn"},
+  {"id": "10293", "name": "南京邮电大学", "province": "江苏", "city": "南京", "region": "华东", "level": "双一流", "tags": ["双一流"], "website": "https://yzb.njupt.edu.cn"},
+  {"id": "10361", "name": "安徽理工大学", "province": "安徽", "city": "淮南", "region": "华东", "level": "双非", "tags": ["双非"], "website": "https://yjsy.aust.edu.cn"}
 ]

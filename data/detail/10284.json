@@ -1,0 +1,315 @@
+{
+  "schoolId": "10284",
+  "programs": [
+    {
+      "id": "10284-cs-081200",
+      "college": "计算机学院",
+      "majorCode": "081200",
+      "majorName": "计算机科学与技术",
+      "degreeType": "academic",
+      "exam": {
+        "politics": "思想政治理论",
+        "foreign": "英语一",
+        "math": "数学一",
+        "pro": [
+          {
+            "code": "408",
+            "name": "计算机学科专业基础"
+          }
+        ]
+      },
+      "years": [
+        {
+          "year": 2024,
+          "retestLine": {
+            "total": 373,
+            "politics": 50,
+            "foreign": 50,
+            "math": 75,
+            "pro": 75
+          },
+          "planCount": 13,
+          "exemptCount": null,
+          "admittedCount": 13,
+          "retestCount": 16,
+          "admitMin": 376,
+          "admitAvg": 391.69,
+          "admitMax": 410,
+          "note": ""
+        },
+        {
+          "year": 2025,
+          "retestLine": {
+            "total": 369,
+            "politics": 50,
+            "foreign": 50,
+            "math": 75,
+            "pro": 75
+          },
+          "planCount": 13,
+          "exemptCount": null,
+          "admittedCount": 14,
+          "retestCount": 16,
+          "admitMin": 369,
+          "admitAvg": 384.0,
+          "admitMax": 401,
+          "note": "录取中位数 385"
+        },
+        {
+          "year": 2026,
+          "retestLine": {
+            "total": 371,
+            "politics": 50,
+            "foreign": 50,
+            "math": 75,
+            "pro": 75
+          },
+          "planCount": 17,
+          "exemptCount": null,
+          "admittedCount": 12,
+          "retestCount": 15,
+          "admitMin": 371,
+          "admitAvg": 386.0,
+          "admitMax": 420,
+          "note": "进复试考生平均分 385（政 67 / 英 77 / 数 129 / 专 112），录取中位数 383。一志愿进复试人数少于招生计划"
+        }
+      ],
+      "remark": "学科评估 A+。研究方向：01 新型程序设计与软件方法学、02 机器学习与智能化信息处理、03 分布计算与系统安全技术、04 媒体计算与…（平台显示不全）。自划线，复试线三年都在 370 左右。另有士兵、少干计划，以上为一志愿统考数据，招生人数不含推免。",
+      "sources": [
+        {
+          "title": "第三方数据平台整理（复试线、招生 / 复试 / 录取人数、录取分数），待与学院官网核对",
+          "url": "",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "id": "10284-cs-085404",
+      "college": "计算机学院",
+      "majorCode": "085404",
+      "majorName": "计算机技术",
+      "degreeType": "professional",
+      "exam": {
+        "politics": "思想政治理论",
+        "foreign": "英语一",
+        "math": "数学一",
+        "pro": [
+          {
+            "code": "408",
+            "name": "计算机学科专业基础"
+          }
+        ]
+      },
+      "years": [
+        {
+          "year": 2024,
+          "retestLine": {
+            "total": 359,
+            "politics": 55,
+            "foreign": 55,
+            "math": 85,
+            "pro": 85
+          },
+          "planCount": 33,
+          "exemptCount": null,
+          "admittedCount": 44,
+          "retestCount": 53,
+          "admitMin": 361,
+          "admitAvg": 380.82,
+          "admitMax": 423,
+          "note": ""
+        },
+        {
+          "year": 2026,
+          "retestLine": {
+            "total": 367,
+            "politics": 55,
+            "foreign": 55,
+            "math": 85,
+            "pro": 85
+          },
+          "planCount": 68,
+          "exemptCount": null,
+          "admittedCount": 76,
+          "retestCount": 93,
+          "admitMin": 367,
+          "admitAvg": 393.0,
+          "admitMax": 431,
+          "note": "进复试考生平均分 390（政 67 / 英 75 / 数 132 / 专 116），录取中位数 392"
+        }
+      ],
+      "remark": "研究方向：01 计算机技术、02 计算机技术（医学人工智能）。专硕但考英语一、数学一，自划线，单科线较高（数学、专业课 85）。平台没有 2025 年数据。2026 年招生从 33 人扩到 68 人。另有士兵、少干计划，以上为一志愿统考数据，招生人数不含推免。2023 年（第三方平台）：复试线 351（55/55/85/85），复试 2 人、录取 2 人，录取最低 354 / 平均 369 / 最高 384。",
+      "sources": [
+        {
+          "title": "第三方数据平台整理（复试线、招生 / 复试 / 录取人数、录取分数），待与学院官网核对",
+          "url": "",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "id": "10284-sw-083500",
+      "college": "软件学院",
+      "majorCode": "083500",
+      "majorName": "软件工程",
+      "degreeType": "academic",
+      "exam": {
+        "politics": "思想政治理论",
+        "foreign": "英语一",
+        "math": "数学一",
+        "pro": [
+          {
+            "code": "408",
+            "name": "计算机学科专业基础"
+          }
+        ]
+      },
+      "years": [
+        {
+          "year": 2024,
+          "retestLine": {
+            "total": 338,
+            "politics": 50,
+            "foreign": 50,
+            "math": 75,
+            "pro": 75
+          },
+          "planCount": 6,
+          "exemptCount": null,
+          "admittedCount": 8,
+          "retestCount": 10,
+          "admitMin": 338,
+          "admitAvg": 355.38,
+          "admitMax": 370,
+          "note": "该年专业课考 842（数据结构、软件工程、操作系统、计算机网络，自命题），不是 408"
+        },
+        {
+          "year": 2025,
+          "retestLine": {
+            "total": 339,
+            "politics": 50,
+            "foreign": 50,
+            "math": 75,
+            "pro": 75
+          },
+          "planCount": 6,
+          "exemptCount": null,
+          "admittedCount": 6,
+          "retestCount": 9,
+          "admitMin": 339,
+          "admitAvg": 369.6,
+          "admitMax": 404,
+          "note": "录取中位数 368.5"
+        },
+        {
+          "year": 2026,
+          "retestLine": {
+            "total": 341,
+            "politics": 50,
+            "foreign": 50,
+            "math": 75,
+            "pro": 75
+          },
+          "planCount": 6,
+          "exemptCount": null,
+          "admittedCount": 6,
+          "retestCount": 8,
+          "admitMin": 353,
+          "admitAvg": 375.0,
+          "admitMax": 407,
+          "note": "进复试考生平均分 370（政 67 / 英 77 / 数 117 / 专 109），录取中位数 373"
+        }
+      ],
+      "remark": "学科评估 A。研究方向：01 软件工程技术、02 信息系统工程、03 嵌入式系统工程。自划线。名额极少（每年 6 人），分数线和录取分波动大，仅供参考。注意：2024 年专业课为自命题 842，2025 年起改考 408。以上为一志愿统考数据，招生人数不含推免。",
+      "sources": [
+        {
+          "title": "第三方数据平台整理（复试线、招生 / 复试 / 录取人数、录取分数），待与学院官网核对",
+          "url": "",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "id": "10284-sw-085405",
+      "college": "软件学院",
+      "majorCode": "085405",
+      "majorName": "软件工程",
+      "degreeType": "professional",
+      "exam": {
+        "politics": "思想政治理论",
+        "foreign": "英语一",
+        "math": "数学一",
+        "pro": [
+          {
+            "code": "408",
+            "name": "计算机学科专业基础"
+          }
+        ]
+      },
+      "years": [
+        {
+          "year": 2024,
+          "retestLine": {
+            "total": 340,
+            "politics": 55,
+            "foreign": 55,
+            "math": 85,
+            "pro": 85
+          },
+          "planCount": 102,
+          "exemptCount": null,
+          "admittedCount": 113,
+          "retestCount": 136,
+          "admitMin": 341,
+          "admitAvg": 369.7,
+          "admitMax": 420,
+          "note": "该年考英语二、数学二，专业课为自命题 842（数据结构、软件工程、操作系统、计算机网络），不是 408"
+        },
+        {
+          "year": 2025,
+          "retestLine": {
+            "total": 372,
+            "politics": 55,
+            "foreign": 55,
+            "math": 85,
+            "pro": 85
+          },
+          "planCount": 101,
+          "exemptCount": null,
+          "admittedCount": 109,
+          "retestCount": 132,
+          "admitMin": 372,
+          "admitAvg": 389.0,
+          "admitMax": 430,
+          "note": "录取中位数 388。该年考英语二、数学二 / 408"
+        },
+        {
+          "year": 2026,
+          "retestLine": {
+            "total": 354,
+            "politics": 55,
+            "foreign": 55,
+            "math": 85,
+            "pro": 85
+          },
+          "planCount": 94,
+          "exemptCount": null,
+          "admittedCount": 117,
+          "retestCount": 141,
+          "admitMin": 355,
+          "admitAvg": 383.0,
+          "admitMax": 418,
+          "note": "进复试考生平均分 379（政 66 / 英 75 / 数 126 / 专 112），录取中位数 380"
+        }
+      ],
+      "remark": "研究方向：01 软件工程。自划线，单科线较高（数学、专业课 85）。注意：2024、2025 年考英语二、数学二，2026 年改为英语一、数学一；2024 年专业课为自命题 842，2025 年起改考 408，分数线前后可比性有限。以上为一志愿统考数据，招生人数不含推免；录取人数每年都多于招生计划。",
+      "sources": [
+        {
+          "title": "第三方数据平台整理（复试线、招生 / 复试 / 录取人数、录取分数），待与学院官网核对",
+          "url": "",
+          "date": ""
+        }
+      ]
+    }
+  ]
+}
