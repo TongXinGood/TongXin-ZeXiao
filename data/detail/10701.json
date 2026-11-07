@@ -146,6 +146,170 @@
           "date": ""
         }
       ]
+    },
+    {
+      "id": "10701-cs-085404",
+      "college": "计算机科学与技术学院",
+      "majorCode": "085404",
+      "majorName": "计算机技术",
+      "degreeType": "professional",
+      "exam": {
+        "politics": "思想政治理论",
+        "foreign": "英语一",
+        "math": "数学一",
+        "pro": [
+          {
+            "code": "408",
+            "name": "计算机学科专业基础"
+          }
+        ]
+      },
+      "years": [
+        {
+          "year": 2024,
+          "retestLine": {
+            "total": 315,
+            "politics": 45,
+            "foreign": 45,
+            "math": 70,
+            "pro": 70
+          },
+          "planCount": 61,
+          "exemptCount": null,
+          "admittedCount": 60,
+          "retestCount": 85,
+          "admitMin": 317,
+          "admitAvg": 351.37,
+          "admitMax": 393,
+          "note": "该年专业课考 834（数据结构等，自命题，平台显示不全），不是 408"
+        },
+        {
+          "year": 2025,
+          "retestLine": {
+            "total": 345,
+            "politics": 45,
+            "foreign": 45,
+            "math": 70,
+            "pro": 70
+          },
+          "planCount": 58,
+          "exemptCount": null,
+          "admittedCount": 84,
+          "retestCount": 131,
+          "admitMin": 347,
+          "admitAvg": 374.0,
+          "admitMax": 419,
+          "note": "录取中位数 371。该年专业课考 834（数据结构等，自命题，平台显示不全），不是 408"
+        },
+        {
+          "year": 2026,
+          "retestLine": {
+            "total": 310,
+            "politics": 45,
+            "foreign": 45,
+            "math": 70,
+            "pro": 70
+          },
+          "planCount": 62,
+          "exemptCount": null,
+          "admittedCount": 75,
+          "retestCount": 124,
+          "admitMin": 318,
+          "admitAvg": 354.0,
+          "admitMax": 400,
+          "note": "进复试考生平均分 343（政 65 / 英 66 / 数 116 / 专 96），录取中位数 352"
+        }
+      ],
+      "remark": "研究方向：01 计算机技术。专硕但考英语一、数学一。复试淘汰率高（复录比 1.4~1.7）。注意：2024、2025 年专业课为自命题 834，2026 年改考 408，分数线前后可比性有限。另有士兵、少干计划，以上为一志愿统考数据，招生人数不含推免。",
+      "sources": [
+        {
+          "title": "第三方数据平台整理（复试线、招生 / 复试 / 录取人数、录取分数），待与学院官网核对",
+          "url": "",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "id": "10701-cs-085405",
+      "college": "计算机科学与技术学院",
+      "majorCode": "085405",
+      "majorName": "软件工程",
+      "degreeType": "professional",
+      "exam": {
+        "politics": "思想政治理论",
+        "foreign": "英语一",
+        "math": "数学一",
+        "pro": [
+          {
+            "code": "408",
+            "name": "计算机学科专业基础"
+          }
+        ]
+      },
+      "years": [
+        {
+          "year": 2024,
+          "retestLine": {
+            "total": 300,
+            "politics": 45,
+            "foreign": 45,
+            "math": 70,
+            "pro": 70
+          },
+          "planCount": 34,
+          "exemptCount": null,
+          "admittedCount": 33,
+          "retestCount": 39,
+          "admitMin": 313,
+          "admitAvg": 332.85,
+          "admitMax": 374,
+          "note": "该年专业课考 834 数据结构、计算机组成原理（自命题），不是 408"
+        },
+        {
+          "year": 2025,
+          "retestLine": {
+            "total": 330,
+            "politics": 45,
+            "foreign": 45,
+            "math": 70,
+            "pro": 70
+          },
+          "planCount": 35,
+          "exemptCount": null,
+          "admittedCount": 50,
+          "retestCount": 65,
+          "admitMin": 334,
+          "admitAvg": 356.0,
+          "admitMax": 410,
+          "note": "录取中位数 353。该年专业课考 834 数据结构、计算机组成原理（自命题），不是 408"
+        },
+        {
+          "year": 2026,
+          "retestLine": {
+            "total": 310,
+            "politics": 45,
+            "foreign": 45,
+            "math": 70,
+            "pro": 70
+          },
+          "planCount": 34,
+          "exemptCount": null,
+          "admittedCount": 46,
+          "retestCount": 57,
+          "admitMin": 310,
+          "admitAvg": 344.0,
+          "admitMax": 393,
+          "note": "进复试考生平均分 339（政 64 / 英 66 / 数 114 / 专 95），录取中位数 352"
+        }
+      ],
+      "remark": "研究方向：01 国家特色化示范性软件学院联合培养项目。专硕但考英语一、数学一。注意：2024、2025 年专业课为自命题 834，2026 年改考 408，分数线前后可比性有限。以上为一志愿统考数据，招生人数不含推免。",
+      "sources": [
+        {
+          "title": "第三方数据平台整理（复试线、招生 / 复试 / 录取人数、录取分数），待与学院官网核对",
+          "url": "",
+          "date": ""
+        }
+      ]
     }
   ]
 }

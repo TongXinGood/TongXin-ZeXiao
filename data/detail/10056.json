@@ -1,0 +1,307 @@
+{
+  "schoolId": "10056",
+  "programs": [
+    {
+      "id": "10056-cs-081200",
+      "college": "计算机科学与技术学院",
+      "majorCode": "081200",
+      "majorName": "计算机科学与技术",
+      "degreeType": "academic",
+      "exam": {
+        "politics": "思想政治理论",
+        "foreign": "英语一",
+        "math": "数学一",
+        "pro": [
+          {
+            "code": "408",
+            "name": "计算机学科专业基础"
+          }
+        ]
+      },
+      "years": [
+        {
+          "year": 2025,
+          "retestLine": {
+            "total": 310,
+            "politics": 45,
+            "foreign": 45,
+            "math": 75,
+            "pro": 45
+          },
+          "planCount": 10,
+          "exemptCount": null,
+          "admittedCount": 3,
+          "retestCount": 4,
+          "admitMin": 326,
+          "admitAvg": 338.7,
+          "admitMax": 361,
+          "note": "录取中位数 329。该年专业课考 868 数据结构与程序设计（自命题），不是 408；单科线以平台显示为准（专业课 45），待官网核对"
+        },
+        {
+          "year": 2026,
+          "retestLine": {
+            "total": 335,
+            "politics": 50,
+            "foreign": 50,
+            "math": 80,
+            "pro": 80
+          },
+          "planCount": 15,
+          "exemptCount": null,
+          "admittedCount": 15,
+          "retestCount": 18,
+          "admitMin": 337,
+          "admitAvg": 361.0,
+          "admitMax": 391,
+          "note": "进复试考生平均分 357（政 68 / 英 74 / 数 118 / 专 98，四科相加 358，以平台为准），录取中位数 355"
+        }
+      ],
+      "remark": "学科评估 A-。不区分研究方向。平台只提供 2025–2026 两年数据。注意：2025 年专业课为自命题 868，2026 年改考 408，可比性有限。另有士兵、少干计划，以上为一志愿统考数据，招生人数不含推免。",
+      "sources": [
+        {
+          "title": "第三方数据平台整理（复试线、招生 / 复试 / 录取人数、录取分数），待与学院官网核对",
+          "url": "",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "id": "10056-cs-085400-085404",
+      "college": "计算机科学与技术学院",
+      "majorCode": "085404",
+      "majorName": "计算机技术",
+      "degreeType": "professional",
+      "exam": {
+        "politics": "思想政治理论",
+        "foreign": "英语一",
+        "math": "数学一",
+        "pro": [
+          {
+            "code": "408",
+            "name": "计算机学科专业基础"
+          }
+        ]
+      },
+      "years": [
+        {
+          "year": 2026,
+          "retestLine": {
+            "total": 335,
+            "politics": 50,
+            "foreign": 50,
+            "math": 80,
+            "pro": 80
+          },
+          "planCount": 42,
+          "exemptCount": null,
+          "admittedCount": 40,
+          "retestCount": 50,
+          "admitMin": 347,
+          "admitAvg": 378.0,
+          "admitMax": 415,
+          "note": "进复试考生平均分 371（政 66 / 英 74 / 数 127 / 专 105，四科相加 372，以平台为准），录取中位数 378"
+        }
+      ],
+      "remark": "招生目录中为 085400 电子信息下的「01 计算机技术方向」。专硕但考英语一、数学一。平台只有 2026 年一年数据，仅供参考。另有士兵、少干计划，以上为一志愿统考数据，招生人数不含推免。",
+      "sources": [
+        {
+          "title": "第三方数据平台整理（复试线、招生 / 复试 / 录取人数、录取分数），待与学院官网核对",
+          "url": "",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "id": "10056-sw-083500",
+      "college": "软件学院",
+      "majorCode": "083500",
+      "majorName": "软件工程",
+      "degreeType": "academic",
+      "exam": {
+        "politics": "思想政治理论",
+        "foreign": "英语一",
+        "math": "数学一",
+        "pro": [
+          {
+            "code": "408",
+            "name": "计算机学科专业基础"
+          }
+        ]
+      },
+      "years": [
+        {
+          "year": 2025,
+          "retestLine": {
+            "total": 333,
+            "politics": 45,
+            "foreign": 45,
+            "math": 75,
+            "pro": 75
+          },
+          "planCount": 10,
+          "exemptCount": null,
+          "admittedCount": 4,
+          "retestCount": 4,
+          "admitMin": 333,
+          "admitAvg": 349.3,
+          "admitMax": 362,
+          "note": "录取中位数 351。该年专业课考 868 数据结构与程序设计（自命题），不是 408"
+        },
+        {
+          "year": 2026,
+          "retestLine": {
+            "total": 326,
+            "politics": 50,
+            "foreign": 50,
+            "math": 80,
+            "pro": 80
+          },
+          "planCount": 15,
+          "exemptCount": null,
+          "admittedCount": 11,
+          "retestCount": 12,
+          "admitMin": 326,
+          "admitAvg": 350.0,
+          "admitMax": 377,
+          "note": "进复试考生平均分 349（政 66 / 英 72 / 数 115 / 专 96），录取中位数 348。一志愿进复试人数少于招生计划"
+        }
+      ],
+      "remark": "学科评估 A。不区分研究方向。平台只提供 2025–2026 两年数据。一志愿报考人数少，进复试人数两年都少于招生计划。注意：2025 年专业课为自命题 868，2026 年改考 408。另有士兵、少干计划，以上为一志愿统考数据，招生人数不含推免。",
+      "sources": [
+        {
+          "title": "第三方数据平台整理（复试线、招生 / 复试 / 录取人数、录取分数），待与学院官网核对",
+          "url": "",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "id": "10056-sw-085400-085405",
+      "college": "软件学院",
+      "majorCode": "085405",
+      "majorName": "软件工程",
+      "degreeType": "professional",
+      "exam": {
+        "politics": "思想政治理论",
+        "foreign": "英语一",
+        "math": "数学一",
+        "pro": [
+          {
+            "code": "408",
+            "name": "计算机学科专业基础"
+          }
+        ]
+      },
+      "years": [
+        {
+          "year": 2024,
+          "retestLine": {
+            "total": 330,
+            "politics": 50,
+            "foreign": 50,
+            "math": 75,
+            "pro": 75
+          },
+          "planCount": 83,
+          "exemptCount": null,
+          "admittedCount": 67,
+          "retestCount": 83,
+          "admitMin": 333,
+          "admitAvg": 368.42,
+          "admitMax": 411,
+          "note": "该年专业课考 901 数据结构、程序设计（自命题），不是 408"
+        },
+        {
+          "year": 2025,
+          "retestLine": {
+            "total": 305,
+            "politics": 45,
+            "foreign": 45,
+            "math": 75,
+            "pro": 75
+          },
+          "planCount": 150,
+          "exemptCount": null,
+          "admittedCount": 103,
+          "retestCount": 200,
+          "admitMin": 315,
+          "admitAvg": 361.4,
+          "admitMax": 398,
+          "note": "录取中位数 362。该年专业课考 868 数据结构与程序设计（自命题），不是 408"
+        },
+        {
+          "year": 2026,
+          "retestLine": {
+            "total": 321,
+            "politics": 50,
+            "foreign": 50,
+            "math": 80,
+            "pro": 80
+          },
+          "planCount": 42,
+          "exemptCount": null,
+          "admittedCount": 45,
+          "retestCount": 57,
+          "admitMin": 326,
+          "admitAvg": 358.0,
+          "admitMax": 401,
+          "note": "进复试考生平均分 352（政 65 / 英 70 / 数 118 / 专 99），录取中位数 357。招生计划从上年 150 人降到 42 人"
+        }
+      ],
+      "remark": "招生目录中为 085400 电子信息下的「01 软件工程方向」。专硕但考英语一、数学一。注意：2024 年专业课为自命题 901、2025 年为自命题 868，2026 年改考 408，可比性有限；招生人数波动很大（83→150→42）。另有士兵、少干计划，以上为一志愿统考数据，招生人数不含推免。",
+      "sources": [
+        {
+          "title": "第三方数据平台整理（复试线、招生 / 复试 / 录取人数、录取分数），待与学院官网核对",
+          "url": "",
+          "date": ""
+        }
+      ]
+    },
+    {
+      "id": "10056-ai-085400-085410",
+      "college": "人工智能学院",
+      "majorCode": "085410",
+      "majorName": "人工智能",
+      "degreeType": "professional",
+      "exam": {
+        "politics": "思想政治理论",
+        "foreign": "英语一",
+        "math": "数学一",
+        "pro": [
+          {
+            "code": "408",
+            "name": "计算机学科专业基础"
+          }
+        ]
+      },
+      "years": [
+        {
+          "year": 2026,
+          "retestLine": {
+            "total": 328,
+            "politics": 50,
+            "foreign": 50,
+            "math": 80,
+            "pro": 80
+          },
+          "planCount": 28,
+          "exemptCount": null,
+          "admittedCount": 31,
+          "retestCount": 45,
+          "admitMin": 329,
+          "admitAvg": 365.0,
+          "admitMax": 410,
+          "note": "进复试考生平均分 355（政 67 / 英 72 / 数 117 / 专 100，四科相加 356，以平台为准），录取中位数 361"
+        }
+      ],
+      "remark": "招生目录中为 085400 电子信息下的「01 人工智能方向」。专硕但考英语一、数学一。平台只有 2026 年一年数据，仅供参考。另有士兵、少干计划，以上为一志愿统考数据，招生人数不含推免。",
+      "sources": [
+        {
+          "title": "第三方数据平台整理（复试线、招生 / 复试 / 录取人数、录取分数），待与学院官网核对",
+          "url": "",
+          "date": ""
+        }
+      ]
+    }
+  ]
+}
